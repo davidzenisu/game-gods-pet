@@ -6,6 +6,14 @@ var lobby_id = 0
 var players : Dictionary = {}
 var lan : bool = true
 
+var broadcasting = false
+var listening = false
+var broadcast_port := 5001
+var game_port := 8565
+
+var udp_broadcaster := PacketPeerUDP.new()
+var udp_listener := PacketPeerUDP.new()
+
 signal players_changed
 signal display_error
 
@@ -64,8 +72,24 @@ func sync_info(name_: String, id: int) -> void:
 	_receive_player_data.rpc(minimum_data, peer_id)
 	players_changed.emit()
 
-#func _process(_d:float) -> void:
+func _process(_d:float) -> void:
 	#Steam.run_callbacks()
+	if broadcasting && Time.get_ticks_msec() % 1000 < 16:
+		var ip_list: Array[String]
+		ip_list.assign(IP.get_local_addresses())
+		var ip = ip_list.filter(func(a): return a.begins_with("192.") or a.begins_with("10.")).front()
+		var message = "GODOT_LOBBY:" + ip + ":" + str(game_port)
+		udp_broadcaster.put_packet(message.to_utf8_buffer())
+		print("Broadcassting... " + message)
+	if listening && udp_listener.get_available_packet_count() > 0:
+		#func listen_multiplayer(_delta):
+			var packet := udp_listener.get_packet().get_string_from_utf8()
+			if packet.begins_with("GODOT_LOBBY:"):
+				var parts = packet.split(":")
+				var host_ip = parts[1]
+				var host_port = int(parts[2])
+				print("Found host at ", host_ip, ":", host_port)
+				# You can now connect to this IP/port
 
 func _on_lobby_created(conn, id) -> void:
 	return
@@ -138,8 +162,11 @@ func _leave_lobby() -> void:
 
 func _on_join_lan() -> void:
 	lan = true
+	listening = true
+	print("Start listening")
+	udp_listener.bind(broadcast_port)
 	multiplayer_peer = ENetMultiplayerPeer.new()
-	var error = multiplayer_peer.create_client("192.168.0.17", 8565)
+	var error = multiplayer_peer.create_client("192.168.0.54", game_port)
 	if error != OK:
 		display_error.emit("FAILED TO CREATE CLIENT\nCODE: " + str(error))
 		multiplayer_peer.close()
@@ -148,8 +175,11 @@ func _on_join_lan() -> void:
 
 func _on_host_lan() -> void:
 	lan = true
+	broadcasting = true
+	udp_broadcaster.set_broadcast_enabled(true)
+	udp_broadcaster.set_dest_address("255.255.255.255", broadcast_port)
 	multiplayer_peer = ENetMultiplayerPeer.new()
-	var error = multiplayer_peer.create_server(8565, 3) # allow 3 peers for 4 player lobby
+	var error = multiplayer_peer.create_server(game_port, 3) # allow 3 peers for 4 player lobby
 	if error != OK:
 		display_error.emit("FAILED TO CREATE HOST\nCODE: " + str(error))
 		multiplayer_peer.close()
@@ -157,6 +187,7 @@ func _on_host_lan() -> void:
 	multiplayer.multiplayer_peer = multiplayer_peer
 	players[1] = {"name": "Player 1 (you)", "id": 1}
 	_transition_to_lobby()
+
 
 func _on_host_steam() -> void:
 	lan = false
