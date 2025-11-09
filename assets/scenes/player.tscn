@@ -1,7 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://b68uitfh610nj"]
+[gd_scene load_steps=9 format=3 uid="uid://b68uitfh610nj"]
 
+[ext_resource type="Script" uid="uid://h8v6qxwm45y6" path="res://assets/scripts/player.gd" id="1_14505"]
 [ext_resource type="Texture2D" uid="uid://cbwpoo8jypiba" path="res://assets/art/playerGrey_walk1.png" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://dopa1eyuuq3c4" path="res://assets/art/playerGrey_walk2.png" id="2_i3pqv"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_s027a"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_14505"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_hqtel"]
 animations = [{
@@ -25,6 +30,13 @@ height = 138.0
 gravity = Vector3(0, 98, 0)
 
 [node name="Player" type="Area2D"]
+script = ExtResource("1_14505")
+
+[node name="ServerSychronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_s027a")
+
+[node name="PlayerInput" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_14505")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_hqtel")

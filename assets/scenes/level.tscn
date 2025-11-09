@@ -1,7 +1,25 @@
 [gd_scene load_steps=2 format=3 uid="uid://cx6syvrvuews"]
 
-[ext_resource type="PackedScene" uid="uid://b68uitfh610nj" path="res://assets/scenes/player.tscn" id="1_u52ul"]
+[ext_resource type="Script" uid="uid://y43ddl6ivq14" path="res://assets/scripts/level.gd" id="1_ye1mc"]
 
 [node name="World" type="Node2D"]
+script = ExtResource("1_ye1mc")
 
-[node name="Player" parent="." instance=ExtResource("1_u52ul")]
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_right = 1153.0
+offset_bottom = 642.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0.176471, 1, 1)
+
+[node name="Players" type="Node2D" parent="."]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://b68uitfh610nj")
+spawn_path = NodePath("../Players")
+spawn_limit = 4

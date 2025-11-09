@@ -20,13 +20,24 @@ func create_main_menu() -> CanvasLayer:
 
 func instantiate_level():
 	var level = get_tree().get_root().get_node("/root/Main/Level")
-	level.add_child(create_level())
+	print("Spawning level")
+	if multiplayer.is_server():
+		level.add_child(create_level(), true)
+	else:
+		print("Error, not server!")
+
+func instantiate_player():
+	var character = preload("res://assets/scenes/player.tscn").instantiate()
+	var playerNode = get_tree().get_root().get_node("/root/Main/Level/World/Players")
+	print("Spawning player")
+	playerNode.add_child(character, true)
 
 func create_level() -> Node2D:
 	if is_instance_valid(main_menu):
 		main_menu.queue_free()
 		main_menu.get_parent().remove_child(main_menu)
-	var l : Node2D = load("res://assets/scenes/level.tscn").instantiate()
+	print("Creating level")
+	var l : Node2D = preload("res://assets/scenes/level.tscn").instantiate()
 	level = l
 	return l
 

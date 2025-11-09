@@ -11,8 +11,7 @@ func _ready() -> void:
 	$Panel/Start.pressed.connect(_on_start)
 
 func _on_start() -> void:
-	NetworkManager._transition_to_game.rpc()
-	GameManager.instantiate_level()
+	NetworkManager._transition_to_game()
 
 func _add_row(name_ : String, id: int) -> void:
 	var instance : HBoxContainer = row.instantiate()

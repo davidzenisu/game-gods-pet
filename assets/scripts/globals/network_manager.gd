@@ -159,13 +159,17 @@ func _transition_to_lobby() -> void:
 	GameManager.main_menu.queue_free()
 	GameManager.main.add_child(GameManager.create_lobby())
 
-@rpc("any_peer", "call_local", "reliable")
+
 func _transition_to_game() -> void:
+	_start_game.rpc()
+	GameManager.instantiate_level()
+
+@rpc("authority", "call_local", "reliable")
+func _start_game() -> void:
 	await get_tree().process_frame
 	GameManager.main.remove_child(GameManager.lobby)
 	GameManager.lobby.queue_free()
 	print('starting game')
-	print('LoadingScene')
 	listening = false
 	broadcasting = false
 
@@ -191,6 +195,7 @@ func _on_host_lan() -> void:
 	udp_broadcaster.set_broadcast_enabled(true)
 	udp_broadcaster.set_dest_address("255.255.255.255", broadcast_port)
 	multiplayer_peer = ENetMultiplayerPeer.new()
+	print("Starting server")
 	var error = multiplayer_peer.create_server(game_port, 3) # allow 3 peers for 4 player lobby
 	if error != OK:
 		display_error.emit("FAILED TO CREATE HOST\nCODE: " + str(error))
