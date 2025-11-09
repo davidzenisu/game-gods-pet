@@ -89,7 +89,16 @@ func _process(_d:float) -> void:
 				var host_ip = parts[1]
 				var host_port = int(parts[2])
 				print("Found host at ", host_ip, ":", host_port)
+				multiplayer_peer = ENetMultiplayerPeer.new()
+				var error = multiplayer_peer.create_client(host_ip, host_port)
+				if error != OK:
+					display_error.emit("FAILED TO CREATE CLIENT\nCODE: " + str(error))
+					multiplayer_peer.close()
+					return
+				multiplayer.multiplayer_peer = multiplayer_peer
 				# You can now connect to this IP/port
+				listening = false
+				print("Connecting to host...")
 
 func _on_lobby_created(conn, id) -> void:
 	return
@@ -150,6 +159,15 @@ func _transition_to_lobby() -> void:
 	GameManager.main_menu.queue_free()
 	GameManager.main.add_child(GameManager.create_lobby())
 
+func _transition_to_game() -> void:
+	await get_tree().process_frame
+	GameManager.main.remove_child(GameManager.lobby)
+	GameManager.lobby.queue_free()
+	print('starting game')
+	print('LoadingScene')
+	var level = get_tree().get_root().get_node("/root/Main/Level")
+	level.add_child(GameManager.create_level())
+
 func _leave_lobby() -> void:
 	GameManager.main.remove_child(GameManager.lobby)
 	GameManager.lobby.queue_free()
@@ -165,13 +183,6 @@ func _on_join_lan() -> void:
 	listening = true
 	print("Start listening")
 	udp_listener.bind(broadcast_port)
-	multiplayer_peer = ENetMultiplayerPeer.new()
-	var error = multiplayer_peer.create_client("192.168.0.54", game_port)
-	if error != OK:
-		display_error.emit("FAILED TO CREATE CLIENT\nCODE: " + str(error))
-		multiplayer_peer.close()
-		return
-	multiplayer.multiplayer_peer = multiplayer_peer
 
 func _on_host_lan() -> void:
 	lan = true

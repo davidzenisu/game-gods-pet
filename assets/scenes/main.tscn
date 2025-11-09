@@ -6,6 +6,13 @@
 [node name="Main" type="Node"]
 script = ExtResource("1_m8bhc")
 
+[node name="Level" type="Node" parent="."]
+
+[node name="LevelSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://cx6syvrvuews")
+spawn_path = NodePath("../Level")
+spawn_limit = 1
+
 [node name="MainMenu" parent="." instance=ExtResource("2_kpi06")]
 
 [node name="MusicAudio" type="AudioStreamPlayer" parent="."]

@@ -3,6 +3,7 @@ extends Node
 var main_menu : CanvasLayer
 var lobby : CanvasLayer
 var main : Main
+var level: Node2D
 
 var debug : bool = false
 
@@ -16,6 +17,14 @@ func create_main_menu() -> CanvasLayer:
 	var mm : CanvasLayer = load("res://assets/scenes/ui/main_menu.tscn").instantiate()
 	main_menu = mm
 	return mm
+
+func create_level() -> Node2D:
+	if is_instance_valid(main_menu):
+		main_menu.queue_free()
+		main_menu.get_parent().remove_child(main_menu)
+	var l : Node2D = load("res://assets/scenes/level.tscn").instantiate()
+	level = l
+	return l
 
 func create_lobby() -> CanvasLayer:
 	var lob : CanvasLayer = load("res://assets/scenes/ui/lobby.tscn").instantiate()

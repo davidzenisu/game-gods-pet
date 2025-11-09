@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://b68uitfh610nj"]
+
+[ext_resource type="Texture2D" uid="uid://cbwpoo8jypiba" path="res://assets/art/playerGrey_walk1.png" id="1_onrkg"]
+[ext_resource type="Texture2D" uid="uid://dopa1eyuuq3c4" path="res://assets/art/playerGrey_walk2.png" id="2_i3pqv"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hqtel"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_onrkg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_i3pqv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sweqy"]
+radius = 51.0
+height = 138.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_onrkg"]
+gravity = Vector3(0, 98, 0)
+
+[node name="Player" type="Area2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_hqtel")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_sweqy")
+
+[node name="Trail" type="GPUParticles2D" parent="."]
+scale = Vector2(0.997988, 1)
+amount = 10
+texture = ExtResource("1_onrkg")
+process_material = SubResource("ParticleProcessMaterial_onrkg")
