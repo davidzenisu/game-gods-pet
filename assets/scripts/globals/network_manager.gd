@@ -159,14 +159,15 @@ func _transition_to_lobby() -> void:
 	GameManager.main_menu.queue_free()
 	GameManager.main.add_child(GameManager.create_lobby())
 
+@rpc("any_peer", "call_local", "reliable")
 func _transition_to_game() -> void:
 	await get_tree().process_frame
 	GameManager.main.remove_child(GameManager.lobby)
 	GameManager.lobby.queue_free()
 	print('starting game')
 	print('LoadingScene')
-	var level = get_tree().get_root().get_node("/root/Main/Level")
-	level.add_child(GameManager.create_level())
+	listening = false
+	broadcasting = false
 
 func _leave_lobby() -> void:
 	GameManager.main.remove_child(GameManager.lobby)

@@ -18,6 +18,10 @@ func create_main_menu() -> CanvasLayer:
 	main_menu = mm
 	return mm
 
+func instantiate_level():
+	var level = get_tree().get_root().get_node("/root/Main/Level")
+	level.add_child(create_level())
+
 func create_level() -> Node2D:
 	if is_instance_valid(main_menu):
 		main_menu.queue_free()
