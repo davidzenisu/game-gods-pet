@@ -1,12 +1,25 @@
-[gd_scene load_steps=9 format=3 uid="uid://b68uitfh610nj"]
+[gd_scene load_steps=10 format=3 uid="uid://b68uitfh610nj"]
 
 [ext_resource type="Script" uid="uid://h8v6qxwm45y6" path="res://assets/scripts/player.gd" id="1_14505"]
 [ext_resource type="Texture2D" uid="uid://cbwpoo8jypiba" path="res://assets/art/playerGrey_walk1.png" id="1_onrkg"]
+[ext_resource type="Script" uid="uid://dqhpcqc6trp2n" path="res://assets/scripts/player-input.gd" id="2_4wcc8"]
 [ext_resource type="Texture2D" uid="uid://dopa1eyuuq3c4" path="res://assets/art/playerGrey_walk2.png" id="2_i3pqv"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_s027a"]
+properties/0/path = NodePath(".:velocity")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:player")
+properties/1/spawn = true
+properties/1/replication_mode = 0
+properties/2/path = NodePath(".:position")
+properties/2/spawn = true
+properties/2/replication_mode = 1
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_14505"]
+properties/0/path = NodePath(".:direction")
+properties/0/spawn = false
+properties/0/replication_mode = 1
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_hqtel"]
 animations = [{
@@ -36,7 +49,9 @@ script = ExtResource("1_14505")
 replication_config = SubResource("SceneReplicationConfig_s027a")
 
 [node name="PlayerInput" type="MultiplayerSynchronizer" parent="."]
+root_path = NodePath(".")
 replication_config = SubResource("SceneReplicationConfig_14505")
+script = ExtResource("2_4wcc8")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_hqtel")
@@ -46,6 +61,7 @@ shape = SubResource("CapsuleShape2D_sweqy")
 
 [node name="Trail" type="GPUParticles2D" parent="."]
 scale = Vector2(0.997988, 1)
+emitting = false
 amount = 10
 texture = ExtResource("1_onrkg")
 process_material = SubResource("ParticleProcessMaterial_onrkg")
