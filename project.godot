@@ -20,6 +20,10 @@ NetworkManager="*res://assets/scripts/globals/network_manager.gd"
 GameManager="*res://assets/scripts/globals/game_manager.gd"
 Settings="*res://assets/scripts/globals/settings.gd"
 
+[display]
+
+window/stretch/mode="viewport"
+
 [input]
 
 start={
