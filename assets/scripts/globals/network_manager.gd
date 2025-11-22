@@ -80,9 +80,13 @@ func _process(_d:float) -> void:
 		var ip = ip_list.filter(func(a): return a.begins_with("192.") or a.begins_with("10.")).front()
 		var message = "GODOT_LOBBY:" + ip + ":" + str(game_port)
 		udp_broadcaster.put_packet(message.to_utf8_buffer())
-		print("Broadcassting... " + message)
-	if listening && udp_listener.get_available_packet_count() > 0:
+		print("Broadcasting... " + message)
+	if listening:
+		if Time.get_ticks_msec() % 1000 < 16:
+			print("Listening... ")
+		if udp_listener.get_available_packet_count() > 0:
 		#func listen_multiplayer(_delta):
+			print("Received broadcast...")
 			var packet := udp_listener.get_packet().get_string_from_utf8()
 			if packet.begins_with("GODOT_LOBBY:"):
 				var parts = packet.split(":")
@@ -98,6 +102,7 @@ func _process(_d:float) -> void:
 				multiplayer.multiplayer_peer = multiplayer_peer
 				# You can now connect to this IP/port
 				listening = false
+				udp_listener.close()
 				print("Connecting to host...")
 
 func _on_lobby_created(conn, id) -> void:
@@ -187,7 +192,7 @@ func _on_join_lan() -> void:
 	lan = true
 	listening = true
 	print("Start listening")
-	udp_listener.bind(broadcast_port)
+	udp_listener.bind(broadcast_port, "*")
 
 func _on_host_lan() -> void:
 	lan = true
