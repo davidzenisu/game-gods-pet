@@ -65,12 +65,16 @@ func instantiate_player():
 		match pad:
 			0:
 				character.position = Vector2(0, 0)
+				character.modulate = Color(1, 0, 0) # Red
 			1:
 				character.position = Vector2(screen_size.x, 0)
+				character.modulate = Color(0, 1, 0) # Green
 			2:
 				character.position = Vector2(0, screen_size.y)
+				character.modulate = Color(0, 0, 1) # Blue
 			3:
 				character.position = Vector2(screen_size.x, screen_size.y)
+				character.modulate = Color(1, 1, 0) # Yellow
 			_:
 				character.position = Vector2(screen_size.x/2, screen_size.y/2)
 		print("Spawning player with joypad: ", pad)
