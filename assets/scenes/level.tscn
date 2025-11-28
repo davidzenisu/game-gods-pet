@@ -1,21 +1,22 @@
-[gd_scene load_steps=2 format=3 uid="uid://cx6syvrvuews"]
+[gd_scene load_steps=5 format=3 uid="uid://cx6syvrvuews"]
 
 [ext_resource type="Script" uid="uid://y43ddl6ivq14" path="res://assets/scripts/level.gd" id="1_ye1mc"]
+[ext_resource type="Shader" uid="uid://jkqoqw81n4u4" path="res://assets/shaders/paper.gdshader" id="2_dyaho"]
+[ext_resource type="Texture2D" uid="uid://yfedbuoaglkf" path="res://assets/art/rectangle-16.jpg" id="3_ckblc"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ckblc"]
+shader = ExtResource("2_dyaho")
+shader_parameter/amount = 0.03
+shader_parameter/tint_color = Color(0.615589, 0.355434, 0.0415625, 1)
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_ye1mc")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
+[node name="TextureRect" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_ckblc")
 offset_right = 1153.0
 offset_bottom = 642.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(1, 0.176471, 1, 1)
+texture = ExtResource("3_ckblc")
 
 [node name="Players" type="Node2D" parent="."]
 
