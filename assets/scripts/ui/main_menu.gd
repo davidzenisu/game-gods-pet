@@ -22,6 +22,15 @@ func _ready() -> void:
 		$StateChartDebugger.show()
 	else:
 		$StateChartDebugger.hide()
+	#TODO: Remove for other games!
+	# disable join or host buttons if desktop or mobile platform
+	match OS.get_name():
+		"Windows", "macOS", "Linux", "FreeBSD", "NetBSD", "OpenBSD", "BSD":
+			print("Welcome humans!")
+			$HostJoin/Options/Join.hide()
+		"Android", "iOS":
+			$HostJoin/Options/Host.hide()	
+			print("Welcome god!")
 
 func _enforce_visibility() -> void:
 	$Title.show()

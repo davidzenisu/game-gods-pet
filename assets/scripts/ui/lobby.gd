@@ -32,10 +32,13 @@ func _on_players_changed() -> void:
 		child.queue_free()
 	for peer : int in NetworkManager.players:
 		if NetworkManager.lan:
+			#TODO: Set player names based on input
+			var player_name =  "Humans" if peer == 1 else "God"
+			if peer != 1:
+				player_name = player_name + " " + str(i-1)
 			if peer == my_id:
-				NetworkManager.players[peer]["name"] = "Player " + str(i) + "(you)"
-			else:
-				NetworkManager.players[peer]["name"] = "Player " + str(i)
+				player_name += " (you)"
+			NetworkManager.players[peer]["name"] = player_name
 			i+=1
 		_add_row(NetworkManager.players[peer]["name"], peer)
 	if NetworkManager.players.size() == 1:

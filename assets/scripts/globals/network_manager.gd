@@ -209,7 +209,7 @@ func _on_host_lan() -> void:
 		multiplayer_peer.close()
 		return
 	multiplayer.multiplayer_peer = multiplayer_peer
-	players[1] = {"name": "Player 1 (you)", "id": 1}
+	players[1] = {"name": "Humans (you)", "id": 1}
 	_transition_to_lobby()
 
 
