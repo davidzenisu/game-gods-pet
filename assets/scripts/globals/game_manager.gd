@@ -9,6 +9,30 @@ var debug : bool = false
 
 func _ready() -> void:
 	_check_launch_args()
+	setup_multiplayer_input(4)
+
+func setup_multiplayer_input(playerCount:int):
+	var actionList:Array[StringName]
+	var actionEventList:Array[InputEvent]
+	var currentAction:StringName
+	var currentEvent:InputEvent
+	actionList = InputMap.get_actions()
+
+	var contollers = Input.get_connected_joypads()
+	print("Connected controllers: ", contollers)
+
+	for player in range(playerCount):
+		for act in range(actionList.size()):
+			if(actionList[act].begins_with("ui_")):
+				continue
+			currentAction = actionList[act]+str(player)
+			InputMap.add_action(currentAction)
+			actionEventList = InputMap.action_get_events(actionList[act])
+			for event in range(actionEventList.size()):
+				currentEvent = actionEventList[event].duplicate(true)
+				currentEvent.set_device(player)
+				InputMap.action_add_event(currentAction,currentEvent)
+				print("Added action: ", currentAction, " with event: ", currentEvent)
 
 func create_main_menu() -> CanvasLayer:
 	if is_instance_valid(main_menu):
@@ -27,10 +51,30 @@ func instantiate_level():
 		print("Error, not server!")
 
 func instantiate_player():
-	var character = preload("res://assets/scenes/player.tscn").instantiate()
+	var joypads = Input.get_connected_joypads()
+	print("Instantiating player for joypads: ", joypads.size())
 	var playerNode = get_tree().get_root().get_node("/root/Main/Level/World/Players")
-	print("Spawning player")
-	playerNode.add_child(character, true)
+	for pad in joypads:
+		print("Joypad ID: ", pad)
+		var character = preload("res://assets/scenes/player.tscn").instantiate()
+		var player_input = character.get_node("PlayerInput")
+		player_input.player_id = pad
+		character.name = "Player_" + str(pad)
+		# position in each corner
+		var screen_size = get_viewport().get_visible_rect().size
+		match pad:
+			0:
+				character.position = Vector2(0, 0)
+			1:
+				character.position = Vector2(screen_size.x, 0)
+			2:
+				character.position = Vector2(0, screen_size.y)
+			3:
+				character.position = Vector2(screen_size.x, screen_size.y)
+			_:
+				character.position = Vector2(screen_size.x/2, screen_size.y/2)
+		print("Spawning player with joypad: ", pad)
+		playerNode.add_child(character, true)
 
 func create_level() -> Node2D:
 	if is_instance_valid(main_menu):
