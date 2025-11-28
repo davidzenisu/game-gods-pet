@@ -198,7 +198,9 @@ func _on_host_lan() -> void:
 	lan = true
 	broadcasting = true
 	udp_broadcaster.set_broadcast_enabled(true)
+	udp_broadcaster.bind(0) 
 	udp_broadcaster.set_dest_address("255.255.255.255", broadcast_port)
+	
 	multiplayer_peer = ENetMultiplayerPeer.new()
 	print("Starting server")
 	var error = multiplayer_peer.create_server(game_port, 3) # allow 3 peers for 4 player lobby
