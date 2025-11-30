@@ -39,7 +39,7 @@ autostart = true
 
 [node name="GodsPlayground" type="Node2D" parent="."]
 script = ExtResource("4_yeohl")
-wall_color = Color(0.990315, 0.756288, 0.730248, 1)
+preview_color = Color(0.988301, 0.699498, 0.668898, 1)
 
 [node name="Walls" type="Node2D" parent="GodsPlayground"]
 
