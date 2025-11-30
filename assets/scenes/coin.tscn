@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://cdh0k8vqg0lq3"]
+
+[ext_resource type="Shader" uid="uid://jkqoqw81n4u4" path="res://assets/shaders/paper.gdshader" id="1_jn77b"]
+[ext_resource type="Texture2D" uid="uid://yfedbuoaglkf" path="res://assets/art/rectangle-16.jpg" id="2_gufri"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jn77b"]
+size = Vector2(30, 30)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a8c43"]
+shader = ExtResource("1_jn77b")
+shader_parameter/amount = 0.03
+shader_parameter/tint_color = Color(0.318589, 0.952787, 0.95393, 1)
+
+[node name="Coin" type="RigidBody2D" groups=["coins"]]
+gravity_scale = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_jn77b")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_a8c43")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -15.0
+offset_top = -15.0
+offset_right = 15.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_gufri")

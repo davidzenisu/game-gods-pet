@@ -4,6 +4,8 @@ var main_menu : CanvasLayer
 var lobby : CanvasLayer
 var main : Main
 var level: Node2D
+var players: Array = []
+var scores: Dictionary = {}
 
 var debug : bool = false
 
@@ -43,23 +45,30 @@ func create_main_menu() -> CanvasLayer:
 	return mm
 
 func instantiate_level():
-	var level = get_tree().get_root().get_node("/root/Main/Level")
+	var level_parent = get_tree().get_root().get_node("/root/Main/Level")
 	print("Spawning level")
 	if multiplayer.is_server():
-		level.add_child(create_level(), true)
+		level_parent.add_child(create_level(), true)
 	else:
 		print("Error, not server!")
 
 func instantiate_player():
+	if (level == null):
+		return
 	var joypads = Input.get_connected_joypads()
 	print("Instantiating player for joypads: ", joypads.size())
-	var playerNode = get_tree().get_root().get_node("/root/Main/Level/World/Players")
+	var playerNode = level.get_node("Players")
+	print("Player node: ", playerNode)
 	for pad in joypads:
 		print("Joypad ID: ", pad)
 		var character = preload("res://assets/scenes/player.tscn").instantiate()
+		players.append(character)
+		#TODO: Only set player id once
+		character.player_id = pad
 		var player_input = character.get_node("PlayerInput")
 		player_input.player_id = pad
 		character.name = "Player_" + str(pad)
+		scores[pad] = 0
 		# position in each corner
 		var screen_size = get_viewport().get_visible_rect().size
 		match pad:
@@ -79,6 +88,33 @@ func instantiate_player():
 				character.position = Vector2(screen_size.x/2, screen_size.y/2)
 		print("Spawning player with joypad: ", pad)
 		playerNode.add_child(character, true)
+
+func instantiate_coin():
+	if (level == null):
+		return
+	# Create a new instance of the coin scene.
+	var coin =  load("res://assets/scenes/coin.tscn").instantiate()
+	# ensure the coin is not overlapping any players
+	var overlapping = true
+	var timeout = 0
+	var max_timeout = 100
+	var random_position = Vector2.ZERO
+
+	while overlapping and timeout < max_timeout:
+		random_position = Vector2(
+			randf() * get_viewport().get_visible_rect().size.x,
+			randf() * get_viewport().get_visible_rect().size.y
+		)
+		#TODO: Check for overlapping objects
+		overlapping = false
+		timeout += 1
+	
+	coin.position = random_position
+	# for player in players_node.get_children():
+	# 	if coin.get_global_rect().intersects(player.get_global_rect()):
+	# 		coin.position += Vector2(50, 50) # move the coin away if overlapping
+	# # Add the coin to the Coins node in the level.
+	level.get_node("Coins").add_child(coin)
 
 func create_level() -> Node2D:
 	if is_instance_valid(main_menu):
@@ -105,3 +141,9 @@ func _check_launch_args() -> void:
 	if "--join" in args:
 		await get_tree().create_timer(1.5).timeout
 		NetworkManager._on_join_lan()
+
+func player_scored(player_id: int, points = 1) -> void:
+	print("Current scores: %s" % str(scores))
+	print("Player %d scored %d points!" % [player_id, points])
+	scores[player_id] += points
+	print("Current scores: %s" % str(scores))

@@ -6,3 +6,7 @@ func _ready():
 		return
 	print("Instantiating player")
 	GameManager.instantiate_player()
+	GameManager.instantiate_coin()
+
+func _on_spawn_coin():
+	GameManager.instantiate_coin()

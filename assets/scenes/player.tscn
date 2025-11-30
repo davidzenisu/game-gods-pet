@@ -46,7 +46,9 @@ height = 138.0
 gravity = Vector3(0, 98, 0)
 
 [node name="Player" type="Area2D"]
+scale = Vector2(0.5, 0.5)
 script = ExtResource("1_14505")
+speed = 100
 
 [node name="ServerSychronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_s027a")
@@ -68,3 +70,5 @@ emitting = false
 amount = 10
 texture = ExtResource("1_onrkg")
 process_material = SubResource("ParticleProcessMaterial_onrkg")
+
+[connection signal="body_entered" from="." to="." method="_on_player_entered_coin"]
