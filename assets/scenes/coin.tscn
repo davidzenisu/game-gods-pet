@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://dysxebgsj11gt"]
+[gd_scene load_steps=7 format=3 uid="uid://dysxebgsj11gt"]
 
+[ext_resource type="Script" uid="uid://cdbcb6vc74213" path="res://assets/scripts/coin.gd" id="1_gufri"]
 [ext_resource type="Shader" uid="uid://jkqoqw81n4u4" path="res://assets/shaders/paper.gdshader" id="1_jn77b"]
 [ext_resource type="Texture2D" uid="uid://yfedbuoaglkf" path="res://assets/art/rectangle-16.jpg" id="2_gufri"]
 
@@ -16,8 +17,8 @@ properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/replication_mode = 1
 
-[node name="Coin" type="RigidBody2D" groups=["coins"]]
-gravity_scale = 0.0
+[node name="Coin" type="Area2D" groups=["coins"]]
+script = ExtResource("1_gufri")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_jn77b")
@@ -39,3 +40,5 @@ texture = ExtResource("2_gufri")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_jn77b")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

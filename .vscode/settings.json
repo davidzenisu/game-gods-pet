@@ -1,5 +1,6 @@
 {
   "godotTools.lsp.serverPort": 6005,
   "godotTools.editorPath.godot4": "C:\\Users\\ovid\\.gdvm\\installs\\4.4.1-stable\\Godot_v4.4.1-stable_win64.exe",
-  "files.autoSave": "afterDelay"
+  "files.autoSave": "afterDelay",
+  "editor.autoIndentOnPaste": true
 }
