@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cdh0k8vqg0lq3"]
+[gd_scene load_steps=6 format=3 uid="uid://dysxebgsj11gt"]
 
 [ext_resource type="Shader" uid="uid://jkqoqw81n4u4" path="res://assets/shaders/paper.gdshader" id="1_jn77b"]
 [ext_resource type="Texture2D" uid="uid://yfedbuoaglkf" path="res://assets/art/rectangle-16.jpg" id="2_gufri"]
@@ -10,6 +10,11 @@ size = Vector2(30, 30)
 shader = ExtResource("1_jn77b")
 shader_parameter/amount = 0.03
 shader_parameter/tint_color = Color(0.318589, 0.952787, 0.95393, 1)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_jn77b"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
 
 [node name="Coin" type="RigidBody2D" groups=["coins"]]
 gravity_scale = 0.0
@@ -31,3 +36,6 @@ offset_bottom = 15.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_gufri")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_jn77b")

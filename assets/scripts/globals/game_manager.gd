@@ -94,6 +94,7 @@ func instantiate_coin():
 		return
 	# Create a new instance of the coin scene.
 	var coin =  load("res://assets/scenes/coin.tscn").instantiate()
+	coin.name = "Coin_%d" % randi()
 	# ensure the coin is not overlapping any players
 	var overlapping = true
 	var timeout = 0
@@ -143,6 +144,8 @@ func _check_launch_args() -> void:
 		NetworkManager._on_join_lan()
 
 func player_scored(player_id: int, points = 1) -> void:
+	if not multiplayer.is_server():
+		return
 	print("Current scores: %s" % str(scores))
 	print("Player %d scored %d points!" % [player_id, points])
 	scores[player_id] += points

@@ -28,7 +28,7 @@ spawn_limit = 4
 [node name="Coins" type="Node2D" parent="."]
 
 [node name="CoinSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("uid://cdh0k8vqg0lq3")
+_spawnable_scenes = PackedStringArray("uid://dysxebgsj11gt")
 spawn_path = NodePath("../Coins")
 spawn_limit = 100
 
