@@ -1,6 +1,10 @@
 extends Node
 
 signal score_updated(scores: Dictionary)
+signal timer_updated(time_left_perc: float)
+signal round_ended()
+
+@export var round_length = 60.0 # seconds
 
 var main_menu : CanvasLayer
 var lobby : CanvasLayer
@@ -8,13 +12,14 @@ var main : Main
 var level: Node2D
 var players: Array = []
 var scores: Dictionary = {}
+var game_timer: SceneTreeTimer
 
 var debug : bool = false
 
 func _ready() -> void:
 	_check_launch_args()
 	setup_multiplayer_input(4)
-
+	
 func setup_multiplayer_input(playerCount:int):
 	var actionList:Array[StringName]
 	var actionEventList:Array[InputEvent]
@@ -118,6 +123,22 @@ func instantiate_coin():
 	# 		coin.position += Vector2(50, 50) # move the coin away if overlapping
 	# # Add the coin to the Coins node in the level.
 	level.get_node("Coins").add_child(coin)
+
+func instantiate_level_timer():
+	if (level == null):
+		return
+	game_timer = get_tree().create_timer(round_length)
+	var on_round_end = func ():
+		round_ended.emit()
+	game_timer.timeout.connect(on_round_end)
+	# Start a process to update the timer UI
+	get_tree().create_timer(1).timeout.connect(on_timer_update)
+
+func on_timer_update():
+	var time_left = game_timer.time_left
+	var time_left_perc = time_left / round_length
+	timer_updated.emit(time_left_perc)
+	get_tree().create_timer(1).timeout.connect(on_timer_update)
 
 func create_level() -> Node2D:
 	if is_instance_valid(main_menu):

@@ -5,6 +5,7 @@ func _ready():
 	if not multiplayer.is_server():
 		return
 	print("Instantiating player")
+	GameManager.instantiate_level_timer()
 	GameManager.instantiate_player()
 	GameManager.instantiate_coin()
 

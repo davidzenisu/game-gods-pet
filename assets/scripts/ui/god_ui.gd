@@ -5,6 +5,7 @@ func _ready():
 		print("Only display score for gods. Disabling UI.")
 		self.visible = false
 	GameManager.score_updated.connect(update_scores)
+	GameManager.timer_updated.connect(update_timer)
 
 func update_scores(scores: Dictionary):
 	print("Updating scores")
@@ -20,3 +21,22 @@ func update_score(label: int, new_score: int):
 	if score_label == null:
 		return
 	score_label.text = str(new_score)
+
+func update_timer(time_left_perc: float):
+	update_timer_rc.rpc(time_left_perc)
+
+@rpc("any_peer","call_local")
+func update_timer_rc(time_left_perc: float):
+	# var timer_progress = $GodUI/Scores/TimerBox/TimerProgress as ProgressBar
+	# timer_progress.value = time_left_perc
+	update_cooldown_visual(time_left_perc)
+
+func update_cooldown_visual(new_value: float):
+	var timer_progress = $GodUI/Scores/TimerBox/TimerProgress as ProgressBar
+	var tween := create_tween()
+	tween.tween_property(
+		timer_progress,
+		"value",
+		new_value,
+		0.15
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
