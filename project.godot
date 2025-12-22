@@ -12,7 +12,7 @@ config_version=5
 
 config/name="GodsPet"
 run/main_scene="uid://clt7s7jihrd4f"
-config/features=PackedStringArray("4.4", "Mobile")
+config/features=PackedStringArray("4.5", "Mobile")
 
 [autoload]
 
