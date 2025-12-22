@@ -1,0 +1,60 @@
+[gd_scene load_steps=3 format=3 uid="uid://owng5aix3qc1"]
+
+[ext_resource type="Script" uid="uid://b0js1qksr2nlr" path="res://assets/scripts/ui/god_ui.gd" id="1_b0nij"]
+[ext_resource type="Texture2D" uid="uid://dibnrmhty8nk5" path="res://assets/art/bricks.png" id="1_sr8po"]
+
+[node name="GodUi" type="CanvasLayer"]
+script = ExtResource("1_b0nij")
+
+[node name="GodUI" type="BoxContainer" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -329.5
+offset_right = 329.5
+offset_bottom = 551.0
+grow_horizontal = 2
+vertical = true
+
+[node name="Abilities" type="BoxContainer" parent="GodUI"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="GodUI/Abilities"]
+layout_mode = 2
+value = 40.0
+fill_mode = 4
+texture_under = ExtResource("1_sr8po")
+texture_progress = ExtResource("1_sr8po")
+tint_under = Color(0.7490196, 0.7490196, 0.7490196, 0.39215687)
+tint_progress = Color(0.84, 0.58996, 0.44519997, 1)
+
+[node name="Scores" type="BoxContainer" parent="GodUI"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 24
+
+[node name="PlayerScore" type="Label" parent="GodUI/Scores"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 48
+text = "0"
+
+[node name="PlayerScore2" type="Label" parent="GodUI/Scores"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+theme_override_font_sizes/font_size = 48
+text = "0"
+
+[node name="PlayerScore3" type="Label" parent="GodUI/Scores"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 1, 1)
+theme_override_font_sizes/font_size = 48
+text = "0"
+
+[node name="PlayerScore4" type="Label" parent="GodUI/Scores"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_font_sizes/font_size = 48
+text = "0"

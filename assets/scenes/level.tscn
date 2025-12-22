@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://cx6syvrvuews"]
+[gd_scene load_steps=7 format=3 uid="uid://cx6syvrvuews"]
 
 [ext_resource type="Script" uid="uid://y43ddl6ivq14" path="res://assets/scripts/level.gd" id="1_ye1mc"]
 [ext_resource type="Shader" uid="uid://jkqoqw81n4u4" path="res://assets/shaders/paper.gdshader" id="2_dyaho"]
 [ext_resource type="Texture2D" uid="uid://yfedbuoaglkf" path="res://assets/art/rectangle-16.jpg" id="3_ckblc"]
 [ext_resource type="Script" uid="uid://dugu8aiqf146l" path="res://assets/scripts/god-wall-input.gd" id="4_yeohl"]
+[ext_resource type="PackedScene" uid="uid://owng5aix3qc1" path="res://assets/scenes/ui/god_ui.tscn" id="5_xitjf"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ckblc"]
 shader = ExtResource("2_dyaho")
@@ -47,5 +48,7 @@ preview_color = Color(0.988301, 0.699498, 0.668898, 1)
 _spawnable_scenes = PackedStringArray("uid://boh10cjn6pvyw")
 spawn_path = NodePath("../Walls")
 spawn_limit = 10
+
+[node name="GodUi" parent="." instance=ExtResource("5_xitjf")]
 
 [connection signal="timeout" from="CoinTimer" to="." method="_on_spawn_coin"]
