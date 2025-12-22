@@ -43,4 +43,9 @@ preview_color = Color(0.988301, 0.699498, 0.668898, 1)
 
 [node name="Walls" type="Node2D" parent="GodsPlayground"]
 
+[node name="WallSpawner" type="MultiplayerSpawner" parent="GodsPlayground"]
+_spawnable_scenes = PackedStringArray("uid://boh10cjn6pvyw")
+spawn_path = NodePath("../Walls")
+spawn_limit = 10
+
 [connection signal="timeout" from="CoinTimer" to="." method="_on_spawn_coin"]
