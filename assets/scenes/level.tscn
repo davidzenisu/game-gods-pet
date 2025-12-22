@@ -38,8 +38,11 @@ spawn_limit = 100
 wait_time = 5.0
 autostart = true
 
+[node name="GodUi" parent="." instance=ExtResource("5_xitjf")]
+
 [node name="GodsPlayground" type="Node2D" parent="."]
 script = ExtResource("4_yeohl")
+wall_color = Color(0.96862745, 0.3529412, 0, 0.7058824)
 preview_color = Color(0.988301, 0.699498, 0.668898, 1)
 
 [node name="Walls" type="Node2D" parent="GodsPlayground"]
@@ -48,7 +51,5 @@ preview_color = Color(0.988301, 0.699498, 0.668898, 1)
 _spawnable_scenes = PackedStringArray("uid://boh10cjn6pvyw")
 spawn_path = NodePath("../Walls")
 spawn_limit = 10
-
-[node name="GodUi" parent="." instance=ExtResource("5_xitjf")]
 
 [connection signal="timeout" from="CoinTimer" to="." method="_on_spawn_coin"]

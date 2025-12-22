@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://owng5aix3qc1"]
+[gd_scene load_steps=7 format=3 uid="uid://owng5aix3qc1"]
 
 [ext_resource type="Script" uid="uid://b0js1qksr2nlr" path="res://assets/scripts/ui/god_ui.gd" id="1_b0nij"]
 [ext_resource type="Texture2D" uid="uid://dibnrmhty8nk5" path="res://assets/art/bricks.png" id="1_sr8po"]
+[ext_resource type="Texture2D" uid="uid://yfedbuoaglkf" path="res://assets/art/rectangle-16.jpg" id="3_5d8ni"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jeh22"]
 bg_color = Color(0, 0, 0, 0.39215687)
@@ -39,6 +40,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 
 [node name="MainContainer" type="PanelContainer" parent="PanelContainer"]
 layout_mode = 1
@@ -76,11 +78,11 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 
-[node name="AbilityGroup" type="AspectRatioContainer" parent="PanelContainer/MainContainer/MainMargin/GodUI/AbilitiesMargin/AbilitiesBox"]
+[node name="WallAbilityGroup" type="AspectRatioContainer" parent="PanelContainer/MainContainer/MainMargin/GodUI/AbilitiesMargin/AbilitiesBox"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="PanelContainer/MainContainer/MainMargin/GodUI/AbilitiesMargin/AbilitiesBox/AbilityGroup"]
+[node name="TextureProgressBar" type="TextureProgressBar" parent="PanelContainer/MainContainer/MainMargin/GodUI/AbilitiesMargin/AbilitiesBox/WallAbilityGroup"]
 layout_mode = 2
 value = 40.0
 fill_mode = 4
@@ -89,6 +91,36 @@ texture_under = ExtResource("1_sr8po")
 texture_progress = ExtResource("1_sr8po")
 tint_under = Color(0.7490196, 0.7490196, 0.7490196, 0.39215687)
 tint_progress = Color(0.84, 0.58996, 0.44519997, 1)
+
+[node name="CoinAbilityGroup" type="AspectRatioContainer" parent="PanelContainer/MainContainer/MainMargin/GodUI/AbilitiesMargin/AbilitiesBox"]
+visible = false
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="PanelContainer/MainContainer/MainMargin/GodUI/AbilitiesMargin/AbilitiesBox/CoinAbilityGroup"]
+layout_mode = 2
+value = 40.0
+fill_mode = 4
+nine_patch_stretch = true
+texture_under = ExtResource("3_5d8ni")
+texture_progress = ExtResource("3_5d8ni")
+tint_under = Color(0.7490196, 0.7490196, 0.7490196, 0.39215687)
+tint_progress = Color(0.21568628, 0.65882355, 0.89411765, 1)
+
+[node name="GrabAbilityGroup" type="AspectRatioContainer" parent="PanelContainer/MainContainer/MainMargin/GodUI/AbilitiesMargin/AbilitiesBox"]
+visible = false
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="PanelContainer/MainContainer/MainMargin/GodUI/AbilitiesMargin/AbilitiesBox/GrabAbilityGroup"]
+layout_mode = 2
+value = 40.0
+fill_mode = 4
+nine_patch_stretch = true
+texture_under = ExtResource("3_5d8ni")
+texture_progress = ExtResource("3_5d8ni")
+tint_under = Color(0.7490196, 0.7490196, 0.7490196, 0.39215687)
+tint_progress = Color(0.50980395, 0, 0.1764706, 1)
 
 [node name="ScoresMargin" type="MarginContainer" parent="PanelContainer/MainContainer/MainMargin/GodUI"]
 layout_mode = 2

@@ -1,6 +1,5 @@
 extends Node2D
 
-@export var wall_color: Color = Color(0.8, 0.2, 0.2)
 @export var preview_color: Color = Color(0.8, 0.2, 0.2)
 @export var min_wall_size: int = 10
 @export var max_walls: int = 3
@@ -96,10 +95,7 @@ func create_wall(start: Vector2, end: Vector2, size: Vector2) -> void:
 	)
 
 	var wall = preload("res://assets/scenes/wall.tscn").instantiate()
-	#TODO: Refactor into wall script
-	var rect = wall.get_node("ColorRect") as ColorRect
-	rect.color = wall_color
-	rect.size = size
+	wall.wall_size = size
 	wall.position = top_left
 	wall.name = "Wall_%d" % randi()
 	
