@@ -9,7 +9,6 @@ func _ready():
 	collision.shape.size = size
 
 func _on_input_event(viewport, event, shape_idx):
-	print(event)
 	if (event is InputEventMouseButton or event is InputEventScreenTouch) and event.pressed:
 		destroy_wall.rpc()
 

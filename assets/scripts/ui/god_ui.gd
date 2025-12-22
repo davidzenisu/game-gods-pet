@@ -1,7 +1,7 @@
 extends Node
 
 func _ready():
-	if multiplayer.is_server():
+	if multiplayer.is_server() and  !OS.is_debug_build():
 		print("Only display score for gods. Disabling UI.")
 		self.visible = false
 	GameManager.score_updated.connect(update_scores)
@@ -17,22 +17,25 @@ func update_scores_rc(scores: Dictionary):
 		update_score(key, scores[key])
 
 func update_score(label: int, new_score: int):
-	var score_label = $GodUI/Scores.get_node("PlayerScore%d" % label) as Label
-	if score_label == null:
+	var score_label_search = get_tree().get_nodes_in_group("Score")
+	if score_label_search.size() == 0:
 		return
-	score_label.text = str(new_score)
+	for score_label in score_label_search:
+		if score_label.name == "PlayerScore%d" % label:
+			score_label.text = str(new_score)
 
 func update_timer(time_left_perc: float):
 	update_timer_rc.rpc(time_left_perc)
 
 @rpc("any_peer","call_local")
 func update_timer_rc(time_left_perc: float):
-	# var timer_progress = $GodUI/Scores/TimerBox/TimerProgress as ProgressBar
-	# timer_progress.value = time_left_perc
 	update_cooldown_visual(time_left_perc)
 
 func update_cooldown_visual(new_value: float):
-	var timer_progress = $GodUI/Scores/TimerBox/TimerProgress as ProgressBar
+	var timer_progress_search = get_tree().get_nodes_in_group("RoundTimer")
+	if timer_progress_search.size() == 0:
+		return
+	var timer_progress = timer_progress_search[0] as ProgressBar
 	var tween := create_tween()
 	tween.tween_property(
 		timer_progress,
