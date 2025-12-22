@@ -78,7 +78,7 @@ func create_wall(start: Vector2, end: Vector2, size: Vector2) -> void:
 	if (not is_multiplayer_authority()):
 		return
 
-	print("Spawning wall with", start, end)
+	print("Spawning wall with", start, end, size)
 	if size.x < min_wall_size or size.y < min_wall_size:
 		return
 
@@ -100,10 +100,6 @@ func create_wall(start: Vector2, end: Vector2, size: Vector2) -> void:
 	var rect = wall.get_node("ColorRect") as ColorRect
 	rect.color = wall_color
 	rect.size = size
-	var collision = wall.get_node("CollisionShape2D") as CollisionShape2D
-	collision.position = size * 0.5
-	collision.shape = RectangleShape2D.new()
-	collision.shape.size = size
 	wall.position = top_left
 	wall.name = "Wall_%d" % randi()
 	
