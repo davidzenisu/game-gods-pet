@@ -35,25 +35,25 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/separation = 24
 
-[node name="PlayerScore" type="Label" parent="GodUI/Scores"]
+[node name="PlayerScore0" type="Label" parent="GodUI/Scores"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_font_sizes/font_size = 48
 text = "0"
 
-[node name="PlayerScore2" type="Label" parent="GodUI/Scores"]
+[node name="PlayerScore1" type="Label" parent="GodUI/Scores"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 1, 0, 1)
 theme_override_font_sizes/font_size = 48
 text = "0"
 
-[node name="PlayerScore3" type="Label" parent="GodUI/Scores"]
+[node name="PlayerScore2" type="Label" parent="GodUI/Scores"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 1, 1)
 theme_override_font_sizes/font_size = 48
 text = "0"
 
-[node name="PlayerScore4" type="Label" parent="GodUI/Scores"]
+[node name="PlayerScore3" type="Label" parent="GodUI/Scores"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 0, 1)
 theme_override_font_sizes/font_size = 48

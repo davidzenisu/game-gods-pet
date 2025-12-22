@@ -1,5 +1,7 @@
 extends Node
 
+signal score_updated(scores: Dictionary)
+
 var main_menu : CanvasLayer
 var lobby : CanvasLayer
 var main : Main
@@ -144,9 +146,11 @@ func _check_launch_args() -> void:
 		NetworkManager._on_join_lan()
 
 func player_scored(player_id: int, points = 1) -> void:
+	# only server updates scores!
 	if not multiplayer.is_server():
 		return
 	print("Current scores: %s" % str(scores))
 	print("Player %d scored %d points!" % [player_id, points])
 	scores[player_id] += points
 	print("Current scores: %s" % str(scores))
+	score_updated.emit(scores)
