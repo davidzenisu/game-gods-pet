@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://cx6syvrvuews"]
+[gd_scene load_steps=8 format=3 uid="uid://cx6syvrvuews"]
 
 [ext_resource type="Script" uid="uid://y43ddl6ivq14" path="res://assets/scripts/level.gd" id="1_ye1mc"]
 [ext_resource type="Shader" uid="uid://jkqoqw81n4u4" path="res://assets/shaders/paper.gdshader" id="2_dyaho"]
 [ext_resource type="Texture2D" uid="uid://yfedbuoaglkf" path="res://assets/art/rectangle-16.jpg" id="3_ckblc"]
 [ext_resource type="Script" uid="uid://dugu8aiqf146l" path="res://assets/scripts/god-wall-input.gd" id="4_yeohl"]
+[ext_resource type="PackedScene" uid="uid://cuvp2bse22qf" path="res://assets/scenes/ui/vote_ui.tscn" id="5_8sdpe"]
 [ext_resource type="PackedScene" uid="uid://owng5aix3qc1" path="res://assets/scenes/ui/god_ui.tscn" id="5_xitjf"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ckblc"]
@@ -40,9 +41,11 @@ autostart = true
 
 [node name="GodUi" parent="." instance=ExtResource("5_xitjf")]
 
+[node name="VoteUi" parent="." instance=ExtResource("5_8sdpe")]
+visible = false
+
 [node name="GodsPlayground" type="Node2D" parent="."]
 script = ExtResource("4_yeohl")
-wall_color = Color(0.96862745, 0.3529412, 0, 0.7058824)
 preview_color = Color(0.988301, 0.699498, 0.668898, 1)
 
 [node name="Walls" type="Node2D" parent="GodsPlayground"]

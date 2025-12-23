@@ -6,6 +6,7 @@ func _ready():
 		self.visible = false
 	GameManager.score_updated.connect(update_scores)
 	GameManager.timer_updated.connect(update_timer)
+	GameManager.round_ended.connect(_on_round_ended)
 
 func update_scores(scores: Dictionary):
 	print("Updating scores")
@@ -43,3 +44,10 @@ func update_cooldown_visual(new_value: float):
 		new_value,
 		0.15
 	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+
+func _on_round_ended():
+	hide_ui_rc.rpc()
+
+@rpc("any_peer","call_local")
+func hide_ui_rc():
+	self.visible = false

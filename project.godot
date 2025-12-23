@@ -24,6 +24,11 @@ Settings="*res://assets/scripts/globals/settings.gd"
 
 window/stretch/mode="viewport"
 
+[global_group]
+
+players=""
+coins=""
+
 [input]
 
 start={

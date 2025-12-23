@@ -4,7 +4,7 @@ signal score_updated(scores: Dictionary)
 signal timer_updated(time_left_perc: float)
 signal round_ended()
 
-@export var round_length = 60.0 # seconds
+@export var round_length = 10.0 # seconds
 
 var main_menu : CanvasLayer
 var lobby : CanvasLayer
@@ -13,6 +13,7 @@ var level: Node2D
 var players: Array = []
 var scores: Dictionary = {}
 var game_timer: SceneTreeTimer
+var game_running : bool = false
 
 var debug : bool = false
 
@@ -52,6 +53,7 @@ func create_main_menu() -> CanvasLayer:
 	return mm
 
 func instantiate_level():
+	game_running = true
 	var level_parent = get_tree().get_root().get_node("/root/Main/Level")
 	print("Spawning level")
 	if multiplayer.is_server():
@@ -97,7 +99,7 @@ func instantiate_player():
 		playerNode.add_child(character, true)
 
 func instantiate_coin():
-	if (level == null):
+	if (level == null or game_running == false):
 		return
 	# Create a new instance of the coin scene.
 	var coin =  load("res://assets/scenes/coin.tscn").instantiate()
@@ -129,7 +131,7 @@ func instantiate_level_timer():
 		return
 	game_timer = get_tree().create_timer(round_length)
 	var on_round_end = func ():
-		round_ended.emit()
+		round_over()
 	game_timer.timeout.connect(on_round_end)
 	# Start a process to update the timer UI
 	get_tree().create_timer(1).timeout.connect(on_timer_update)
@@ -175,3 +177,15 @@ func player_scored(player_id: int, points = 1) -> void:
 	scores[player_id] += points
 	print("Current scores: %s" % str(scores))
 	score_updated.emit(scores)
+
+func round_over() -> void:
+	game_running = false
+	if not multiplayer.is_server():
+		return
+	var player_nodes = get_tree().get_nodes_in_group("players")
+	for player in player_nodes:
+		player.queue_free()
+	var coin_nodes = get_tree().get_nodes_in_group("coins")
+	for coin in coin_nodes:
+		coin.queue_free()
+	round_ended.emit()

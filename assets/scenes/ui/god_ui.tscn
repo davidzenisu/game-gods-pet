@@ -79,6 +79,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 0
 
 [node name="WallAbilityGroup" type="AspectRatioContainer" parent="PanelContainer/MainContainer/MainMargin/GodUI/AbilitiesMargin/AbilitiesBox"]
+visible = false
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 

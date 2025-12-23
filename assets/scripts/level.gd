@@ -2,6 +2,7 @@ extends Node
 
 func _ready():
 	# We only need to spawn players on the server.
+	# TODO: Move to game manager!
 	if not multiplayer.is_server():
 		return
 	print("Instantiating player")
