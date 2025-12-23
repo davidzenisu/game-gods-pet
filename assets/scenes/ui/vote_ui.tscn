@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://cuvp2bse22qf"]
+[gd_scene load_steps=5 format=3 uid="uid://cuvp2bse22qf"]
 
 [ext_resource type="Script" uid="uid://jjyl0kq566dq" path="res://assets/scripts/ui/vote_ui.gd" id="1_8ltnt"]
 [ext_resource type="Texture2D" uid="uid://dopa1eyuuq3c4" path="res://assets/art/playerGrey_walk2.png" id="2_py3t6"]
+[ext_resource type="Script" uid="uid://b47kt4rnp7usm" path="res://assets/scripts/ui/vote_number.gd" id="3_bbfwl"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jeh22"]
 bg_color = Color(0, 0, 0, 0.39215687)
@@ -87,6 +88,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_font_sizes/font_size = 48
 text = "0"
+script = ExtResource("3_bbfwl")
 
 [node name="Player2" type="BoxContainer" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AbilitiesBox"]
 layout_mode = 2
@@ -108,6 +110,8 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0, 1, 0, 1)
 theme_override_font_sizes/font_size = 48
 text = "0"
+script = ExtResource("3_bbfwl")
+player_id = 1
 
 [node name="Player3" type="BoxContainer" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AbilitiesBox"]
 layout_mode = 2
@@ -129,6 +133,8 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 1, 1)
 theme_override_font_sizes/font_size = 48
 text = "0"
+script = ExtResource("3_bbfwl")
+player_id = 2
 
 [node name="Player4" type="BoxContainer" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AbilitiesBox"]
 layout_mode = 2
@@ -150,3 +156,5 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 0, 1)
 theme_override_font_sizes/font_size = 48
 text = "0"
+script = ExtResource("3_bbfwl")
+player_id = 3

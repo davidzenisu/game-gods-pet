@@ -1,6 +1,7 @@
 extends Node
 
 signal score_updated(scores: Dictionary)
+signal vote_updated(votes: Dictionary)
 signal timer_updated(time_left_perc: float)
 signal round_ended()
 
@@ -12,6 +13,8 @@ var main : Main
 var level: Node2D
 var players: Array = []
 var scores: Dictionary = {}
+var votes: Dictionary = {}
+var vote_tracker: Dictionary = {}
 var game_timer: SceneTreeTimer
 var game_running : bool = false
 
@@ -78,6 +81,8 @@ func instantiate_player():
 		player_input.player_id = pad
 		character.name = "Player_" + str(pad)
 		scores[pad] = 0
+		votes[pad] = 0
+		vote_tracker[pad] = false
 		# position in each corner
 		var screen_size = get_viewport().get_visible_rect().size
 		match pad:
@@ -177,6 +182,15 @@ func player_scored(player_id: int, points = 1) -> void:
 	scores[player_id] += points
 	print("Current scores: %s" % str(scores))
 	score_updated.emit(scores)
+
+func vote_cast(player_id: int, player_id_cast: int, points = 1) -> void:
+	if not multiplayer.is_server() or vote_tracker[player_id_cast] or !votes.has(player_id):
+		return
+	print("New vote for player: %d" % player_id)
+	votes[player_id] += points
+	vote_tracker[player_id_cast] = true
+	print("Current votes: %s" % str(votes))
+	vote_updated.emit(votes)
 
 func round_over() -> void:
 	game_running = false

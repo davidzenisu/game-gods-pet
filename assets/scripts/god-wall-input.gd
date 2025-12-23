@@ -75,7 +75,7 @@ func update_preview(pos: Vector2):
 
 @rpc("any_peer","call_local")
 func create_wall(start: Vector2, end: Vector2, size: Vector2) -> void:
-	if (not is_multiplayer_authority()):
+	if (not multiplayer.is_server()):
 		return
 
 	print("Spawning wall with", start, end, size)
