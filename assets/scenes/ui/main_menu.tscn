@@ -130,7 +130,8 @@ size_flags_vertical = 3
 theme = ExtResource("2_uanxr")
 theme_override_font_sizes/normal_font_size = 128
 bbcode_enabled = true
-text = "[center]TITLE[/center]"
+text = "[center]GOD'S
+PET[/center]"
 
 [node name="RichTextLabel4" type="RichTextLabel" parent="Title/VBoxContainer"]
 clip_contents = false
@@ -191,9 +192,9 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_outline_size = 6
 theme_override_constants/shadow_offset_x = -2
 theme_override_constants/shadow_offset_y = 2
-theme_override_font_sizes/normal_font_size = 128
+theme_override_font_sizes/normal_font_size = 120
 bbcode_enabled = true
-text = "TITLE"
+text = "GOD'S PET"
 
 [node name="Options" type="VBoxContainer" parent="Main"]
 layout_mode = 1
@@ -249,9 +250,9 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_outline_size = 6
 theme_override_constants/shadow_offset_x = -2
 theme_override_constants/shadow_offset_y = 2
-theme_override_font_sizes/normal_font_size = 128
+theme_override_font_sizes/normal_font_size = 120
 bbcode_enabled = true
-text = "TITLE"
+text = "GOD'S PET"
 
 [node name="Options" type="VBoxContainer" parent="LobbyType"]
 layout_mode = 1
@@ -302,9 +303,9 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_outline_size = 6
 theme_override_constants/shadow_offset_x = -2
 theme_override_constants/shadow_offset_y = 2
-theme_override_font_sizes/normal_font_size = 128
+theme_override_font_sizes/normal_font_size = 120
 bbcode_enabled = true
-text = "TITLE"
+text = "GOD'S PET"
 
 [node name="Options" type="VBoxContainer" parent="HostJoin"]
 layout_mode = 1
@@ -364,9 +365,9 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_outline_size = 6
 theme_override_constants/shadow_offset_x = -2
 theme_override_constants/shadow_offset_y = 2
-theme_override_font_sizes/normal_font_size = 128
+theme_override_font_sizes/normal_font_size = 120
 bbcode_enabled = true
-text = "TITLE"
+text = "GOD'S PET"
 
 [node name="Options" type="VBoxContainer" parent="Settings"]
 layout_mode = 1
