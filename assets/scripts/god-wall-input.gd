@@ -42,7 +42,8 @@ func _input(event):
 	):
 		preview_active = false
 		preview_rect.visible = false
-		create_wall.rpc(drag_start, event.position, wall_size)
+		if GameManager.game_running:
+			create_wall.rpc(drag_start, event.position, wall_size)
 		# reset wall size
 		wall_size = Vector2.ZERO
 
