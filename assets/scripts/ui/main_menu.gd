@@ -18,7 +18,7 @@ func _ready() -> void:
 	_setup_buttons()
 	_setup_state_chart()
 	_enforce_visibility()
-	if GameManager.debug:
+	if GameManager.is_debug():
 		$StateChartDebugger.show()
 	else:
 		$StateChartDebugger.hide()

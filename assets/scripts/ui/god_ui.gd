@@ -1,12 +1,11 @@
 extends Node
 
 func _ready():
-	if multiplayer.is_server() and  !OS.is_debug_build():
-		print("Only display score for gods. Disabling UI.")
-		self.visible = false
+	view_ui_rc.rpc()
 	GameManager.score_updated.connect(update_scores)
 	GameManager.timer_updated.connect(update_timer)
 	GameManager.round_ended.connect(_on_round_ended)
+	GameManager.round_started.connect(_on_round_started)
 
 func update_scores(scores: Dictionary):
 	print("Updating scores")
@@ -48,6 +47,17 @@ func update_cooldown_visual(new_value: float):
 func _on_round_ended():
 	hide_ui_rc.rpc()
 
+func _on_round_started():
+	view_ui_rc.rpc()
+
 @rpc("any_peer","call_local")
 func hide_ui_rc():
 	self.visible = false
+
+@rpc("any_peer","call_local")
+func view_ui_rc():
+	if multiplayer.is_server() and  !GameManager.is_debug():
+		print("Only display score for gods. Disabling UI.")
+		self.visible = false
+		return
+	self.visible = true

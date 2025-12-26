@@ -4,6 +4,7 @@ signal score_updated(scores: Dictionary)
 signal vote_updated(votes: Dictionary)
 signal timer_updated(time_left_perc: float)
 signal round_ended()
+signal round_started()
 
 @export var round_length = 10.0 # seconds
 
@@ -18,7 +19,8 @@ var vote_tracker: Dictionary = {}
 var game_timer: SceneTreeTimer
 var game_running : bool = false
 
-var debug : bool = false
+func is_debug() -> bool:
+	return true
 
 func _ready() -> void:
 	_check_launch_args()
@@ -145,7 +147,8 @@ func on_timer_update():
 	var time_left = game_timer.time_left
 	var time_left_perc = time_left / round_length
 	timer_updated.emit(time_left_perc)
-	get_tree().create_timer(1).timeout.connect(on_timer_update)
+	if time_left > 0:
+		get_tree().create_timer(1).timeout.connect(on_timer_update)
 
 func create_level() -> Node2D:
 	if is_instance_valid(main_menu):
@@ -202,4 +205,14 @@ func round_over() -> void:
 	var coin_nodes = get_tree().get_nodes_in_group("coins")
 	for coin in coin_nodes:
 		coin.queue_free()
+	var wall_nodes = get_tree().get_nodes_in_group("walls")
+	for wall in wall_nodes:
+		wall.queue_free()
 	round_ended.emit()
+
+func restart_round() -> void:
+	instantiate_level_timer()
+	instantiate_player()
+	instantiate_coin()
+	game_running = true
+	round_started.emit()

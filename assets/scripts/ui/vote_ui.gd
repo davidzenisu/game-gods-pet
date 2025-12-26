@@ -3,11 +3,12 @@ extends Node
 func _ready():
 	if multiplayer.is_server():
 		GameManager.round_ended.connect(_on_round_ended)
+		GameManager.round_started.connect(_on_round_started)
 
 func _on_round_ended():
 	self.visible = true
 
-func _on_round_reset():
+func _on_round_started():
 	self.visible = false
 
 func _process(delta):
@@ -45,3 +46,12 @@ func _process(delta):
 		GameManager.vote_cast(3,2)
 	if Input.is_action_just_pressed("button_circle3"):
 		GameManager.vote_cast(3,3)
+	#restart game on start button
+	if Input.is_action_just_pressed("button_start0"):
+		GameManager.restart_round()
+	if Input.is_action_just_pressed("button_start1"):
+		GameManager.restart_round()
+	if Input.is_action_just_pressed("button_start2"):
+		GameManager.restart_round()
+	if Input.is_action_just_pressed("button_start3"):
+		GameManager.restart_round()

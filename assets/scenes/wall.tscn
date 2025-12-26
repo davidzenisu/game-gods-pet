@@ -14,7 +14,7 @@ properties/1/path = NodePath(".:wall_size")
 properties/1/spawn = true
 properties/1/replication_mode = 1
 
-[node name="Wall" type="StaticBody2D"]
+[node name="Wall" type="StaticBody2D" groups=["walls"]]
 input_pickable = true
 script = ExtResource("1_fv7l2")
 
