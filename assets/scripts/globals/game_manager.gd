@@ -104,6 +104,8 @@ func instantiate_player():
 				character.position = Vector2(screen_size.x/2, screen_size.y/2)
 		print("Spawning player with joypad: ", pad)
 		playerNode.add_child(character, true)
+	score_updated.emit(scores)
+	vote_updated.emit(votes)
 
 func instantiate_coin():
 	if (level == null or game_running == false):
@@ -211,8 +213,8 @@ func round_over() -> void:
 	round_ended.emit()
 
 func restart_round() -> void:
+	game_running = true
 	instantiate_level_timer()
 	instantiate_player()
 	instantiate_coin()
-	game_running = true
 	round_started.emit()
