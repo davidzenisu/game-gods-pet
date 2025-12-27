@@ -42,8 +42,7 @@ func _input(event):
 	):
 		preview_active = false
 		preview_rect.visible = false
-		if GameManager.game_running:
-			create_wall.rpc(drag_start, event.position, wall_size)
+		create_wall.rpc(drag_start, event.position, wall_size)
 		# reset wall size
 		wall_size = Vector2.ZERO
 
@@ -75,7 +74,7 @@ func update_preview(pos: Vector2):
 
 @rpc("any_peer","call_local")
 func create_wall(start: Vector2, end: Vector2, size: Vector2) -> void:
-	if (not multiplayer.is_server()):
+	if (!multiplayer.is_server() or !GameManager.game_running):
 		return
 
 	print("Spawning wall with", start, end, size)

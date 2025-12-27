@@ -54,7 +54,7 @@ func _on_round_started():
 func hide_ui_rc():
 	#TODO: Hide once presentation is available
 	#self.visible = false
-	self.visible = true
+	print("Doing nothing for now...")
 
 @rpc("any_peer","call_local")
 func view_ui_rc():
