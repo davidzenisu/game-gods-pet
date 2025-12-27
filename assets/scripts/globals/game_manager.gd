@@ -6,7 +6,7 @@ signal timer_updated(time_left_perc: float)
 signal round_ended()
 signal round_started()
 
-@export var round_length = 10.0 # seconds
+@export var round_length = 90.0 # seconds
 
 var main_menu : CanvasLayer
 var lobby : CanvasLayer
@@ -20,7 +20,7 @@ var game_timer: SceneTreeTimer
 var game_running : bool = false
 
 func is_debug() -> bool:
-	return true
+	return false
 
 func _ready() -> void:
 	_check_launch_args()
@@ -35,8 +35,14 @@ func setup_multiplayer_input(playerCount:int):
 
 	var contollers = Input.get_connected_joypads()
 	print("Connected controllers: ", contollers)
-
+	var controller_index = 0
+	
 	for player in range(playerCount):
+		var joypad_name = Input.get_joy_name(controller_index)
+		print("Configuring controller: ", joypad_name)
+		if (joypad_name=="Steam Deck Controller" && contollers.size() > playerCount):
+			print("Skipping Steam Deck Controller")
+			controller_index += 1
 		for act in range(actionList.size()):
 			if(actionList[act].begins_with("ui_")):
 				continue
@@ -45,9 +51,9 @@ func setup_multiplayer_input(playerCount:int):
 			actionEventList = InputMap.action_get_events(actionList[act])
 			for event in range(actionEventList.size()):
 				currentEvent = actionEventList[event].duplicate(true)
-				currentEvent.set_device(player)
+				currentEvent.set_device(controller_index)
 				InputMap.action_add_event(currentAction,currentEvent)
-				print("Added action: ", currentAction, " with event: ", currentEvent)
+		controller_index += 1
 
 func create_main_menu() -> CanvasLayer:
 	if is_instance_valid(main_menu):
@@ -73,21 +79,26 @@ func instantiate_player():
 	print("Instantiating player for joypads: ", joypads.size())
 	var playerNode = level.get_node("Players")
 	print("Player node: ", playerNode)
+	var pad_index = 0
 	for pad in joypads:
 		print("Joypad ID: ", pad)
+		print("Player index: ", pad_index)
 		var character = preload("res://assets/scenes/player.tscn").instantiate()
 		players.append(character)
 		#TODO: Only set player id once
-		character.player_id = pad
+		character.player_id = pad_index
 		var player_input = character.get_node("PlayerInput")
-		player_input.player_id = pad
-		character.name = "Player_" + str(pad)
-		scores[pad] = 0
-		votes[pad] = 0
-		vote_tracker[pad] = false
+		player_input.player_id = pad_index
+		character.name = "Player_" + str(pad_index)
+		scores[pad_index] = 0
+		votes[pad_index] = 0
+		vote_tracker[pad_index] = false
 		# position in each corner
 		var screen_size = get_viewport().get_visible_rect().size
-		match pad:
+		print(Input.get_joy_name(pad_index))
+		#if (Input.get_joy_name(pad_index) == "Steam Deck Controller"):
+			#continue;
+		match pad_index:
 			0:
 				character.position = Vector2(0, 0)
 				character.modulate = Color(1, 0, 0) # Red
@@ -102,8 +113,10 @@ func instantiate_player():
 				character.modulate = Color(1, 1, 0) # Yellow
 			_:
 				character.position = Vector2(screen_size.x/2, screen_size.y/2)
+				continue;
 		print("Spawning player with joypad: ", pad)
 		playerNode.add_child(character, true)
+		pad_index += 1
 	score_updated.emit(scores)
 	vote_updated.emit(votes)
 

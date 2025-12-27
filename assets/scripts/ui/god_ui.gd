@@ -52,7 +52,9 @@ func _on_round_started():
 
 @rpc("any_peer","call_local")
 func hide_ui_rc():
-	self.visible = false
+	#TODO: Hide once presentation is available
+	#self.visible = false
+	self.visible = true
 
 @rpc("any_peer","call_local")
 func view_ui_rc():
