@@ -29,6 +29,7 @@ window/stretch/mode="viewport"
 players=""
 coins=""
 walls=""
+pet_sprite=""
 
 [input]
 

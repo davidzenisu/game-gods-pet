@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://owng5aix3qc1"]
+[gd_scene load_steps=8 format=3 uid="uid://owng5aix3qc1"]
 
 [ext_resource type="Script" uid="uid://b0js1qksr2nlr" path="res://assets/scripts/ui/god_ui.gd" id="1_b0nij"]
 [ext_resource type="Texture2D" uid="uid://dibnrmhty8nk5" path="res://assets/art/bricks.png" id="1_sr8po"]
+[ext_resource type="Texture2D" uid="uid://co5ibmkc0vgtk" path="res://assets/art/playerGrey_up1.png" id="2_jeh22"]
 [ext_resource type="Texture2D" uid="uid://yfedbuoaglkf" path="res://assets/art/rectangle-16.jpg" id="3_5d8ni"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jeh22"]
@@ -66,7 +67,7 @@ theme_override_constants/margin_bottom = 10
 
 [node name="GodUI" type="BoxContainer" parent="PanelContainer/MainContainer/MainMargin"]
 layout_mode = 2
-theme_override_constants/separation = 50
+theme_override_constants/separation = 30
 alignment = 1
 
 [node name="AbilitiesMargin" type="MarginContainer" parent="PanelContainer/MainContainer/MainMargin/GodUI"]
@@ -122,6 +123,22 @@ texture_under = ExtResource("3_5d8ni")
 texture_progress = ExtResource("3_5d8ni")
 tint_under = Color(0.7490196, 0.7490196, 0.7490196, 0.39215687)
 tint_progress = Color(0.50980395, 0, 0.1764706, 1)
+
+[node name="PetContainer" type="MarginContainer" parent="PanelContainer/MainContainer/MainMargin/GodUI"]
+layout_mode = 2
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="PetGroup" type="AspectRatioContainer" parent="PanelContainer/MainContainer/MainMargin/GodUI/PetContainer"]
+custom_minimum_size = Vector2(80, 100)
+layout_mode = 2
+stretch_mode = 1
+
+[node name="PetSprite" type="TextureRect" parent="PanelContainer/MainContainer/MainMargin/GodUI/PetContainer/PetGroup" groups=["pet_sprite"]]
+layout_mode = 2
+texture = ExtResource("2_jeh22")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="ScoresMargin" type="MarginContainer" parent="PanelContainer/MainContainer/MainMargin/GodUI"]
 layout_mode = 2

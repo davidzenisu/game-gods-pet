@@ -2,6 +2,7 @@ extends Node
 
 signal score_updated(scores: Dictionary)
 signal vote_updated(votes: Dictionary)
+signal pet_updated(player_id: int)
 signal timer_updated(time_left_perc: float)
 signal round_ended()
 signal round_started()
@@ -13,11 +14,19 @@ var lobby : CanvasLayer
 var main : Main
 var level: Node2D
 var players: Array = []
+var god_pet: int = -1
 var scores: Dictionary = {}
 var votes: Dictionary = {}
 var vote_tracker: Dictionary = {}
 var game_timer: SceneTreeTimer
 var game_running : bool = false
+
+var player_colors: Dictionary = {
+	0 : Color(1, 0, 0),
+	1 : Color(0, 1, 0),
+	2 : Color(0, 0, 1),
+	3 : Color(1, 1, 0)
+}
 
 func is_debug() -> bool:
 	return false
@@ -80,11 +89,11 @@ func instantiate_player():
 	var playerNode = level.get_node("Players")
 	print("Player node: ", playerNode)
 	var pad_index = 0
+	players.clear()
 	for pad in joypads:
 		print("Joypad ID: ", pad)
 		print("Player index: ", pad_index)
 		var character = preload("res://assets/scenes/player.tscn").instantiate()
-		players.append(character)
 		#TODO: Only set player id once
 		character.player_id = pad_index
 		var player_input = character.get_node("PlayerInput")
@@ -101,22 +110,26 @@ func instantiate_player():
 		match pad_index:
 			0:
 				character.position = Vector2(0, 0)
-				character.modulate = Color(1, 0, 0) # Red
+				character.modulate = player_colors[pad_index]
 			1:
 				character.position = Vector2(screen_size.x, 0)
-				character.modulate = Color(0, 1, 0) # Green
+				character.modulate = player_colors[pad_index]
 			2:
 				character.position = Vector2(0, screen_size.y)
-				character.modulate = Color(0, 0, 1) # Blue
+				character.modulate = player_colors[pad_index]
 			3:
 				character.position = Vector2(screen_size.x, screen_size.y)
-				character.modulate = Color(1, 1, 0) # Yellow
+				character.modulate = player_colors[pad_index]
 			_:
 				character.position = Vector2(screen_size.x/2, screen_size.y/2)
 				continue;
 		print("Spawning player with joypad: ", pad)
 		playerNode.add_child(character, true)
 		pad_index += 1
+		players.append(character)
+	# update pet based on number of players
+	god_pet = range(players.size()).pick_random()
+	pet_updated.emit(god_pet)
 	score_updated.emit(scores)
 	vote_updated.emit(votes)
 

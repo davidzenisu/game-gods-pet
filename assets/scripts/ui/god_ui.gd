@@ -4,8 +4,12 @@ func _ready():
 	view_ui_rc.rpc()
 	GameManager.score_updated.connect(update_scores)
 	GameManager.timer_updated.connect(update_timer)
+	GameManager.pet_updated.connect(update_pet)
 	GameManager.round_ended.connect(_on_round_ended)
 	GameManager.round_started.connect(_on_round_started)
+	# timing issue?
+	if (!multiplayer.is_server()):
+		init_pet.rpc()
 
 func update_scores(scores: Dictionary):
 	print("Updating scores")
@@ -30,6 +34,22 @@ func update_timer(time_left_perc: float):
 @rpc("any_peer","call_local")
 func update_timer_rc(time_left_perc: float):
 	update_cooldown_visual(time_left_perc)
+
+func update_pet(player_id: int):
+	var pet_color = GameManager.player_colors[player_id]
+	update_pet_rc.rpc(pet_color)
+
+@rpc("any_peer", "call_remote")
+func init_pet():
+	if (!multiplayer.is_server()):
+		return
+	update_pet(GameManager.god_pet)
+	
+@rpc("any_peer","call_local")
+func update_pet_rc(color: Color):
+	var pet_icons = get_tree().get_nodes_in_group("pet_sprite")
+	for pet_icon in pet_icons:
+		pet_icon.modulate = color
 
 func update_cooldown_visual(new_value: float):
 	var timer_progress_search = get_tree().get_nodes_in_group("RoundTimer")
