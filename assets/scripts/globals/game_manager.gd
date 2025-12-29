@@ -6,8 +6,12 @@ signal pet_updated(player_id: int)
 signal timer_updated(time_left_perc: float)
 signal round_ended()
 signal round_started()
+signal vote_ended()
+signal game_score_updated(game_score: Dictionary)
 
 @export var round_length = 90.0 # seconds
+func is_debug() -> bool:
+	return false
 
 var main_menu : CanvasLayer
 var lobby : CanvasLayer
@@ -17,7 +21,9 @@ var players: Array = []
 var god_pet: int = -1
 var scores: Dictionary = {}
 var votes: Dictionary = {}
+var game_score: Dictionary = {}
 var vote_tracker: Dictionary = {}
+var round_winners: Array = []
 var game_timer: SceneTreeTimer
 var game_running : bool = false
 
@@ -27,9 +33,6 @@ var player_colors: Dictionary = {
 	2 : Color(0, 0, 1),
 	3 : Color(1, 1, 0)
 }
-
-func is_debug() -> bool:
-	return false
 
 func _ready() -> void:
 	_check_launch_args()
@@ -236,9 +239,53 @@ func round_over() -> void:
 	var wall_nodes = get_tree().get_nodes_in_group("walls")
 	for wall in wall_nodes:
 		wall.queue_free()
+	round_winners.clear()
 	round_ended.emit()
+	determine_winner_prevote()
+
+func determine_winner_prevote():
+	var pet_winning = true
+	# if any player has equal or higher score
+	for key in scores:
+		if key != god_pet and scores[key] >= scores[god_pet]:
+			pet_winning = false
+			round_winners.append(key)
+	if !pet_winning:
+		add_game_scores()
+		GameManager.vote_ended.emit()
+
+func vote_over() -> void:
+	# only transition if all votes have been fulfilled
+	var not_voted = func (vote_cast):
+		return !vote_cast
+	if vote_tracker.values().any(not_voted):
+		return
+	determine_winner()
+	GameManager.vote_ended.emit()
+
+func determine_winner():
+	#If pet has majority of votes
+	if votes[god_pet] >= scores.values().max():
+		for player in range(players.size()):
+			if player != god_pet:
+				round_winners.append(player)
+	else:
+		round_winners.append(god_pet)
+		# god = 4s
+		round_winners.append(4)
+	add_game_scores()
+
+func add_game_scores():
+	for winner in round_winners:
+		if game_score.has(winner):
+			game_score[winner] += 1
+		else:
+			game_score[winner] = 1
+	print("Current game scores: ", game_score)
 
 func restart_round() -> void:
+	if game_running==true:
+		return
 	game_running = true
 	instantiate_level_timer()
 	instantiate_player()

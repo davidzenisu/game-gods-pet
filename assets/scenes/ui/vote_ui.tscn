@@ -50,7 +50,7 @@ theme_override_constants/margin_bottom = 30
 
 [node name="BoxContainer" type="BoxContainer" parent="PanelContainer/MainContainer/AbilitiesMargin"]
 layout_mode = 2
-theme_override_constants/separation = 60
+theme_override_constants/separation = 50
 alignment = 1
 vertical = true
 
@@ -208,3 +208,9 @@ player_id = 3
 
 [node name="Placeholder5" type="Control" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AbilitiesBox"]
 layout_mode = 2
+
+[node name="NextStepLabel" type="Label" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "After all votes have been cast, press start to continue..."
+horizontal_alignment = 1

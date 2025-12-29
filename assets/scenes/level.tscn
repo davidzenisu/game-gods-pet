@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cx6syvrvuews"]
+[gd_scene load_steps=9 format=3 uid="uid://cx6syvrvuews"]
 
 [ext_resource type="Script" uid="uid://y43ddl6ivq14" path="res://assets/scripts/level.gd" id="1_ye1mc"]
 [ext_resource type="Shader" uid="uid://jkqoqw81n4u4" path="res://assets/shaders/paper.gdshader" id="2_dyaho"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://dugu8aiqf146l" path="res://assets/scripts/god-wall-input.gd" id="4_yeohl"]
 [ext_resource type="PackedScene" uid="uid://cuvp2bse22qf" path="res://assets/scenes/ui/vote_ui.tscn" id="5_8sdpe"]
 [ext_resource type="PackedScene" uid="uid://owng5aix3qc1" path="res://assets/scenes/ui/god_ui.tscn" id="5_xitjf"]
+[ext_resource type="PackedScene" uid="uid://b4mi5vngj2vls" path="res://assets/scenes/ui/result_ui.tscn" id="6_tjd8y"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ckblc"]
 shader = ExtResource("2_dyaho")
@@ -42,6 +43,9 @@ autostart = true
 [node name="GodUi" parent="." instance=ExtResource("5_xitjf")]
 
 [node name="VoteUi" parent="." instance=ExtResource("5_8sdpe")]
+visible = false
+
+[node name="ResultUi" parent="." instance=ExtResource("6_tjd8y")]
 visible = false
 
 [node name="GodsPlayground" type="Node2D" parent="."]
