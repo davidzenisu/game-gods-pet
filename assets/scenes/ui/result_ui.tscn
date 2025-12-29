@@ -1,0 +1,221 @@
+[gd_scene load_steps=5 format=3 uid="uid://b4mi5vngj2vls"]
+
+[ext_resource type="Script" uid="uid://c57p12ypbk0b3" path="res://assets/scripts/ui/result_ui.gd" id="1_6csdb"]
+[ext_resource type="Texture2D" uid="uid://dopa1eyuuq3c4" path="res://assets/art/playerGrey_walk2.png" id="3_tae1r"]
+[ext_resource type="Texture2D" uid="uid://yfedbuoaglkf" path="res://assets/art/rectangle-16.jpg" id="4_cwxa5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jeh22"]
+bg_color = Color(0, 0, 0, 0.39215687)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[node name="ResultUi" type="CanvasLayer"]
+script = ExtResource("1_6csdb")
+
+[node name="PanelContainer" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="MainContainer" type="PanelContainer" parent="PanelContainer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -542.0
+offset_top = -291.0
+offset_right = 542.0
+offset_bottom = 291.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_jeh22")
+
+[node name="AbilitiesMargin" type="MarginContainer" parent="PanelContainer/MainContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 60
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 60
+theme_override_constants/margin_bottom = 30
+
+[node name="BoxContainer" type="BoxContainer" parent="PanelContainer/MainContainer/AbilitiesMargin"]
+layout_mode = 2
+theme_override_constants/separation = 50
+alignment = 1
+vertical = true
+
+[node name="GameOverLabel" type="Label" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 36
+text = "The winners are..."
+horizontal_alignment = 1
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+
+[node name="WinnerScreen" type="VBoxContainer" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer" groups=["winner_screen"]]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+theme_override_constants/separation = 50
+
+[node name="WinnersAnimals" type="HBoxContainer" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen" groups=["winner_row"]]
+layout_mode = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="Player" type="TextureRect" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/WinnersAnimals"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("3_tae1r")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Player2" type="TextureRect" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/WinnersAnimals"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("3_tae1r")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Player3" type="TextureRect" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/WinnersAnimals"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("3_tae1r")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="WinnersGod" type="HBoxContainer" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen" groups=["winner_row"]]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="God" type="TextureRect" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/WinnersGod"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("4_cwxa5")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Player" type="TextureRect" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/WinnersGod"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("3_tae1r")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen"]
+layout_mode = 2
+theme_override_constants/separation = 150
+
+[node name="RoundScore" type="VBoxContainer" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer/RoundScore"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 36
+text = "Round 	Scores:"
+horizontal_alignment = 1
+
+[node name="WinnersGod2" type="HBoxContainer" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer/RoundScore"]
+layout_mode = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="PlayerScore0" type="Label" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer/RoundScore/WinnersGod2" groups=["score"]]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 36
+text = "0"
+horizontal_alignment = 1
+
+[node name="PlayerScore1" type="Label" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer/RoundScore/WinnersGod2" groups=["score"]]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+theme_override_font_sizes/font_size = 36
+text = "0"
+horizontal_alignment = 1
+
+[node name="PlayerScore2" type="Label" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer/RoundScore/WinnersGod2" groups=["score"]]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 1, 1)
+theme_override_font_sizes/font_size = 36
+text = "0"
+horizontal_alignment = 1
+
+[node name="PlayerScore3" type="Label" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer/RoundScore/WinnersGod2" groups=["score"]]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_font_sizes/font_size = 36
+text = "0"
+horizontal_alignment = 1
+
+[node name="GameScore" type="VBoxContainer" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer/GameScore"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Game Scores:"
+horizontal_alignment = 1
+
+[node name="WinnersGod2" type="HBoxContainer" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer/GameScore"]
+layout_mode = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="GodScore" type="Label" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer/GameScore/WinnersGod2" groups=["round_score"]]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "0"
+horizontal_alignment = 1
+
+[node name="PlayerScore0" type="Label" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer/GameScore/WinnersGod2" groups=["round_score"]]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 36
+text = "0"
+horizontal_alignment = 1
+
+[node name="PlayerScore1" type="Label" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer/GameScore/WinnersGod2" groups=["round_score"]]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+theme_override_font_sizes/font_size = 36
+text = "0"
+horizontal_alignment = 1
+
+[node name="PlayerScore2" type="Label" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer/GameScore/WinnersGod2" groups=["round_score"]]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 1, 1)
+theme_override_font_sizes/font_size = 36
+text = "0"
+horizontal_alignment = 1
+
+[node name="PlayerScore3" type="Label" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer/GameScore/WinnersGod2" groups=["round_score"]]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_font_sizes/font_size = 36
+text = "0"
+horizontal_alignment = 1
+
+[node name="NextRoundLabel" type="Label" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Press start for a new round"
+horizontal_alignment = 1

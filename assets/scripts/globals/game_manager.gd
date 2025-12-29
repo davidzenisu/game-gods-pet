@@ -27,6 +27,8 @@ var round_winners: Array = []
 var game_timer: SceneTreeTimer
 var game_running : bool = false
 
+var god_identifier = 4
+
 var player_colors: Dictionary = {
 	0 : Color(1, 0, 0),
 	1 : Color(0, 1, 0),
@@ -272,7 +274,7 @@ func determine_winner():
 	else:
 		round_winners.append(god_pet)
 		# god = 4s
-		round_winners.append(4)
+		round_winners.append(god_identifier)
 	add_game_scores()
 
 func add_game_scores():
