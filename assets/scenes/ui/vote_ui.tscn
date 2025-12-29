@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cuvp2bse22qf"]
+[gd_scene load_steps=6 format=3 uid="uid://cuvp2bse22qf"]
 
 [ext_resource type="Script" uid="uid://jjyl0kq566dq" path="res://assets/scripts/ui/vote_ui.gd" id="1_8ltnt"]
 [ext_resource type="Texture2D" uid="uid://dopa1eyuuq3c4" path="res://assets/art/playerGrey_walk2.png" id="2_py3t6"]
+[ext_resource type="Script" uid="uid://d0hg3dtg4fegh" path="res://assets/scripts/ui/vote_left.gd" id="2_stt4x"]
 [ext_resource type="Script" uid="uid://b47kt4rnp7usm" path="res://assets/scripts/ui/vote_number.gd" id="3_bbfwl"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jeh22"]
@@ -11,7 +12,7 @@ corner_radius_top_right = 30
 corner_radius_bottom_right = 30
 corner_radius_bottom_left = 30
 
-[node name="GodUi" type="CanvasLayer"]
+[node name="VoteUi" type="CanvasLayer"]
 script = ExtResource("1_8ltnt")
 
 [node name="PanelContainer" type="Control" parent="."]
@@ -42,31 +43,56 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_jeh22")
 
 [node name="AbilitiesMargin" type="MarginContainer" parent="PanelContainer/MainContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 30
+theme_override_constants/margin_left = 60
 theme_override_constants/margin_top = 30
-theme_override_constants/margin_right = 30
+theme_override_constants/margin_right = 60
 theme_override_constants/margin_bottom = 30
 
 [node name="BoxContainer" type="BoxContainer" parent="PanelContainer/MainContainer/AbilitiesMargin"]
 layout_mode = 2
-theme_override_constants/separation = 30
+theme_override_constants/separation = 60
 alignment = 1
 vertical = true
 
-[node name="GameOverLabel" type="Label" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer"]
 layout_mode = 2
+theme_override_constants/separation = 100
+alignment = 1
+
+[node name="GameOverLabel" type="Label" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 36
 text = "The game has ended...
 Try to find the pet!"
 horizontal_alignment = 1
 
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="VotesLabel" type="Label" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Votes left: "
+horizontal_alignment = 1
+
+[node name="VoteLeft" type="Label" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "4"
+horizontal_alignment = 1
+script = ExtResource("2_stt4x")
+
 [node name="AbilitiesBox" type="GridContainer" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_constants/h_separation = 150
-theme_override_constants/v_separation = 75
-columns = 2
+theme_override_constants/h_separation = 30
+theme_override_constants/v_separation = 30
+columns = 3
+
+[node name="Placeholder" type="Control" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AbilitiesBox"]
+layout_mode = 2
 
 [node name="Player1" type="BoxContainer" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AbilitiesBox"]
 layout_mode = 2
@@ -74,8 +100,11 @@ theme_override_constants/separation = 20
 
 [node name="TextureRect" type="TextureRect" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AbilitiesBox/Player1"]
 self_modulate = Color(1, 0, 0, 1)
+custom_minimum_size = Vector2(75, 75)
 layout_mode = 2
 texture = ExtResource("2_py3t6")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="Votes" type="Label" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AbilitiesBox/Player1"]
 layout_mode = 2
@@ -90,14 +119,20 @@ theme_override_font_sizes/font_size = 48
 text = "0"
 script = ExtResource("3_bbfwl")
 
+[node name="Placeholder2" type="Control" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AbilitiesBox"]
+layout_mode = 2
+
 [node name="Player2" type="BoxContainer" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AbilitiesBox"]
 layout_mode = 2
 theme_override_constants/separation = 20
 
 [node name="TextureRect" type="TextureRect" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AbilitiesBox/Player2"]
 self_modulate = Color(0, 1, 0, 1)
+custom_minimum_size = Vector2(75, 75)
 layout_mode = 2
 texture = ExtResource("2_py3t6")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="Votes" type="Label" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AbilitiesBox/Player2"]
 layout_mode = 2
@@ -113,14 +148,20 @@ text = "0"
 script = ExtResource("3_bbfwl")
 player_id = 1
 
+[node name="Placeholder3" type="Control" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AbilitiesBox"]
+layout_mode = 2
+
 [node name="Player3" type="BoxContainer" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AbilitiesBox"]
 layout_mode = 2
 theme_override_constants/separation = 20
 
 [node name="TextureRect" type="TextureRect" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AbilitiesBox/Player3"]
 self_modulate = Color(0, 0, 1, 1)
+custom_minimum_size = Vector2(75, 75)
 layout_mode = 2
 texture = ExtResource("2_py3t6")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="Votes" type="Label" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AbilitiesBox/Player3"]
 layout_mode = 2
@@ -136,14 +177,20 @@ text = "0"
 script = ExtResource("3_bbfwl")
 player_id = 2
 
+[node name="Placeholder4" type="Control" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AbilitiesBox"]
+layout_mode = 2
+
 [node name="Player4" type="BoxContainer" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AbilitiesBox"]
 layout_mode = 2
 theme_override_constants/separation = 20
 
 [node name="TextureRect" type="TextureRect" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AbilitiesBox/Player4"]
 self_modulate = Color(1, 1, 0, 1)
+custom_minimum_size = Vector2(75, 75)
 layout_mode = 2
 texture = ExtResource("2_py3t6")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="Votes" type="Label" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AbilitiesBox/Player4"]
 layout_mode = 2
@@ -158,3 +205,6 @@ theme_override_font_sizes/font_size = 48
 text = "0"
 script = ExtResource("3_bbfwl")
 player_id = 3
+
+[node name="Placeholder5" type="Control" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AbilitiesBox"]
+layout_mode = 2
