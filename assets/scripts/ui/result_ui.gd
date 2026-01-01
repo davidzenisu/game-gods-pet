@@ -17,6 +17,7 @@ func _on_vote_ended():
 		update_score(key, GameManager.scores[key])
 	for key in GameManager.game_score:
 		update_game_score(key, GameManager.game_score[key])
+	update_pet_sprite()
 
 func _on_round_started():
 	self.visible = false
@@ -75,3 +76,8 @@ func update_game_score(label, new_score: int):
 			score_label.text = str(new_score)
 		elif score_label.name == "PlayerScore%d" % label:
 			score_label.text = str(new_score)
+
+func update_pet_sprite():
+	var pet_sprites = get_tree().get_nodes_in_group("pet_sprite")
+	for pet_sprite in pet_sprites:
+		pet_sprite.modulate = GameManager.player_colors[GameManager.god_pet]

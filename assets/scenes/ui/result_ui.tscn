@@ -111,7 +111,7 @@ texture = ExtResource("4_cwxa5")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Player" type="TextureRect" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/WinnersGod"]
+[node name="Player" type="TextureRect" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/WinnersGod" groups=["pet_sprite"]]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 texture = ExtResource("3_tae1r")
@@ -120,11 +120,11 @@ stretch_mode = 5
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen"]
 layout_mode = 2
-theme_override_constants/separation = 150
+size_flags_vertical = 3
+theme_override_constants/separation = 75
 
 [node name="RoundScore" type="VBoxContainer" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer/RoundScore"]
 layout_mode = 2
@@ -135,6 +135,7 @@ horizontal_alignment = 1
 
 [node name="WinnersGod2" type="HBoxContainer" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer/RoundScore"]
 layout_mode = 2
+size_flags_vertical = 3
 theme_override_constants/separation = 30
 alignment = 1
 
@@ -166,17 +167,36 @@ theme_override_font_sizes/font_size = 36
 text = "0"
 horizontal_alignment = 1
 
+[node name="GodsPetLabel" type="VBoxContainer" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer/GodsPetLabel"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 36
+text = "God's Pet:"
+horizontal_alignment = 1
+
+[node name="Player" type="TextureRect" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer/GodsPetLabel" groups=["pet_sprite"]]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+texture = ExtResource("3_tae1r")
+expand_mode = 1
+stretch_mode = 5
+
 [node name="GameScore" type="VBoxContainer" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer"]
 layout_mode = 2
 
 [node name="Label" type="Label" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer/GameScore"]
 layout_mode = 2
+size_flags_vertical = 6
 theme_override_font_sizes/font_size = 36
 text = "Game Scores:"
 horizontal_alignment = 1
 
 [node name="WinnersGod2" type="HBoxContainer" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer/GameScore"]
 layout_mode = 2
+size_flags_vertical = 3
 theme_override_constants/separation = 30
 alignment = 1
 
