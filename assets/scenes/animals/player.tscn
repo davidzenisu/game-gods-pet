@@ -1,0 +1,102 @@
+[gd_scene load_steps=14 format=3 uid="uid://b68uitfh610nj"]
+
+[ext_resource type="Script" uid="uid://h8v6qxwm45y6" path="res://assets/scripts/player.gd" id="1_bpmvs"]
+[ext_resource type="Texture2D" uid="uid://dlftlldkogiaf" path="res://assets/art/cat_bottom1.png" id="2_0mp4a"]
+[ext_resource type="Script" uid="uid://dqhpcqc6trp2n" path="res://assets/scripts/player-input.gd" id="2_y6c2j"]
+[ext_resource type="Texture2D" uid="uid://f435ndv5c53q" path="res://assets/art/dog_bottom1.png" id="3_0mp4a"]
+[ext_resource type="Texture2D" uid="uid://dqriluqa5djfq" path="res://assets/art/cat_bottom2.png" id="3_2hir3"]
+[ext_resource type="Texture2D" uid="uid://b0nbxkbwujjh" path="res://assets/art/dog_bottom2.png" id="4_2hir3"]
+[ext_resource type="Texture2D" uid="uid://cbwpoo8jypiba" path="res://assets/art/playerGrey_walk1.png" id="5_0184f"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0184f"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_0mp4a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_2hir3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hqtel"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_0mp4a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_2hir3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_s027a"]
+properties/0/path = NodePath(".:velocity")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:position")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:modulate")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath(".:player_authority")
+properties/3/spawn = true
+properties/3/replication_mode = 0
+properties/4/path = NodePath(".:player_id")
+properties/4/spawn = true
+properties/4/replication_mode = 1
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_14505"]
+properties/0/path = NodePath(".:direction")
+properties/0/spawn = false
+properties/0/replication_mode = 1
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sweqy"]
+radius = 56.0
+height = 120.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_onrkg"]
+gravity = Vector3(0, 98, 0)
+
+[node name="Player" type="CharacterBody2D" groups=["players"]]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_bpmvs")
+speed = 100
+
+[node name="CatSprite" type="AnimatedSprite2D" parent="." groups=["cat_sprite", "sprite"]]
+visible = false
+scale = Vector2(0.35, 0.35)
+sprite_frames = SubResource("SpriteFrames_0184f")
+speed_scale = 0.3
+
+[node name="DogSprite" type="AnimatedSprite2D" parent="." groups=["dog_sprite", "sprite"]]
+visible = false
+scale = Vector2(0.4, 0.4)
+sprite_frames = SubResource("SpriteFrames_hqtel")
+speed_scale = 0.3
+
+[node name="ServerSychronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_s027a")
+
+[node name="PlayerInput" type="MultiplayerSynchronizer" parent="."]
+root_path = NodePath(".")
+replication_config = SubResource("SceneReplicationConfig_14505")
+script = ExtResource("2_y6c2j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8)
+shape = SubResource("CapsuleShape2D_sweqy")
+
+[node name="Trail" type="GPUParticles2D" parent="."]
+scale = Vector2(0.997988, 1)
+emitting = false
+amount = 10
+texture = ExtResource("5_0184f")
+process_material = SubResource("ParticleProcessMaterial_onrkg")

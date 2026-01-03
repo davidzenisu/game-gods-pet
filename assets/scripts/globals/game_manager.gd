@@ -102,7 +102,7 @@ func instantiate_player():
 		if pad >= player_count:
 			print("Skipping joypad (exceeds max player count): ", pad)
 			continue
-		var character = preload("res://assets/scenes/player.tscn").instantiate()
+		var character = preload("res://assets/scenes/animals/player.tscn").instantiate()
 		#TODO: Only set player id once
 		character.player_id = pad_index
 		var player_input = character.get_node("PlayerInput")
