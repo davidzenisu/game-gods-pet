@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cx6syvrvuews"]
+[gd_scene load_steps=12 format=3 uid="uid://cx6syvrvuews"]
 
 [ext_resource type="Script" uid="uid://y43ddl6ivq14" path="res://assets/scripts/level.gd" id="1_ye1mc"]
 [ext_resource type="Shader" uid="uid://jkqoqw81n4u4" path="res://assets/shaders/paper.gdshader" id="2_dyaho"]
@@ -13,14 +13,49 @@ shader = ExtResource("2_dyaho")
 shader_parameter/amount = 0.03
 shader_parameter/tint_color = Color(0.615589, 0.355434, 0.0415625, 1)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0kt67"]
+size = Vector2(1368, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lka7q"]
+size = Vector2(25, 838)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tjd8y"]
+size = Vector2(1384, 20)
+
 [node name="World" type="Node2D"]
 script = ExtResource("1_ye1mc")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 material = SubResource("ShaderMaterial_ckblc")
 offset_right = 1153.0
-offset_bottom = 642.0
+offset_bottom = 648.0
 texture = ExtResource("3_ckblc")
+
+[node name="Bounds" type="Node2D" parent="."]
+
+[node name="BoundBottom" type="StaticBody2D" parent="Bounds"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bounds/BoundBottom"]
+position = Vector2(581, 703)
+shape = SubResource("RectangleShape2D_0kt67")
+
+[node name="BoundLeft" type="StaticBody2D" parent="Bounds"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bounds/BoundLeft"]
+position = Vector2(-58.5, 324)
+shape = SubResource("RectangleShape2D_lka7q")
+
+[node name="BoundTop" type="StaticBody2D" parent="Bounds"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bounds/BoundTop"]
+position = Vector2(580, -55)
+shape = SubResource("RectangleShape2D_tjd8y")
+
+[node name="BoundRight" type="StaticBody2D" parent="Bounds"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bounds/BoundRight"]
+position = Vector2(1204, 320)
+shape = SubResource("RectangleShape2D_lka7q")
 
 [node name="Players" type="Node2D" parent="."]
 

@@ -94,6 +94,7 @@ func instantiate_player():
 	var playerNode = level.get_node("Players")
 	print("Player node: ", playerNode)
 	var pad_index = 0
+	var pos_offset = 20
 	players.clear()
 	for pad in joypads:
 		print("Joypad ID: ", pad)
@@ -117,16 +118,16 @@ func instantiate_player():
 			#continue;
 		match pad_index:
 			0:
-				character.position = Vector2(0, 0)
+				character.position = Vector2(0 + pos_offset, 0 + pos_offset)
 				character.modulate = player_colors[pad_index]
 			1:
-				character.position = Vector2(screen_size.x, 0)
+				character.position = Vector2(screen_size.x - pos_offset, 0 + pos_offset)
 				character.modulate = player_colors[pad_index]
 			2:
-				character.position = Vector2(0, screen_size.y)
+				character.position = Vector2(0 + pos_offset, screen_size.y - pos_offset)
 				character.modulate = player_colors[pad_index]
 			3:
-				character.position = Vector2(screen_size.x, screen_size.y)
+				character.position = Vector2(screen_size.x - pos_offset, screen_size.y - pos_offset)
 				character.modulate = player_colors[pad_index]
 			_:
 				character.position = Vector2(screen_size.x/2, screen_size.y/2)
