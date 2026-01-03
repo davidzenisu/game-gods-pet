@@ -18,6 +18,7 @@ func _on_vote_ended():
 	for key in GameManager.game_score:
 		update_game_score(key, GameManager.game_score[key])
 	update_pet_sprite()
+	update_winner_sprite()
 
 func _on_round_started():
 	self.visible = false
@@ -81,3 +82,17 @@ func update_pet_sprite():
 	var pet_sprites = get_tree().get_nodes_in_group("pet_sprite")
 	for pet_sprite in pet_sprites:
 		pet_sprite.modulate = GameManager.player_colors[GameManager.god_pet]
+
+func update_winner_sprite():
+	var animal_sprites = get_tree().get_nodes_in_group("player_sprite")
+	for animal_sprite in animal_sprites:
+		animal_sprite.visible = false
+	if GameManager.round_winners.has(GameManager.god_identifier):
+		return
+	var sprite_index = 0
+	for winner in GameManager.round_winners:
+		if sprite_index >= animal_sprites.size():
+			continue
+		animal_sprites[sprite_index].visible = true
+		animal_sprites[sprite_index].modulate = GameManager.player_colors[winner]
+		sprite_index += 1

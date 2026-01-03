@@ -12,6 +12,8 @@ signal game_score_updated(game_score: Dictionary)
 @export var round_length = 90.0 # seconds
 func is_debug() -> bool:
 	return false
+var player_count = 4
+var god_identifier = player_count
 
 var main_menu : CanvasLayer
 var lobby : CanvasLayer
@@ -27,8 +29,6 @@ var round_winners: Array = []
 var game_timer: SceneTreeTimer
 var game_running : bool = false
 
-var god_identifier = 4
-
 var player_colors: Dictionary = {
 	0 : Color(1, 0, 0),
 	1 : Color(0, 1, 0),
@@ -38,7 +38,7 @@ var player_colors: Dictionary = {
 
 func _ready() -> void:
 	_check_launch_args()
-	setup_multiplayer_input(4)
+	setup_multiplayer_input(player_count)
 	
 func setup_multiplayer_input(playerCount:int):
 	var actionList:Array[StringName]
@@ -98,6 +98,9 @@ func instantiate_player():
 	for pad in joypads:
 		print("Joypad ID: ", pad)
 		print("Player index: ", pad_index)
+		if pad >= player_count:
+			print("Skipping joypad (exceeds max player count): ", pad)
+			continue
 		var character = preload("res://assets/scenes/player.tscn").instantiate()
 		#TODO: Only set player id once
 		character.player_id = pad_index
@@ -249,8 +252,15 @@ func determine_winner_prevote():
 	var pet_winning = true
 	# if any player has equal or higher score
 	for key in scores:
-		if key != god_pet and scores[key] >= scores[god_pet]:
+		if key == god_pet:
+			continue
+		# if score is higher or equal to pet: pet/god lost
+		if scores[key] >= scores[god_pet]:
 			pet_winning = false
+			print("Pet lost")
+		# if score is highest, player wins
+		if scores[key] == scores.values().max() and scores[key] > 0:
+			print("Adding winner", key)
 			round_winners.append(key)
 	if !pet_winning:
 		add_game_scores()
@@ -266,8 +276,16 @@ func vote_over() -> void:
 	GameManager.vote_ended.emit()
 
 func determine_winner():
-	#If pet has majority of votes
-	if votes[god_pet] >= scores.values().max():
+	#If pet has majority of votes (one more than others!)
+	#var not_pet = func(score: int, scores: Dictionary):
+		#
+	var non_pet_votes = []
+	for player_index in votes.keys():
+		if player_index == god_pet:
+			continue
+		non_pet_votes.append(player_index)
+	
+	if votes[god_pet] > non_pet_votes.max():
 		for player in range(players.size()):
 			if player != god_pet:
 				round_winners.append(player)
