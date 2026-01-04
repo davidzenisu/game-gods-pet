@@ -16,3 +16,5 @@ spawn_limit = 1
 [node name="MainMenu" parent="." instance=ExtResource("2_kpi06")]
 
 [node name="MusicAudio" type="AudioStreamPlayer" parent="."]
+
+[node name="Textures" type="Node" parent="."]

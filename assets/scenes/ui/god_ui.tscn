@@ -1,8 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://owng5aix3qc1"]
+[gd_scene load_steps=7 format=3 uid="uid://owng5aix3qc1"]
 
 [ext_resource type="Script" uid="uid://b0js1qksr2nlr" path="res://assets/scripts/ui/god_ui.gd" id="1_b0nij"]
 [ext_resource type="Texture2D" uid="uid://dibnrmhty8nk5" path="res://assets/art/bricks.png" id="1_sr8po"]
-[ext_resource type="Texture2D" uid="uid://co5ibmkc0vgtk" path="res://assets/art/playerGrey_up1.png" id="2_jeh22"]
 [ext_resource type="Texture2D" uid="uid://yfedbuoaglkf" path="res://assets/art/rectangle-16.jpg" id="3_5d8ni"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jeh22"]
@@ -136,7 +135,7 @@ stretch_mode = 1
 
 [node name="PetSprite" type="TextureRect" parent="PanelContainer/MainContainer/MainMargin/GodUI/PetContainer/PetGroup" groups=["pet_sprite"]]
 layout_mode = 2
-texture = ExtResource("2_jeh22")
+texture = ExtResource("3_5d8ni")
 expand_mode = 1
 stretch_mode = 5
 

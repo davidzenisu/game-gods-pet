@@ -29,11 +29,11 @@ var round_winners: Array = []
 var game_timer: SceneTreeTimer
 var game_running : bool = false
 
-var player_colors: Dictionary = {
-	0 : Color(1, 0, 0),
-	1 : Color(0, 1, 0),
-	2 : Color(0, 0, 1),
-	3 : Color(1, 1, 0)
+var player_sprites: Dictionary = {
+	0 : preload("res://assets/art/dog_bottom1.png"),
+	1 : preload("res://assets/art/cat_bottom1.png"),
+	2 : preload("res://assets/art/fish_bottom1.png"),
+	3 : preload("res://assets/art/hamster_bottom1.png"),
 }
 
 func _ready() -> void:
@@ -119,16 +119,12 @@ func instantiate_player():
 		match pad_index:
 			0:
 				character.position = Vector2(0 + pos_offset, 0 + pos_offset)
-				character.modulate = player_colors[pad_index]
 			1:
 				character.position = Vector2(screen_size.x - pos_offset, 0 + pos_offset)
-				character.modulate = player_colors[pad_index]
 			2:
 				character.position = Vector2(0 + pos_offset, screen_size.y - pos_offset)
-				character.modulate = player_colors[pad_index]
 			3:
 				character.position = Vector2(screen_size.x - pos_offset, screen_size.y - pos_offset)
-				character.modulate = player_colors[pad_index]
 			_:
 				character.position = Vector2(screen_size.x/2, screen_size.y/2)
 				continue;
@@ -284,8 +280,6 @@ func determine_winner():
 	for player_index in votes.keys():
 		if player_index == god_pet:
 			continue
-		non_pet_votes.append(player_index)
-	
 		non_pet_votes.append(votes[player_index])
 	if votes[god_pet] > non_pet_votes.max():
 		for player in range(players.size()):

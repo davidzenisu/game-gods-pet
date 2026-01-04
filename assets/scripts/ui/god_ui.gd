@@ -36,8 +36,8 @@ func update_timer_rc(time_left_perc: float):
 	update_cooldown_visual(time_left_perc)
 
 func update_pet(player_id: int):
-	var pet_color = GameManager.player_colors[player_id]
-	update_pet_rc.rpc(pet_color)
+	var pet_texture = GameManager.player_sprites[player_id] as CompressedTexture2D
+	update_pet_rc.rpc(pet_texture)
 
 @rpc("any_peer", "call_remote")
 func init_pet():
@@ -46,11 +46,11 @@ func init_pet():
 	update_pet(GameManager.god_pet)
 	
 @rpc("any_peer","call_local")
-func update_pet_rc(color: Color):
+func update_pet_rc(texture: CompressedTexture2D):
 	var pet_icons = get_tree().get_nodes_in_group("pet_sprite")
 	for pet_icon in pet_icons:
-		pet_icon.modulate = color
-
+		pet_icon.texture = texture
+		
 func update_cooldown_visual(new_value: float):
 	var timer_progress_search = get_tree().get_nodes_in_group("RoundTimer")
 	if timer_progress_search.size() == 0:

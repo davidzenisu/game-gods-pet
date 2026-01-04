@@ -81,7 +81,7 @@ func update_game_score(label, new_score: int):
 func update_pet_sprite():
 	var pet_sprites = get_tree().get_nodes_in_group("pet_sprite")
 	for pet_sprite in pet_sprites:
-		pet_sprite.modulate = GameManager.player_colors[GameManager.god_pet]
+		pet_sprite.texture = GameManager.player_sprites[GameManager.god_pet]
 
 func update_winner_sprite():
 	var animal_sprites = get_tree().get_nodes_in_group("player_sprite")
@@ -94,5 +94,5 @@ func update_winner_sprite():
 		if sprite_index >= animal_sprites.size():
 			continue
 		animal_sprites[sprite_index].visible = true
-		animal_sprites[sprite_index].modulate = GameManager.player_colors[winner]
+		animal_sprites[sprite_index].texture = GameManager.player_sprites[winner]
 		sprite_index += 1
