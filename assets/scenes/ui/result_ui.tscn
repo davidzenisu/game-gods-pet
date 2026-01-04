@@ -1,8 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://b4mi5vngj2vls"]
+[gd_scene load_steps=8 format=3 uid="uid://b4mi5vngj2vls"]
 
 [ext_resource type="Script" uid="uid://c57p12ypbk0b3" path="res://assets/scripts/ui/result_ui.gd" id="1_6csdb"]
 [ext_resource type="Texture2D" uid="uid://dopa1eyuuq3c4" path="res://assets/art/playerGrey_walk2.png" id="3_tae1r"]
 [ext_resource type="Texture2D" uid="uid://yfedbuoaglkf" path="res://assets/art/rectangle-16.jpg" id="4_cwxa5"]
+[ext_resource type="Texture2D" uid="uid://f435ndv5c53q" path="res://assets/art/dog_bottom1.png" id="4_r0jis"]
+[ext_resource type="Texture2D" uid="uid://dlftlldkogiaf" path="res://assets/art/cat_bottom1.png" id="5_r0jis"]
+[ext_resource type="Texture2D" uid="uid://c155u7jko4uxb" path="res://assets/art/fish_bottom1.png" id="6_tae1r"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jeh22"]
 bg_color = Color(0, 0, 0, 0.39215687)
@@ -99,6 +102,7 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="WinnersGod" type="HBoxContainer" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen" groups=["winner_row"]]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 30
 alignment = 1
@@ -130,6 +134,7 @@ theme_override_constants/separation = 75
 
 [node name="RoundScore" type="VBoxContainer" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer"]
 layout_mode = 2
+theme_override_constants/separation = 20
 
 [node name="Label" type="Label" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer/RoundScore"]
 layout_mode = 2
@@ -138,34 +143,70 @@ theme_override_font_sizes/font_size = 36
 text = "Round 	Scores:"
 horizontal_alignment = 1
 
-[node name="WinnersGod2" type="HBoxContainer" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer/RoundScore"]
+[node name="ScoreBoard" type="HBoxContainer" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer/RoundScore"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 30
 alignment = 1
 
-[node name="PlayerScore0" type="Label" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer/RoundScore/WinnersGod2" groups=["score"]]
+[node name="PlayerScoreBoard0" type="VBoxContainer" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer/RoundScore/ScoreBoard"]
+layout_mode = 2
+
+[node name="PlayerSprite0" type="TextureRect" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer/RoundScore/ScoreBoard/PlayerScoreBoard0"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("4_r0jis")
+expand_mode = 1
+
+[node name="PlayerScore0" type="Label" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer/RoundScore/ScoreBoard/PlayerScoreBoard0" groups=["score"]]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_font_sizes/font_size = 36
 text = "0"
 horizontal_alignment = 1
 
-[node name="PlayerScore1" type="Label" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer/RoundScore/WinnersGod2" groups=["score"]]
+[node name="PlayerScoreBoard1" type="VBoxContainer" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer/RoundScore/ScoreBoard"]
+layout_mode = 2
+
+[node name="PlayerSprite1" type="TextureRect" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer/RoundScore/ScoreBoard/PlayerScoreBoard1"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("5_r0jis")
+expand_mode = 1
+
+[node name="PlayerScore1" type="Label" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer/RoundScore/ScoreBoard/PlayerScoreBoard1" groups=["score"]]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 1, 0, 1)
 theme_override_font_sizes/font_size = 36
 text = "0"
 horizontal_alignment = 1
 
-[node name="PlayerScore2" type="Label" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer/RoundScore/WinnersGod2" groups=["score"]]
+[node name="PlayerScoreBoard2" type="VBoxContainer" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer/RoundScore/ScoreBoard"]
+layout_mode = 2
+
+[node name="PlayerSprite2" type="TextureRect" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer/RoundScore/ScoreBoard/PlayerScoreBoard2"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("6_tae1r")
+expand_mode = 1
+
+[node name="PlayerScore2" type="Label" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer/RoundScore/ScoreBoard/PlayerScoreBoard2" groups=["score"]]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 1, 1)
 theme_override_font_sizes/font_size = 36
 text = "0"
 horizontal_alignment = 1
 
-[node name="PlayerScore3" type="Label" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer/RoundScore/WinnersGod2" groups=["score"]]
+[node name="PlayerScoreBoard3" type="VBoxContainer" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer/RoundScore/ScoreBoard"]
+layout_mode = 2
+
+[node name="PlayerSprite3" type="TextureRect" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer/RoundScore/ScoreBoard/PlayerScoreBoard3"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("5_r0jis")
+expand_mode = 1
+
+[node name="PlayerScore3" type="Label" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer/RoundScore/ScoreBoard/PlayerScoreBoard3" groups=["score"]]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 0, 1)
 theme_override_font_sizes/font_size = 36
@@ -205,34 +246,79 @@ size_flags_vertical = 3
 theme_override_constants/separation = 30
 alignment = 1
 
-[node name="GodScore" type="Label" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer/GameScore/WinnersGod2" groups=["round_score"]]
+[node name="GodScoreBoard" type="VBoxContainer" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer/GameScore/WinnersGod2"]
+layout_mode = 2
+
+[node name="GodSprite" type="TextureRect" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer/GameScore/WinnersGod2/GodScoreBoard"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("4_cwxa5")
+expand_mode = 1
+
+[node name="GodScore" type="Label" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer/GameScore/WinnersGod2/GodScoreBoard" groups=["round_score"]]
 layout_mode = 2
 theme_override_font_sizes/font_size = 36
 text = "0"
 horizontal_alignment = 1
 
-[node name="PlayerScore0" type="Label" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer/GameScore/WinnersGod2" groups=["round_score"]]
+[node name="PlayerScoreBoard0" type="VBoxContainer" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer/GameScore/WinnersGod2"]
+layout_mode = 2
+
+[node name="PlayerSprite0" type="TextureRect" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer/GameScore/WinnersGod2/PlayerScoreBoard0"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("4_r0jis")
+expand_mode = 1
+
+[node name="PlayerScore0" type="Label" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer/GameScore/WinnersGod2/PlayerScoreBoard0" groups=["round_score"]]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_font_sizes/font_size = 36
 text = "0"
 horizontal_alignment = 1
 
-[node name="PlayerScore1" type="Label" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer/GameScore/WinnersGod2" groups=["round_score"]]
+[node name="PlayerScoreBoard1" type="VBoxContainer" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer/GameScore/WinnersGod2"]
+layout_mode = 2
+
+[node name="PlayerSprite1" type="TextureRect" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer/GameScore/WinnersGod2/PlayerScoreBoard1"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("5_r0jis")
+expand_mode = 1
+
+[node name="PlayerScore1" type="Label" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer/GameScore/WinnersGod2/PlayerScoreBoard1" groups=["round_score"]]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 1, 0, 1)
 theme_override_font_sizes/font_size = 36
 text = "0"
 horizontal_alignment = 1
 
-[node name="PlayerScore2" type="Label" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer/GameScore/WinnersGod2" groups=["round_score"]]
+[node name="PlayerScoreBoard2" type="VBoxContainer" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer/GameScore/WinnersGod2"]
+layout_mode = 2
+
+[node name="PlayerSprite2" type="TextureRect" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer/GameScore/WinnersGod2/PlayerScoreBoard2"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("6_tae1r")
+expand_mode = 1
+
+[node name="PlayerScore2" type="Label" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer/GameScore/WinnersGod2/PlayerScoreBoard2" groups=["round_score"]]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 1, 1)
 theme_override_font_sizes/font_size = 36
 text = "0"
 horizontal_alignment = 1
 
-[node name="PlayerScore3" type="Label" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer/GameScore/WinnersGod2" groups=["round_score"]]
+[node name="PlayerScoreBoard3" type="VBoxContainer" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer/GameScore/WinnersGod2"]
+layout_mode = 2
+
+[node name="PlayerSprite3" type="TextureRect" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer/GameScore/WinnersGod2/PlayerScoreBoard3"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("5_r0jis")
+expand_mode = 1
+
+[node name="PlayerScore3" type="Label" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer/GameScore/WinnersGod2/PlayerScoreBoard3" groups=["round_score"]]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 0, 1)
 theme_override_font_sizes/font_size = 36

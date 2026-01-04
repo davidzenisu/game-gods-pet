@@ -1,9 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://cuvp2bse22qf"]
+[gd_scene load_steps=9 format=3 uid="uid://cuvp2bse22qf"]
 
 [ext_resource type="Script" uid="uid://jjyl0kq566dq" path="res://assets/scripts/ui/vote_ui.gd" id="1_8ltnt"]
-[ext_resource type="Texture2D" uid="uid://dopa1eyuuq3c4" path="res://assets/art/playerGrey_walk2.png" id="2_py3t6"]
 [ext_resource type="Script" uid="uid://d0hg3dtg4fegh" path="res://assets/scripts/ui/vote_left.gd" id="2_stt4x"]
 [ext_resource type="Script" uid="uid://b47kt4rnp7usm" path="res://assets/scripts/ui/vote_number.gd" id="3_bbfwl"]
+[ext_resource type="Texture2D" uid="uid://f435ndv5c53q" path="res://assets/art/dog_bottom1.png" id="3_py3t6"]
+[ext_resource type="Texture2D" uid="uid://dlftlldkogiaf" path="res://assets/art/cat_bottom1.png" id="5_ptcex"]
+[ext_resource type="Texture2D" uid="uid://c155u7jko4uxb" path="res://assets/art/fish_bottom1.png" id="6_b8u7a"]
+[ext_resource type="Texture2D" uid="uid://s631mk3hyodm" path="res://assets/art/hamster_bottom1.png" id="7_b8u7a"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jeh22"]
 bg_color = Color(0, 0, 0, 0.39215687)
@@ -87,8 +90,8 @@ script = ExtResource("2_stt4x")
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_constants/h_separation = 30
-theme_override_constants/v_separation = 30
+theme_override_constants/h_separation = 15
+theme_override_constants/v_separation = 15
 columns = 3
 
 [node name="Placeholder" type="Control" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AbilitiesBox"]
@@ -99,10 +102,9 @@ layout_mode = 2
 theme_override_constants/separation = 20
 
 [node name="TextureRect" type="TextureRect" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AbilitiesBox/Player1"]
-self_modulate = Color(1, 0, 0, 1)
-custom_minimum_size = Vector2(75, 75)
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
-texture = ExtResource("2_py3t6")
+texture = ExtResource("3_py3t6")
 expand_mode = 1
 stretch_mode = 5
 
@@ -127,10 +129,9 @@ layout_mode = 2
 theme_override_constants/separation = 20
 
 [node name="TextureRect" type="TextureRect" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AbilitiesBox/Player2"]
-self_modulate = Color(0, 1, 0, 1)
-custom_minimum_size = Vector2(75, 75)
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
-texture = ExtResource("2_py3t6")
+texture = ExtResource("5_ptcex")
 expand_mode = 1
 stretch_mode = 5
 
@@ -156,10 +157,9 @@ layout_mode = 2
 theme_override_constants/separation = 20
 
 [node name="TextureRect" type="TextureRect" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AbilitiesBox/Player3"]
-self_modulate = Color(0, 0, 1, 1)
-custom_minimum_size = Vector2(75, 75)
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
-texture = ExtResource("2_py3t6")
+texture = ExtResource("6_b8u7a")
 expand_mode = 1
 stretch_mode = 5
 
@@ -185,10 +185,9 @@ layout_mode = 2
 theme_override_constants/separation = 20
 
 [node name="TextureRect" type="TextureRect" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AbilitiesBox/Player4"]
-self_modulate = Color(1, 1, 0, 1)
-custom_minimum_size = Vector2(75, 75)
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
-texture = ExtResource("2_py3t6")
+texture = ExtResource("7_b8u7a")
 expand_mode = 1
 stretch_mode = 5
 

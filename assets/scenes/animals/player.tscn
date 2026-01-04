@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://b68uitfh610nj"]
+[gd_scene load_steps=20 format=3 uid="uid://b68uitfh610nj"]
 
 [ext_resource type="Script" uid="uid://h8v6qxwm45y6" path="res://assets/scripts/player.gd" id="1_bpmvs"]
 [ext_resource type="Texture2D" uid="uid://dlftlldkogiaf" path="res://assets/art/cat_bottom1.png" id="2_0mp4a"]
@@ -7,8 +7,12 @@
 [ext_resource type="Texture2D" uid="uid://dqriluqa5djfq" path="res://assets/art/cat_bottom2.png" id="3_2hir3"]
 [ext_resource type="Texture2D" uid="uid://b0nbxkbwujjh" path="res://assets/art/dog_bottom2.png" id="4_2hir3"]
 [ext_resource type="Texture2D" uid="uid://cbwpoo8jypiba" path="res://assets/art/playerGrey_walk1.png" id="5_0184f"]
+[ext_resource type="Texture2D" uid="uid://c155u7jko4uxb" path="res://assets/art/fish_bottom1.png" id="6_0184f"]
+[ext_resource type="Texture2D" uid="uid://c3br7ae4bn8rk" path="res://assets/art/fish_bottom2.png" id="7_ep38r"]
+[ext_resource type="Texture2D" uid="uid://s631mk3hyodm" path="res://assets/art/hamster_bottom1.png" id="8_mjvjq"]
+[ext_resource type="Texture2D" uid="uid://bejq73hdcjv80" path="res://assets/art/hamster_bottom2.png" id="9_6offu"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_0184f"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_mjvjq"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -30,6 +34,34 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("4_2hir3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0184f"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_0184f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_ep38r")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_q5eti"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_mjvjq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_6offu")
 }],
 "loop": true,
 "name": &"default",
@@ -73,13 +105,27 @@ speed = 100
 [node name="CatSprite" type="AnimatedSprite2D" parent="." groups=["cat_sprite", "sprite"]]
 visible = false
 scale = Vector2(0.35, 0.35)
-sprite_frames = SubResource("SpriteFrames_0184f")
+sprite_frames = SubResource("SpriteFrames_mjvjq")
 speed_scale = 0.3
 
 [node name="DogSprite" type="AnimatedSprite2D" parent="." groups=["dog_sprite", "sprite"]]
 visible = false
 scale = Vector2(0.4, 0.4)
 sprite_frames = SubResource("SpriteFrames_hqtel")
+speed_scale = 0.3
+
+[node name="FishSprite" type="AnimatedSprite2D" parent="." groups=["fish_sprite", "sprite"]]
+visible = false
+position = Vector2(-24.000002, -8.000001)
+scale = Vector2(0.40833333, 0.40833333)
+sprite_frames = SubResource("SpriteFrames_0184f")
+speed_scale = 0.3
+
+[node name="HamsterSprite" type="AnimatedSprite2D" parent="." groups=["hamster_sprite", "sprite"]]
+visible = false
+scale = Vector2(0.3, 0.3)
+sprite_frames = SubResource("SpriteFrames_q5eti")
+frame_progress = 0.863373
 speed_scale = 0.3
 
 [node name="ServerSychronizer" type="MultiplayerSynchronizer" parent="."]

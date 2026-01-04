@@ -6,7 +6,9 @@ signal hit
 
 var player_sprites = [
 	"dog_sprite",
-	"cat_sprite"
+	"cat_sprite",
+	"fish_sprite",
+	"hamster_sprite"
 ]
 
 var animation_sprite: AnimatedSprite2D
