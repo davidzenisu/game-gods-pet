@@ -286,6 +286,7 @@ func determine_winner():
 			continue
 		non_pet_votes.append(player_index)
 	
+		non_pet_votes.append(votes[player_index])
 	if votes[god_pet] > non_pet_votes.max():
 		for player in range(players.size()):
 			if player != god_pet:
