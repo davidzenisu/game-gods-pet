@@ -1,8 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://owng5aix3qc1"]
+[gd_scene load_steps=11 format=3 uid="uid://owng5aix3qc1"]
 
 [ext_resource type="Script" uid="uid://b0js1qksr2nlr" path="res://assets/scripts/ui/god_ui.gd" id="1_b0nij"]
 [ext_resource type="Texture2D" uid="uid://dibnrmhty8nk5" path="res://assets/art/bricks.png" id="1_sr8po"]
 [ext_resource type="Texture2D" uid="uid://yfedbuoaglkf" path="res://assets/art/rectangle-16.jpg" id="3_5d8ni"]
+[ext_resource type="Texture2D" uid="uid://f435ndv5c53q" path="res://assets/art/dog_bottom1.png" id="4_jeh22"]
+[ext_resource type="Texture2D" uid="uid://dlftlldkogiaf" path="res://assets/art/cat_bottom1.png" id="5_4tcmw"]
+[ext_resource type="Texture2D" uid="uid://c155u7jko4uxb" path="res://assets/art/fish_bottom1.png" id="6_0gpo5"]
+[ext_resource type="Texture2D" uid="uid://s631mk3hyodm" path="res://assets/art/hamster_bottom1.png" id="7_i3pw3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jeh22"]
 bg_color = Color(0, 0, 0, 0.39215687)
@@ -141,18 +145,17 @@ stretch_mode = 5
 
 [node name="ScoresMargin" type="MarginContainer" parent="PanelContainer/MainContainer/MainMargin/GodUI"]
 layout_mode = 2
-theme_override_constants/margin_top = 20
 
 [node name="ScoresBox" type="BoxContainer" parent="PanelContainer/MainContainer/MainMargin/GodUI/ScoresMargin"]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
 theme_override_constants/separation = 24
 
 [node name="TimerLabel" type="Label" parent="PanelContainer/MainContainer/MainMargin/GodUI/ScoresMargin/ScoresBox"]
 layout_mode = 2
+size_flags_vertical = 1
 theme_override_font_sizes/font_size = 48
 text = "⧗:"
+vertical_alignment = 1
 
 [node name="TimerBox" type="MarginContainer" parent="PanelContainer/MainContainer/MainMargin/GodUI/ScoresMargin/ScoresBox"]
 layout_mode = 2
@@ -164,6 +167,7 @@ theme_override_constants/margin_bottom = 10
 [node name="TimerProgress" type="ProgressBar" parent="PanelContainer/MainContainer/MainMargin/GodUI/ScoresMargin/ScoresBox/TimerBox" groups=["RoundTimer"]]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
+size_flags_vertical = 4
 theme_override_styles/background = SubResource("StyleBoxFlat_b0nij")
 theme_override_styles/fill = SubResource("StyleBoxFlat_5d8ni")
 max_value = 1.0
@@ -175,26 +179,70 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 48
 text = "Scores:"
 
-[node name="PlayerScore0" type="Label" parent="PanelContainer/MainContainer/MainMargin/GodUI/ScoresMargin/ScoresBox" groups=["Score"]]
+[node name="ScoreBoard0" type="VBoxContainer" parent="PanelContainer/MainContainer/MainMargin/GodUI/ScoresMargin/ScoresBox"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MainContainer/MainMargin/GodUI/ScoresMargin/ScoresBox/ScoreBoard0"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("4_jeh22")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PlayerScore0" type="Label" parent="PanelContainer/MainContainer/MainMargin/GodUI/ScoresMargin/ScoresBox/ScoreBoard0" groups=["Score"]]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_font_sizes/font_size = 48
 text = "0"
+horizontal_alignment = 1
 
-[node name="PlayerScore1" type="Label" parent="PanelContainer/MainContainer/MainMargin/GodUI/ScoresMargin/ScoresBox" groups=["Score"]]
+[node name="ScoreBoard1" type="VBoxContainer" parent="PanelContainer/MainContainer/MainMargin/GodUI/ScoresMargin/ScoresBox"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MainContainer/MainMargin/GodUI/ScoresMargin/ScoresBox/ScoreBoard1"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("5_4tcmw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PlayerScore1" type="Label" parent="PanelContainer/MainContainer/MainMargin/GodUI/ScoresMargin/ScoresBox/ScoreBoard1" groups=["Score"]]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 1, 0, 1)
 theme_override_font_sizes/font_size = 48
 text = "0"
+horizontal_alignment = 1
 
-[node name="PlayerScore2" type="Label" parent="PanelContainer/MainContainer/MainMargin/GodUI/ScoresMargin/ScoresBox" groups=["Score"]]
+[node name="ScoreBoard2" type="VBoxContainer" parent="PanelContainer/MainContainer/MainMargin/GodUI/ScoresMargin/ScoresBox"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MainContainer/MainMargin/GodUI/ScoresMargin/ScoresBox/ScoreBoard2"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("6_0gpo5")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PlayerScore2" type="Label" parent="PanelContainer/MainContainer/MainMargin/GodUI/ScoresMargin/ScoresBox/ScoreBoard2" groups=["Score"]]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 1, 1)
 theme_override_font_sizes/font_size = 48
 text = "0"
+horizontal_alignment = 1
 
-[node name="PlayerScore3" type="Label" parent="PanelContainer/MainContainer/MainMargin/GodUI/ScoresMargin/ScoresBox" groups=["Score"]]
+[node name="ScoreBoard3" type="VBoxContainer" parent="PanelContainer/MainContainer/MainMargin/GodUI/ScoresMargin/ScoresBox"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MainContainer/MainMargin/GodUI/ScoresMargin/ScoresBox/ScoreBoard3"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("7_i3pw3")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PlayerScore3" type="Label" parent="PanelContainer/MainContainer/MainMargin/GodUI/ScoresMargin/ScoresBox/ScoreBoard3" groups=["Score"]]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 0, 1)
 theme_override_font_sizes/font_size = 48
 text = "0"
+horizontal_alignment = 1
