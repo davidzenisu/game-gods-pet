@@ -22,7 +22,7 @@ Settings="*res://assets/scripts/globals/settings.gd"
 
 [display]
 
-window/stretch/mode="viewport"
+window/stretch/mode="canvas_items"
 
 [global_group]
 
