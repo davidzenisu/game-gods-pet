@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b4mi5vngj2vls"]
+[gd_scene load_steps=10 format=3 uid="uid://b4mi5vngj2vls"]
 
 [ext_resource type="Script" uid="uid://c57p12ypbk0b3" path="res://assets/scripts/ui/result_ui.gd" id="1_6csdb"]
 [ext_resource type="Texture2D" uid="uid://dopa1eyuuq3c4" path="res://assets/art/playerGrey_walk2.png" id="3_tae1r"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dlftlldkogiaf" path="res://assets/art/cat_bottom1.png" id="5_r0jis"]
 [ext_resource type="Texture2D" uid="uid://c155u7jko4uxb" path="res://assets/art/fish_bottom1.png" id="6_tae1r"]
 [ext_resource type="Texture2D" uid="uid://s631mk3hyodm" path="res://assets/art/hamster_bottom1.png" id="7_12j8s"]
+[ext_resource type="AudioStream" uid="uid://o775m1h4qbh6" path="res://assets/audio/drum_roll.ogg" id="8_i7syl"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jeh22"]
 bg_color = Color(0, 0, 0, 0.39215687)
@@ -339,3 +340,7 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Press start for a new round"
 horizontal_alignment = 1
+
+[node name="DrumRoll" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(695.5, 397)
+stream = ExtResource("8_i7syl")

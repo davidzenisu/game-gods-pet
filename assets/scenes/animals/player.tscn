@@ -126,7 +126,7 @@ speed_scale = 0.3
 visible = false
 scale = Vector2(0.3, 0.3)
 sprite_frames = SubResource("SpriteFrames_q5eti")
-frame_progress = 0.7336862
+frame_progress = 0.569494
 speed_scale = 0.3
 
 [node name="ServerSychronizer" type="MultiplayerSynchronizer" parent="."]

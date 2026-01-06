@@ -226,6 +226,7 @@ func vote_cast(player_id: int, player_id_cast: int, points = 1) -> void:
 	votes[player_id] += points
 	vote_tracker[player_id_cast] = true
 	print("Current votes: %s" % str(votes))
+	main._play_sound("Confirm")
 	vote_updated.emit(votes)
 
 func round_over() -> void:
@@ -281,6 +282,8 @@ func determine_winner():
 		if player_index == god_pet:
 			continue
 		non_pet_votes.append(votes[player_index])
+	if non_pet_votes.size() == 0:
+		return
 	if votes[god_pet] > non_pet_votes.max():
 		for player in range(players.size()):
 			if player != god_pet:

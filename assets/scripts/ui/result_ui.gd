@@ -19,6 +19,7 @@ func _on_vote_ended():
 		update_game_score(key, GameManager.game_score[key])
 	update_pet_sprite()
 	update_winner_sprite()
+	$DrumRoll.play()
 
 func _on_round_started():
 	self.visible = false
