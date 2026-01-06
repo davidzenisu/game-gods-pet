@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://boh10cjn6pvyw"]
+[gd_scene load_steps=6 format=3 uid="uid://boh10cjn6pvyw"]
 
 [ext_resource type="Script" uid="uid://c7wcaacpn11cb" path="res://assets/scripts/wall.gd" id="1_fv7l2"]
 [ext_resource type="Texture2D" uid="uid://lnvgity2svn0" path="res://assets/art/bricks_texture.png" id="2_nddmm"]
+[ext_resource type="AudioStream" uid="uid://c7f80f8p0777u" path="res://assets/audio/wall.ogg" id="3_b7qg2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jyti7"]
 size = Vector2(40, 40)
@@ -33,5 +34,9 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("2_nddmm")
 expand_mode = 1
 stretch_mode = 1
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_b7qg2")
+autoplay = true
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]

@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-signal hit
+signal eat
 
 # @export var velocity = Vector2.ZERO
 
@@ -11,6 +11,14 @@ var player_sprites = [
 	"hamster_sprite"
 ]
 
+enum Sound {
+	EAT
+}
+
+@onready var sounds = {
+	Sound.EAT: $Sounds/CrunchSound,
+}
+
 var animation_sprite: AnimatedSprite2D
 
 @export var speed = 400 # How fast the player will move (pixels/sec).
@@ -19,6 +27,9 @@ var screen_size # Size of the game window.
 func _ready():
 	screen_size = get_viewport_rect().size
 	set_player_sprite()
+	var on_eat = func():
+		play_sound(Sound.EAT)
+	eat.connect(on_eat)
 
 @export var player_id: int:
 	set(value):
@@ -76,3 +87,7 @@ func start(pos):
 	rotation = 0
 	show()
 	$CollisionShape2D.disabled = false
+
+func play_sound(sound: Sound):
+	if sounds.has(sound):
+		sounds[sound].play()

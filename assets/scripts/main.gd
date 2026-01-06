@@ -12,6 +12,7 @@ var special_music_dict : Dictionary = {
 var main_music_dict : Dictionary = {
 	# put general music in here
 	# 'My Song' : 'res://assets/audio/music/my_song.ogg'
+	'Main_Theme': 'res://assets/audio/song_main.wav'
 }
 
 var current_song := ""
@@ -20,16 +21,12 @@ var sync := false
 
 func _ready() -> void:
 	GameManager.main = self
+	_start_synced_music()
 
 func _start_synced_music() -> void:
 	if !multiplayer.is_server():
 		return
-	await get_tree().create_timer(1.0).timeout
-	sync = true
-	while sync:
-		_play_track.rpc(_get_random_track())
-		await musicAudio.finished
-		await get_tree().create_timer(0.5).timeout
+	_play_track.rpc(_get_random_track())
 
 func _get_random_track() -> String:
 	if current_music_dict.size() == 0:
@@ -44,6 +41,8 @@ func _play_track(track : String) -> void:
 	musicAudio.stream = load(main_music_dict[track])
 	current_song = track
 	musicAudio.play()
+	if multiplayer.is_server():
+		musicAudio.finished.connect(_start_synced_music)
 
 @rpc("call_local")
 func _play_special(track : String) -> void:

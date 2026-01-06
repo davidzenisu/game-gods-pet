@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://b68uitfh610nj"]
+[gd_scene load_steps=21 format=3 uid="uid://b68uitfh610nj"]
 
 [ext_resource type="Script" uid="uid://h8v6qxwm45y6" path="res://assets/scripts/player.gd" id="1_bpmvs"]
 [ext_resource type="Texture2D" uid="uid://dlftlldkogiaf" path="res://assets/art/cat_bottom1.png" id="2_0mp4a"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://c3br7ae4bn8rk" path="res://assets/art/fish_bottom2.png" id="7_ep38r"]
 [ext_resource type="Texture2D" uid="uid://s631mk3hyodm" path="res://assets/art/hamster_bottom1.png" id="8_mjvjq"]
 [ext_resource type="Texture2D" uid="uid://bejq73hdcjv80" path="res://assets/art/hamster_bottom2.png" id="9_6offu"]
+[ext_resource type="AudioStream" uid="uid://b5m2vpux5slg8" path="res://assets/audio/crunch.ogg" id="12_6offu"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_mjvjq"]
 animations = [{
@@ -125,7 +126,7 @@ speed_scale = 0.3
 visible = false
 scale = Vector2(0.3, 0.3)
 sprite_frames = SubResource("SpriteFrames_q5eti")
-frame_progress = 0.863373
+frame_progress = 0.7336862
 speed_scale = 0.3
 
 [node name="ServerSychronizer" type="MultiplayerSynchronizer" parent="."]
@@ -146,3 +147,9 @@ emitting = false
 amount = 10
 texture = ExtResource("5_0184f")
 process_material = SubResource("ParticleProcessMaterial_onrkg")
+
+[node name="Sounds" type="Node2D" parent="."]
+scale = Vector2(2, 2)
+
+[node name="CrunchSound" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("12_6offu")

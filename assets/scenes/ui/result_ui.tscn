@@ -251,10 +251,18 @@ alignment = 1
 layout_mode = 2
 
 [node name="GodSprite" type="TextureRect" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer/GameScore/WinnersGod2/GodScoreBoard"]
+visible = false
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 texture = ExtResource("4_cwxa5")
 expand_mode = 1
+
+[node name="GodLabel" type="Label" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer/GameScore/WinnersGod2/GodScoreBoard"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 24
+text = "GOD"
+vertical_alignment = 1
 
 [node name="GodScore" type="Label" parent="PanelContainer/MainContainer/AbilitiesMargin/BoxContainer/AspectRatioContainer/WinnerScreen/HBoxContainer/GameScore/WinnersGod2/GodScoreBoard" groups=["round_score"]]
 layout_mode = 2
