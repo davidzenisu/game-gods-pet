@@ -11,7 +11,7 @@ func _ready():
 func _on_vote_ended():
 	hide_winner()
 	self.visible = true
-	screen_timer = get_tree().create_timer(5)
+	screen_timer = get_tree().create_timer($DrumRoll.stream.get_length())
 	screen_timer.timeout.connect(_on_timer_elapsed)
 	for key in GameManager.scores:
 		update_score(key, GameManager.scores[key])
@@ -19,6 +19,7 @@ func _on_vote_ended():
 		update_game_score(key, GameManager.game_score[key])
 	update_pet_sprite()
 	update_winner_sprite()
+	GameManager.main._stop_synched_music()
 	$DrumRoll.play()
 
 func _on_round_started():

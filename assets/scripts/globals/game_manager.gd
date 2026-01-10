@@ -310,3 +310,4 @@ func restart_round() -> void:
 	instantiate_player()
 	instantiate_coin()
 	round_started.emit()
+	GameManager.main._start_synced_music()

@@ -35,6 +35,11 @@ func _start_synced_music() -> void:
 		return
 	_play_track.rpc(_get_random_track())
 
+func _stop_synched_music():
+	if !multiplayer.is_server():
+		return
+	_stop_track.rpc()
+
 func _get_random_track() -> String:
 	if current_music_dict.size() == 0:
 		current_music_dict = main_music_dict.keys()
@@ -64,3 +69,9 @@ func _play_special(track : String) -> void:
 		return
 	musicAudio.stream = load(special_music_dict[track])
 	musicAudio.play()
+
+@rpc("call_local")
+func _stop_track() -> void:
+	musicAudio.stop()
+	if multiplayer.is_server():
+		musicAudio.finished.disconnect(_start_synced_music)
