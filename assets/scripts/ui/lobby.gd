@@ -9,6 +9,7 @@ func _ready() -> void:
 	$Panel/Exit.pressed.connect(NetworkManager._leave_lobby)
 	$Panel/Ready.pressed.connect(_on_ready)
 	$Panel/Start.pressed.connect(_on_start)
+	$Panel/Ready.grab_focus()
 
 func _on_start() -> void:
 	NetworkManager._transition_to_game()

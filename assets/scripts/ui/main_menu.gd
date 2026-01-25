@@ -32,6 +32,13 @@ func _ready() -> void:
 			$HostJoin/Options/Host.hide()	
 			print("Welcome god!")
 
+#func _process(delta):
+	#var focused := get_viewport().gui_get_focus_owner()
+	#print(focused)
+	#if (focused == null):
+		#$Title/start.grab_focus()
+
+
 func _enforce_visibility() -> void:
 	$Title.show()
 	$Main.hide()
@@ -89,6 +96,15 @@ func _connect_state_signals(
 		print("Entering state: " + state_node.name)
 		if enter_sound:
 			_play_sound(enter_sound)
+		match state_node.name:
+			"Root":
+				$Main/Options/Play.grab_focus()
+			"Settings":
+				$Settings/Options/Fullscreen.grab_focus()
+			"LobbyType":
+				$LobbyType/Options/LAN.grab_focus()
+			"HostJoin":
+				$HostJoin/Options/Host.grab_focus()
 	)
 	state_node.state_exited.connect(func(): target_node.hide())
 
