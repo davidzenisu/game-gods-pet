@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://owng5aix3qc1"]
+[gd_scene format=3 uid="uid://owng5aix3qc1"]
 
 [ext_resource type="Script" uid="uid://b0js1qksr2nlr" path="res://assets/scripts/ui/god_ui.gd" id="1_b0nij"]
 [ext_resource type="Texture2D" uid="uid://dibnrmhty8nk5" path="res://assets/art/bricks.png" id="1_sr8po"]
@@ -34,10 +34,10 @@ corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
-[node name="GodUi" type="CanvasLayer"]
+[node name="GodUi" type="CanvasLayer" unique_id=1266097541]
 script = ExtResource("1_b0nij")
 
-[node name="PanelContainer" type="Control" parent="."]
+[node name="PanelContainer" type="Control" parent="." unique_id=1224384676]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -46,7 +46,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 
-[node name="MainContainer" type="PanelContainer" parent="PanelContainer"]
+[node name="MainContainer" type="PanelContainer" parent="PanelContainer" unique_id=1087769739]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -61,33 +61,33 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_jeh22")
 
-[node name="MainMargin" type="MarginContainer" parent="PanelContainer/MainContainer"]
+[node name="MainMargin" type="MarginContainer" parent="PanelContainer/MainContainer" unique_id=1977011993]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 10
 
-[node name="GodUI" type="BoxContainer" parent="PanelContainer/MainContainer/MainMargin"]
+[node name="GodUI" type="BoxContainer" parent="PanelContainer/MainContainer/MainMargin" unique_id=1400107571]
 layout_mode = 2
 theme_override_constants/separation = 30
 alignment = 1
 
-[node name="AbilitiesMargin" type="MarginContainer" parent="PanelContainer/MainContainer/MainMargin/GodUI"]
+[node name="AbilitiesMargin" type="MarginContainer" parent="PanelContainer/MainContainer/MainMargin/GodUI" unique_id=694881211]
 layout_mode = 2
 theme_override_constants/margin_top = 5
 
-[node name="AbilitiesBox" type="BoxContainer" parent="PanelContainer/MainContainer/MainMargin/GodUI/AbilitiesMargin"]
+[node name="AbilitiesBox" type="BoxContainer" parent="PanelContainer/MainContainer/MainMargin/GodUI/AbilitiesMargin" unique_id=1243756183]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 
-[node name="WallAbilityGroup" type="AspectRatioContainer" parent="PanelContainer/MainContainer/MainMargin/GodUI/AbilitiesMargin/AbilitiesBox"]
-visible = false
+[node name="WallAbilityGroup" type="AspectRatioContainer" parent="PanelContainer/MainContainer/MainMargin/GodUI/AbilitiesMargin/AbilitiesBox" unique_id=1339662061]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="PanelContainer/MainContainer/MainMargin/GodUI/AbilitiesMargin/AbilitiesBox/WallAbilityGroup"]
+[node name="TextureProgressBar" type="TextureProgressBar" parent="PanelContainer/MainContainer/MainMargin/GodUI/AbilitiesMargin/AbilitiesBox/WallAbilityGroup" unique_id=664802003]
+self_modulate = Color(0.36078432, 0.36078432, 0.36078432, 1)
 layout_mode = 2
 value = 40.0
 fill_mode = 4
@@ -97,12 +97,12 @@ texture_progress = ExtResource("1_sr8po")
 tint_under = Color(0.7490196, 0.7490196, 0.7490196, 0.39215687)
 tint_progress = Color(0.84, 0.58996, 0.44519997, 1)
 
-[node name="CoinAbilityGroup" type="AspectRatioContainer" parent="PanelContainer/MainContainer/MainMargin/GodUI/AbilitiesMargin/AbilitiesBox"]
+[node name="CoinAbilityGroup" type="AspectRatioContainer" parent="PanelContainer/MainContainer/MainMargin/GodUI/AbilitiesMargin/AbilitiesBox" unique_id=2041261320]
 visible = false
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="PanelContainer/MainContainer/MainMargin/GodUI/AbilitiesMargin/AbilitiesBox/CoinAbilityGroup"]
+[node name="TextureProgressBar" type="TextureProgressBar" parent="PanelContainer/MainContainer/MainMargin/GodUI/AbilitiesMargin/AbilitiesBox/CoinAbilityGroup" unique_id=864001620]
 layout_mode = 2
 value = 40.0
 fill_mode = 4
@@ -112,12 +112,12 @@ texture_progress = ExtResource("3_5d8ni")
 tint_under = Color(0.7490196, 0.7490196, 0.7490196, 0.39215687)
 tint_progress = Color(0.21568628, 0.65882355, 0.89411765, 1)
 
-[node name="GrabAbilityGroup" type="AspectRatioContainer" parent="PanelContainer/MainContainer/MainMargin/GodUI/AbilitiesMargin/AbilitiesBox"]
+[node name="GrabAbilityGroup" type="AspectRatioContainer" parent="PanelContainer/MainContainer/MainMargin/GodUI/AbilitiesMargin/AbilitiesBox" unique_id=955815007]
 visible = false
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="PanelContainer/MainContainer/MainMargin/GodUI/AbilitiesMargin/AbilitiesBox/GrabAbilityGroup"]
+[node name="TextureProgressBar" type="TextureProgressBar" parent="PanelContainer/MainContainer/MainMargin/GodUI/AbilitiesMargin/AbilitiesBox/GrabAbilityGroup" unique_id=2036271149]
 layout_mode = 2
 value = 40.0
 fill_mode = 4
@@ -127,44 +127,44 @@ texture_progress = ExtResource("3_5d8ni")
 tint_under = Color(0.7490196, 0.7490196, 0.7490196, 0.39215687)
 tint_progress = Color(0.50980395, 0, 0.1764706, 1)
 
-[node name="PetContainer" type="MarginContainer" parent="PanelContainer/MainContainer/MainMargin/GodUI"]
+[node name="PetContainer" type="MarginContainer" parent="PanelContainer/MainContainer/MainMargin/GodUI" unique_id=92346070]
 layout_mode = 2
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="PetGroup" type="AspectRatioContainer" parent="PanelContainer/MainContainer/MainMargin/GodUI/PetContainer"]
+[node name="PetGroup" type="AspectRatioContainer" parent="PanelContainer/MainContainer/MainMargin/GodUI/PetContainer" unique_id=691878734]
 custom_minimum_size = Vector2(80, 100)
 layout_mode = 2
 stretch_mode = 1
 
-[node name="PetSprite" type="TextureRect" parent="PanelContainer/MainContainer/MainMargin/GodUI/PetContainer/PetGroup" groups=["pet_sprite"]]
+[node name="PetSprite" type="TextureRect" parent="PanelContainer/MainContainer/MainMargin/GodUI/PetContainer/PetGroup" unique_id=714129232 groups=["pet_sprite"]]
 layout_mode = 2
 texture = ExtResource("3_5d8ni")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="ScoresMargin" type="MarginContainer" parent="PanelContainer/MainContainer/MainMargin/GodUI"]
+[node name="ScoresMargin" type="MarginContainer" parent="PanelContainer/MainContainer/MainMargin/GodUI" unique_id=780568933]
 layout_mode = 2
 
-[node name="ScoresBox" type="BoxContainer" parent="PanelContainer/MainContainer/MainMargin/GodUI/ScoresMargin"]
+[node name="ScoresBox" type="BoxContainer" parent="PanelContainer/MainContainer/MainMargin/GodUI/ScoresMargin" unique_id=1527026162]
 layout_mode = 2
 theme_override_constants/separation = 24
 
-[node name="TimerLabel" type="Label" parent="PanelContainer/MainContainer/MainMargin/GodUI/ScoresMargin/ScoresBox"]
+[node name="TimerLabel" type="Label" parent="PanelContainer/MainContainer/MainMargin/GodUI/ScoresMargin/ScoresBox" unique_id=1070935539]
 layout_mode = 2
 size_flags_vertical = 1
 theme_override_font_sizes/font_size = 48
 text = "⧗:"
 vertical_alignment = 1
 
-[node name="TimerBox" type="MarginContainer" parent="PanelContainer/MainContainer/MainMargin/GodUI/ScoresMargin/ScoresBox"]
+[node name="TimerBox" type="MarginContainer" parent="PanelContainer/MainContainer/MainMargin/GodUI/ScoresMargin/ScoresBox" unique_id=1614949747]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="TimerProgress" type="ProgressBar" parent="PanelContainer/MainContainer/MainMargin/GodUI/ScoresMargin/ScoresBox/TimerBox" groups=["RoundTimer"]]
+[node name="TimerProgress" type="ProgressBar" parent="PanelContainer/MainContainer/MainMargin/GodUI/ScoresMargin/ScoresBox/TimerBox" unique_id=1328811306 groups=["RoundTimer"]]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 size_flags_vertical = 4
@@ -174,73 +174,73 @@ max_value = 1.0
 value = 1.0
 show_percentage = false
 
-[node name="ScoreLabel" type="Label" parent="PanelContainer/MainContainer/MainMargin/GodUI/ScoresMargin/ScoresBox"]
+[node name="ScoreLabel" type="Label" parent="PanelContainer/MainContainer/MainMargin/GodUI/ScoresMargin/ScoresBox" unique_id=1388303904]
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
 text = "Scores:"
 
-[node name="ScoreBoard0" type="VBoxContainer" parent="PanelContainer/MainContainer/MainMargin/GodUI/ScoresMargin/ScoresBox"]
+[node name="ScoreBoard0" type="VBoxContainer" parent="PanelContainer/MainContainer/MainMargin/GodUI/ScoresMargin/ScoresBox" unique_id=1117933433]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/MainContainer/MainMargin/GodUI/ScoresMargin/ScoresBox/ScoreBoard0"]
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MainContainer/MainMargin/GodUI/ScoresMargin/ScoresBox/ScoreBoard0" unique_id=237123824]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 texture = ExtResource("4_jeh22")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="PlayerScore0" type="Label" parent="PanelContainer/MainContainer/MainMargin/GodUI/ScoresMargin/ScoresBox/ScoreBoard0" groups=["Score"]]
+[node name="PlayerScore0" type="Label" parent="PanelContainer/MainContainer/MainMargin/GodUI/ScoresMargin/ScoresBox/ScoreBoard0" unique_id=1180678720 groups=["Score"]]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_font_sizes/font_size = 48
 text = "0"
 horizontal_alignment = 1
 
-[node name="ScoreBoard1" type="VBoxContainer" parent="PanelContainer/MainContainer/MainMargin/GodUI/ScoresMargin/ScoresBox"]
+[node name="ScoreBoard1" type="VBoxContainer" parent="PanelContainer/MainContainer/MainMargin/GodUI/ScoresMargin/ScoresBox" unique_id=1431128914]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/MainContainer/MainMargin/GodUI/ScoresMargin/ScoresBox/ScoreBoard1"]
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MainContainer/MainMargin/GodUI/ScoresMargin/ScoresBox/ScoreBoard1" unique_id=1400312878]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 texture = ExtResource("5_4tcmw")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="PlayerScore1" type="Label" parent="PanelContainer/MainContainer/MainMargin/GodUI/ScoresMargin/ScoresBox/ScoreBoard1" groups=["Score"]]
+[node name="PlayerScore1" type="Label" parent="PanelContainer/MainContainer/MainMargin/GodUI/ScoresMargin/ScoresBox/ScoreBoard1" unique_id=1281046300 groups=["Score"]]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 1, 0, 1)
 theme_override_font_sizes/font_size = 48
 text = "0"
 horizontal_alignment = 1
 
-[node name="ScoreBoard2" type="VBoxContainer" parent="PanelContainer/MainContainer/MainMargin/GodUI/ScoresMargin/ScoresBox"]
+[node name="ScoreBoard2" type="VBoxContainer" parent="PanelContainer/MainContainer/MainMargin/GodUI/ScoresMargin/ScoresBox" unique_id=2004227618]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/MainContainer/MainMargin/GodUI/ScoresMargin/ScoresBox/ScoreBoard2"]
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MainContainer/MainMargin/GodUI/ScoresMargin/ScoresBox/ScoreBoard2" unique_id=1947279118]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 texture = ExtResource("6_0gpo5")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="PlayerScore2" type="Label" parent="PanelContainer/MainContainer/MainMargin/GodUI/ScoresMargin/ScoresBox/ScoreBoard2" groups=["Score"]]
+[node name="PlayerScore2" type="Label" parent="PanelContainer/MainContainer/MainMargin/GodUI/ScoresMargin/ScoresBox/ScoreBoard2" unique_id=1641708395 groups=["Score"]]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 1, 1)
 theme_override_font_sizes/font_size = 48
 text = "0"
 horizontal_alignment = 1
 
-[node name="ScoreBoard3" type="VBoxContainer" parent="PanelContainer/MainContainer/MainMargin/GodUI/ScoresMargin/ScoresBox"]
+[node name="ScoreBoard3" type="VBoxContainer" parent="PanelContainer/MainContainer/MainMargin/GodUI/ScoresMargin/ScoresBox" unique_id=1891544407]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/MainContainer/MainMargin/GodUI/ScoresMargin/ScoresBox/ScoreBoard3"]
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MainContainer/MainMargin/GodUI/ScoresMargin/ScoresBox/ScoreBoard3" unique_id=257255199]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 texture = ExtResource("7_i3pw3")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="PlayerScore3" type="Label" parent="PanelContainer/MainContainer/MainMargin/GodUI/ScoresMargin/ScoresBox/ScoreBoard3" groups=["Score"]]
+[node name="PlayerScore3" type="Label" parent="PanelContainer/MainContainer/MainMargin/GodUI/ScoresMargin/ScoresBox/ScoreBoard3" unique_id=1998844668 groups=["Score"]]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 0, 1)
 theme_override_font_sizes/font_size = 48

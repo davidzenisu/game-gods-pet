@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://boh10cjn6pvyw"]
+[gd_scene format=3 uid="uid://boh10cjn6pvyw"]
 
 [ext_resource type="Script" uid="uid://c7wcaacpn11cb" path="res://assets/scripts/wall.gd" id="1_fv7l2"]
 [ext_resource type="Texture2D" uid="uid://lnvgity2svn0" path="res://assets/art/bricks_texture.png" id="2_nddmm"]
@@ -15,18 +15,18 @@ properties/1/path = NodePath(".:wall_size")
 properties/1/spawn = true
 properties/1/replication_mode = 1
 
-[node name="Wall" type="StaticBody2D" groups=["walls"]]
+[node name="Wall" type="StaticBody2D" unique_id=1982718749 groups=["walls"]]
 input_pickable = true
 script = ExtResource("1_fv7l2")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1930921160]
 position = Vector2(20, 20)
 shape = SubResource("RectangleShape2D_jyti7")
 
-[node name="ServerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+[node name="ServerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=442468455]
 replication_config = SubResource("SceneReplicationConfig_fv7l2")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1719194009]
 modulate = Color(1, 0.5137255, 0.15294118, 1)
 offset_right = 409.99997
 offset_bottom = 389.99997
@@ -35,7 +35,7 @@ texture = ExtResource("2_nddmm")
 expand_mode = 1
 stretch_mode = 1
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1219114643]
 stream = ExtResource("3_b7qg2")
 autoplay = true
 
