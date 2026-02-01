@@ -179,6 +179,13 @@ func instantiate_level_timer():
 
 
 func shock_player(player_id: int):
+	# don't do anything if shocked already!
+	if (
+		GameManager.player_states.has(player_id) && 
+		GameManager.player_states[player_id].shocked
+	):
+		return
+	print("Shocking player ", player_id)
 	player_states.set(player_id, {
 		"shocked": true
 	})
