@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://b0js1qksr2nlr" path="res://assets/scripts/ui/god_ui.gd" id="1_b0nij"]
 [ext_resource type="Texture2D" uid="uid://dibnrmhty8nk5" path="res://assets/art/bricks.png" id="1_sr8po"]
 [ext_resource type="Texture2D" uid="uid://yfedbuoaglkf" path="res://assets/art/rectangle-16.jpg" id="3_5d8ni"]
+[ext_resource type="Texture2D" uid="uid://3fo3rkfndpot" path="res://assets/art/bolt_ability.png" id="3_rp45u"]
 [ext_resource type="Texture2D" uid="uid://f435ndv5c53q" path="res://assets/art/dog_bottom1.png" id="4_jeh22"]
 [ext_resource type="Texture2D" uid="uid://dlftlldkogiaf" path="res://assets/art/cat_bottom1.png" id="5_4tcmw"]
 [ext_resource type="Texture2D" uid="uid://c155u7jko4uxb" path="res://assets/art/fish_bottom1.png" id="6_0gpo5"]
@@ -97,6 +98,20 @@ texture_progress = ExtResource("1_sr8po")
 tint_under = Color(0.7490196, 0.7490196, 0.7490196, 0.39215687)
 tint_progress = Color(0.84, 0.58996, 0.44519997, 1)
 
+[node name="BoltAbilityGroup" type="AspectRatioContainer" parent="PanelContainer/MainContainer/MainMargin/GodUI/AbilitiesMargin/AbilitiesBox" unique_id=955815007]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="PanelContainer/MainContainer/MainMargin/GodUI/AbilitiesMargin/AbilitiesBox/BoltAbilityGroup" unique_id=2036271149]
+layout_mode = 2
+value = 40.0
+fill_mode = 4
+nine_patch_stretch = true
+texture_under = ExtResource("3_rp45u")
+texture_progress = ExtResource("3_rp45u")
+tint_under = Color(0.7490196, 0.7490196, 0.7490196, 0.39215687)
+tint_progress = Color(1, 0.8448975, 0.65630794, 1)
+
 [node name="CoinAbilityGroup" type="AspectRatioContainer" parent="PanelContainer/MainContainer/MainMargin/GodUI/AbilitiesMargin/AbilitiesBox" unique_id=2041261320]
 visible = false
 custom_minimum_size = Vector2(100, 100)
@@ -111,21 +126,6 @@ texture_under = ExtResource("3_5d8ni")
 texture_progress = ExtResource("3_5d8ni")
 tint_under = Color(0.7490196, 0.7490196, 0.7490196, 0.39215687)
 tint_progress = Color(0.21568628, 0.65882355, 0.89411765, 1)
-
-[node name="GrabAbilityGroup" type="AspectRatioContainer" parent="PanelContainer/MainContainer/MainMargin/GodUI/AbilitiesMargin/AbilitiesBox" unique_id=955815007]
-visible = false
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-
-[node name="TextureProgressBar" type="TextureProgressBar" parent="PanelContainer/MainContainer/MainMargin/GodUI/AbilitiesMargin/AbilitiesBox/GrabAbilityGroup" unique_id=2036271149]
-layout_mode = 2
-value = 40.0
-fill_mode = 4
-nine_patch_stretch = true
-texture_under = ExtResource("3_5d8ni")
-texture_progress = ExtResource("3_5d8ni")
-tint_under = Color(0.7490196, 0.7490196, 0.7490196, 0.39215687)
-tint_progress = Color(0.50980395, 0, 0.1764706, 1)
 
 [node name="PetContainer" type="MarginContainer" parent="PanelContainer/MainContainer/MainMargin/GodUI" unique_id=92346070]
 layout_mode = 2

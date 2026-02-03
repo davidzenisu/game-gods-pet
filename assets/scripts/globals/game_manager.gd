@@ -8,6 +8,7 @@ signal round_ended()
 signal round_started()
 signal vote_ended()
 signal game_score_updated(game_score: Dictionary)
+signal player_shocked(player_id: int)
 
 @export var round_length = 90.0 # seconds
 func is_debug() -> bool:
@@ -195,6 +196,7 @@ func shock_player(player_id: int):
 			"shocked": false
 		})
 	shock_timer.timeout.connect(on_shock_end)
+	player_shocked.emit(player_id)
 
 func on_timer_update():
 	var time_left = game_timer.time_left
