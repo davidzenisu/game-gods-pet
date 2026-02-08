@@ -16,7 +16,14 @@ func _ready():
 	preview_rect.visible = false
 	preview_rect.color = preview_color
 	add_child(preview_rect)
+	GameManager.player_shocked.connect(_on_display_bolt)
 
+func _on_display_bolt(player_id: int):
+	print("Displaying bolt!")
+	var bolt = preload("res://assets/scenes/bolt.tscn").instantiate()
+	bolt.name = "Bolt_%d" % randi()
+	var bolt_node = get_node("Bolts")
+	bolt_node.add_child(bolt)
 
 func _input(event):
 	# --- START DRAG (Touch OR Mouse Left Button) ---

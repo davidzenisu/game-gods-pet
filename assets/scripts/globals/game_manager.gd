@@ -8,10 +8,11 @@ signal round_ended()
 signal round_started()
 signal vote_ended()
 signal game_score_updated(game_score: Dictionary)
+signal player_shocked(player_id: int)
 
 @export var round_length = 90.0 # seconds
 func is_debug() -> bool:
-	return false
+	return true
 var player_count = 4
 var god_identifier = player_count
 
@@ -23,6 +24,7 @@ var players: Array = []
 var god_pet: int = -1
 var scores: Dictionary = {}
 var votes: Dictionary = {}
+var player_states: Dictionary = {}
 var game_score: Dictionary = {}
 var vote_tracker: Dictionary = {}
 var round_winners: Array = []
@@ -175,6 +177,26 @@ func instantiate_level_timer():
 	game_timer.timeout.connect(on_round_end)
 	# Start a process to update the timer UI
 	get_tree().create_timer(1).timeout.connect(on_timer_update)
+
+
+func shock_player(player_id: int):
+	# don't do anything if shocked already!
+	if (
+		GameManager.player_states.has(player_id) && 
+		GameManager.player_states[player_id].shocked
+	):
+		return
+	print("Shocking player ", player_id)
+	player_states.set(player_id, {
+		"shocked": true
+	})
+	var shock_timer = get_tree().create_timer(2)
+	var on_shock_end = func ():
+		player_states.set(player_id, {
+			"shocked": false
+		})
+	shock_timer.timeout.connect(on_shock_end)
+	player_shocked.emit(player_id)
 
 func on_timer_update():
 	var time_left = game_timer.time_left

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cx6syvrvuews"]
+[gd_scene format=3 uid="uid://cx6syvrvuews"]
 
 [ext_resource type="Script" uid="uid://y43ddl6ivq14" path="res://assets/scripts/level.gd" id="1_ye1mc"]
 [ext_resource type="Shader" uid="uid://jkqoqw81n4u4" path="res://assets/shaders/paper.gdshader" id="2_dyaho"]
@@ -22,76 +22,85 @@ size = Vector2(25, 838)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tjd8y"]
 size = Vector2(1384, 20)
 
-[node name="World" type="Node2D"]
+[node name="World" type="Node2D" unique_id=715253726]
 script = ExtResource("1_ye1mc")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1960869313]
 material = SubResource("ShaderMaterial_ckblc")
 offset_right = 1153.0
 offset_bottom = 648.0
 texture = ExtResource("3_ckblc")
 
-[node name="Bounds" type="Node2D" parent="."]
+[node name="Bounds" type="Node2D" parent="." unique_id=599612327]
 
-[node name="BoundBottom" type="StaticBody2D" parent="Bounds"]
+[node name="BoundBottom" type="StaticBody2D" parent="Bounds" unique_id=419855627]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Bounds/BoundBottom"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bounds/BoundBottom" unique_id=61893868]
 position = Vector2(581, 703)
 shape = SubResource("RectangleShape2D_0kt67")
 
-[node name="BoundLeft" type="StaticBody2D" parent="Bounds"]
+[node name="BoundLeft" type="StaticBody2D" parent="Bounds" unique_id=1416282915]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Bounds/BoundLeft"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bounds/BoundLeft" unique_id=1079866663]
 position = Vector2(-58.5, 324)
 shape = SubResource("RectangleShape2D_lka7q")
 
-[node name="BoundTop" type="StaticBody2D" parent="Bounds"]
+[node name="BoundTop" type="StaticBody2D" parent="Bounds" unique_id=1497358466]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Bounds/BoundTop"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bounds/BoundTop" unique_id=217287494]
 position = Vector2(580, -55)
 shape = SubResource("RectangleShape2D_tjd8y")
 
-[node name="BoundRight" type="StaticBody2D" parent="Bounds"]
+[node name="BoundRight" type="StaticBody2D" parent="Bounds" unique_id=1636750959]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Bounds/BoundRight"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bounds/BoundRight" unique_id=266907040]
 position = Vector2(1204, 320)
 shape = SubResource("RectangleShape2D_lka7q")
 
-[node name="Players" type="Node2D" parent="."]
+[node name="Players" type="Node2D" parent="." unique_id=354051779]
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=590399663]
 _spawnable_scenes = PackedStringArray("uid://b68uitfh610nj")
 spawn_path = NodePath("../Players")
 spawn_limit = 4
 
-[node name="Coins" type="Node2D" parent="."]
+[node name="Coins" type="Node2D" parent="." unique_id=1819895255]
 
-[node name="CoinSpawner" type="MultiplayerSpawner" parent="."]
+[node name="CoinSpawner" type="MultiplayerSpawner" parent="." unique_id=1461357876]
 _spawnable_scenes = PackedStringArray("uid://dysxebgsj11gt")
 spawn_path = NodePath("../Coins")
 spawn_limit = 100
 
-[node name="CoinTimer" type="Timer" parent="."]
+[node name="CoinTimer" type="Timer" parent="." unique_id=1871724375]
 wait_time = 5.0
 autostart = true
 
-[node name="GodUi" parent="." instance=ExtResource("5_xitjf")]
+[node name="GodUi" parent="." unique_id=1708149271 instance=ExtResource("5_xitjf")]
 
-[node name="VoteUi" parent="." instance=ExtResource("5_8sdpe")]
+[node name="VoteUi" parent="." unique_id=308203225 instance=ExtResource("5_8sdpe")]
 visible = false
 
-[node name="ResultUi" parent="." instance=ExtResource("6_tjd8y")]
+[node name="ResultUi" parent="." unique_id=1997554232 instance=ExtResource("6_tjd8y")]
 visible = false
 
-[node name="GodsPlayground" type="Node2D" parent="."]
+[node name="GodsPlayground" type="Node2D" parent="." unique_id=302596559]
 script = ExtResource("4_yeohl")
 preview_color = Color(0.988301, 0.699498, 0.668898, 1)
 
-[node name="Walls" type="Node2D" parent="GodsPlayground"]
+[node name="Walls" type="Node2D" parent="GodsPlayground" unique_id=124722644]
 
-[node name="WallSpawner" type="MultiplayerSpawner" parent="GodsPlayground"]
+[node name="WallSpawner" type="MultiplayerSpawner" parent="GodsPlayground" unique_id=124351680]
 _spawnable_scenes = PackedStringArray("uid://boh10cjn6pvyw")
 spawn_path = NodePath("../Walls")
 spawn_limit = 10
+
+[node name="Bolts" type="Node2D" parent="GodsPlayground" unique_id=1308609896]
+position = Vector2(600, 300)
+scale = Vector2(1.5, 1.5)
+
+[node name="BoltSpawner" type="MultiplayerSpawner" parent="GodsPlayground" unique_id=2142757467]
+_spawnable_scenes = PackedStringArray("uid://xmwd4sabcth8")
+spawn_path = NodePath("../Bolts")
+spawn_limit = 1
 
 [connection signal="timeout" from="CoinTimer" to="." method="_on_spawn_coin"]

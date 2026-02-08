@@ -62,7 +62,12 @@ func set_player_sprite():
 
 func _physics_process(delta):
 	velocity = input.direction
-
+	
+	if (
+		GameManager.player_states.has(player_id) && 
+		GameManager.player_states[player_id].shocked
+		):
+		velocity = Vector2.ZERO
 	#if velocity.x > 0.5 or velocity.x < -0.5:
 		#$AnimatedSprite2D.animation = &"default"
 		#$AnimatedSprite2D.flip_v = false
@@ -91,3 +96,12 @@ func start(pos):
 func play_sound(sound: Sound):
 	if sounds.has(sound):
 		sounds[sound].play()
+
+func _on_input_event(viewport, event, shape_idx):
+	if (event is InputEventMouseButton or event is InputEventScreenTouch) and event.pressed:
+		print("Animal was pressed!")
+		shock_player.rpc(player_id)
+		
+@rpc("any_peer","call_local")
+func shock_player(id: int):
+	GameManager.shock_player(id)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://b68uitfh610nj"]
+[gd_scene format=3 uid="uid://b68uitfh610nj"]
 
 [ext_resource type="Script" uid="uid://h8v6qxwm45y6" path="res://assets/scripts/player.gd" id="1_bpmvs"]
 [ext_resource type="Texture2D" uid="uid://dlftlldkogiaf" path="res://assets/art/cat_bottom1.png" id="2_0mp4a"]
@@ -98,58 +98,61 @@ height = 120.0
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_onrkg"]
 gravity = Vector3(0, 98, 0)
 
-[node name="Player" type="CharacterBody2D" groups=["players"]]
+[node name="Player" type="CharacterBody2D" unique_id=471016788 groups=["players"]]
 scale = Vector2(0.5, 0.5)
+input_pickable = true
 script = ExtResource("1_bpmvs")
 speed = 100
 
-[node name="CatSprite" type="AnimatedSprite2D" parent="." groups=["cat_sprite", "sprite"]]
+[node name="CatSprite" type="AnimatedSprite2D" parent="." unique_id=1847580715 groups=["cat_sprite", "sprite"]]
 visible = false
 scale = Vector2(0.35, 0.35)
 sprite_frames = SubResource("SpriteFrames_mjvjq")
 speed_scale = 0.3
 
-[node name="DogSprite" type="AnimatedSprite2D" parent="." groups=["dog_sprite", "sprite"]]
+[node name="DogSprite" type="AnimatedSprite2D" parent="." unique_id=407723668 groups=["dog_sprite", "sprite"]]
 visible = false
 scale = Vector2(0.4, 0.4)
 sprite_frames = SubResource("SpriteFrames_hqtel")
 speed_scale = 0.3
 
-[node name="FishSprite" type="AnimatedSprite2D" parent="." groups=["fish_sprite", "sprite"]]
+[node name="FishSprite" type="AnimatedSprite2D" parent="." unique_id=2094068097 groups=["fish_sprite", "sprite"]]
 visible = false
 position = Vector2(-24.000002, -8.000001)
 scale = Vector2(0.40833333, 0.40833333)
 sprite_frames = SubResource("SpriteFrames_0184f")
 speed_scale = 0.3
 
-[node name="HamsterSprite" type="AnimatedSprite2D" parent="." groups=["hamster_sprite", "sprite"]]
+[node name="HamsterSprite" type="AnimatedSprite2D" parent="." unique_id=127733061 groups=["hamster_sprite", "sprite"]]
 visible = false
 scale = Vector2(0.3, 0.3)
 sprite_frames = SubResource("SpriteFrames_q5eti")
 frame_progress = 0.569494
 speed_scale = 0.3
 
-[node name="ServerSychronizer" type="MultiplayerSynchronizer" parent="."]
+[node name="ServerSychronizer" type="MultiplayerSynchronizer" parent="." unique_id=821839046]
 replication_config = SubResource("SceneReplicationConfig_s027a")
 
-[node name="PlayerInput" type="MultiplayerSynchronizer" parent="."]
+[node name="PlayerInput" type="MultiplayerSynchronizer" parent="." unique_id=1218664205]
 root_path = NodePath(".")
 replication_config = SubResource("SceneReplicationConfig_14505")
 script = ExtResource("2_y6c2j")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1026101682]
 position = Vector2(0, -8)
 shape = SubResource("CapsuleShape2D_sweqy")
 
-[node name="Trail" type="GPUParticles2D" parent="."]
+[node name="Trail" type="GPUParticles2D" parent="." unique_id=905699299]
 scale = Vector2(0.997988, 1)
 emitting = false
 amount = 10
 texture = ExtResource("5_0184f")
 process_material = SubResource("ParticleProcessMaterial_onrkg")
 
-[node name="Sounds" type="Node2D" parent="."]
+[node name="Sounds" type="Node2D" parent="." unique_id=1318084645]
 scale = Vector2(2, 2)
 
-[node name="CrunchSound" type="AudioStreamPlayer2D" parent="Sounds"]
+[node name="CrunchSound" type="AudioStreamPlayer2D" parent="Sounds" unique_id=1839792828]
 stream = ExtResource("12_6offu")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
