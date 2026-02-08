@@ -15,6 +15,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="GodsPet"
+config/version="0.1.0"
 run/main_scene="uid://clt7s7jihrd4f"
 config/features=PackedStringArray("4.6", "Mobile")
 
