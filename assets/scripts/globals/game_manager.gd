@@ -12,7 +12,7 @@ signal player_shocked(player_id: int)
 
 @export var round_length = 90.0 # seconds
 func is_debug() -> bool:
-	return true
+	return false
 var player_count = 4
 var god_identifier = player_count
 
