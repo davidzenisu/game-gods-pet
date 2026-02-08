@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cp87f3snwbfqf" path="res://assets/scripts/bolt.gd" id="1_rbecc"]
 [ext_resource type="Texture2D" uid="uid://b54wffy7wj1f0" path="res://assets/art/bolt.png" id="1_yfslc"]
-[ext_resource type="AudioStream" uid="uid://c7f80f8p0777u" path="res://assets/audio/wall.ogg" id="3_657uk"]
+[ext_resource type="AudioStream" uid="uid://dsm3nud3akkfh" path="res://assets/audio/bolt_effect.ogg" id="3_657uk"]
 
 [sub_resource type="Animation" id="Animation_rbecc"]
 resource_name = "FadeIn"
