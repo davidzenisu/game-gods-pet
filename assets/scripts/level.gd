@@ -14,3 +14,5 @@ func _on_spawn_coin():
 	if not multiplayer.is_server():
 		return
 	GameManager.instantiate_coin()
+	var new_time = GameManager.calculate_coin_timer()
+	$CoinTimer.wait_time = new_time
