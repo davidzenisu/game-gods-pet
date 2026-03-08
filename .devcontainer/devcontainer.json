@@ -16,7 +16,8 @@
         }
     },
     "containerEnv": {
-        "GODOT_VERSION": "4.6"
+        "GODOT_VERSION": "4.6",
+        "JAVA_HOME": "/usr/lib/jvm/java-17-openjdk-amd64"
     },
     "postCreateCommand": "bash .devcontainer/install_godot.sh"
 }
