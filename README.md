@@ -16,4 +16,6 @@ export JAVA_HOME=/run/media/deck/07f3ad58-56f4-4b23-91ca-c184f0de2af2/Dev/depend
 
 The following command requires that the Java SDK path is set in editor settings (not in code!!)
 
+
+godot --headless --editor res://ci/ci_bootstrap.tscn
 godot --headless --install-android-build-template --export-debug "Android" build/game.apk
