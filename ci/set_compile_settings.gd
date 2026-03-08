@@ -1,7 +1,7 @@
 @tool
-extends EditorScript
+extends Node
 
-func _run() -> void:
+func _ready() -> void:
 	print("Set editor settings required for build!")
 	var settings = EditorInterface.get_editor_settings()
 	var java_sdk_path = OS.get_environment("JAVA_HOME")
