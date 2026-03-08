@@ -29,7 +29,7 @@ jobs:
         runCmd: |
           mkdir -p build
           godot --headless --editor res://ci/ci_bootstrap.tscn
-          godot --headless --install-android-build-template --export-debug "Android" build/output.apk
+          godot --headless --install-android-build-template --export-debug "Android" build/output.aab
 
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4
