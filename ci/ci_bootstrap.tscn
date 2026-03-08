@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cqf5uavkoqvqe"]
+
+[ext_resource type="Script" uid="uid://bthyf7corfbqu" path="res://ci/set_compile_settings.gd" id="1_428e3"]
+
+[node name="CiBootstrap" type="Node" unique_id=945351940]
+script = ExtResource("1_428e3")

@@ -12,7 +12,7 @@ signal player_shocked(player_id: int)
 
 @export var round_length = 90.0 # seconds
 func is_debug() -> bool:
-	return true
+	return false
 var player_count = 4
 var god_identifier = player_count
 
@@ -139,6 +139,16 @@ func instantiate_player():
 	pet_updated.emit(god_pet)
 	score_updated.emit(scores)
 	vote_updated.emit(votes)
+
+func calculate_coin_timer():
+	var max_timer = 5
+	var min_timer = 2
+	var time_left = game_timer.time_left
+	var game_progress = (round_length - time_left) / round_length
+	var timer_reduction = game_progress * (max_timer - min_timer)
+	var new_timer = max_timer - timer_reduction
+	print(new_timer)
+	return new_timer
 
 func instantiate_coin():
 	if (level == null or game_running == false):
