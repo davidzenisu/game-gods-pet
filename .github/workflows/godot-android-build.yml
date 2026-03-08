@@ -1,0 +1,38 @@
+
+name: Godot Android Build
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch: 
+
+jobs:
+
+  build:
+    strategy:
+      matrix:
+        configuration: [Debug]
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Set up devcontainer
+      uses: devcontainers/ci@v0.2
+      with:
+        runCmd: |
+          mkdir -p build
+          godot --headless --editor res://ci/ci_bootstrap.tscn
+          godot --headless --install-android-build-template --export-debug "Android" build/output.apk
+
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: AndroidBuild
+        path: build/
