@@ -1,7 +1,7 @@
 {
     "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
     "features": {
-        "ghcr.io/devcontainers/features/java:1": {},
+        // includes OpenJDK17
         "ghcr.io/nordcominc/devcontainer-features/android-sdk:1": {
             // https://docs.godotengine.org/en/4.4/contributing/development/compiling/compiling_for_android.html#setting-up-the-buildsystem
             "extra_packages": "platform-tools build-tools;34.0.0 platforms;android-34 cmdline-tools;latest cmake;3.10.2.4988404 ndk;23.2.8568313"
