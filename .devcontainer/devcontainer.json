@@ -14,5 +14,9 @@
                 "ms-vscode-remote.remote-containers"
             ]
         }
-    }
+    },
+    "containerEnv": {
+        "GODOT_VERSION": "4.6"
+    },
+    "postCreateCommand": "bash .devcontainer/install_godot.sh"
 }
