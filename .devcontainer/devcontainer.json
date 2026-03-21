@@ -8,10 +8,10 @@
         },
         "ghcr.io/devcontainers/features/git-lfs:1": {},
         //Test with Homebrew for now:
-        "ghcr.io/devcontainers-extra/features/homebrew-package:1": {
-            "package": "fastlane"
-        }
-        // "ghcr.io/rails/devcontainer/features/ruby:2": {}
+        // "ghcr.io/devcontainers-extra/features/homebrew-package:1": {
+        //     "package": "fastlane"
+        // }
+        "ghcr.io/rails/devcontainer/features/ruby:2": {}
     },
     "customizations": {
         "vscode": {
