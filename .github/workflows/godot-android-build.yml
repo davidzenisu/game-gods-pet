@@ -37,7 +37,7 @@ jobs:
       with:
         runCmd: |
           echo Setting environment variables
-          echo ${{ secrets.GODOT_ANDROID_KEYSTORE_BASE64 }} | base64 --decode > release.keystore
+          printf "%s" "${{ secrets.GODOT_ANDROID_KEYSTORE_BASE64 }}" | base64 --decode > release.keystore
           export GODOT_ANDROID_KEYSTORE_RELEASE_PATH=$(pwd)/release.keystore
           export GODOT_ANDROID_KEYSTORE_RELEASE_USER=${{ secrets.GODOT_ANDROID_KEYSTORE_RELEASE_USER }}
           export GODOT_ANDROID_KEYSTORE_RELEASE_PASSWORD=${{ secrets.GODOT_ANDROID_KEYSTORE_RELEASE_PASSWORD }}
