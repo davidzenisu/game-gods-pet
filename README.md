@@ -19,3 +19,29 @@ The following command requires that the Java SDK path is set in editor settings 
 
 godot --headless --editor res://ci/ci_bootstrap.tscn
 godot --headless --install-android-build-template --export-debug "Android" build/game.apk
+
+
+https://docs.godotengine.org/en/stable/tutorials/export/exporting_for_android.html#environment-variables
+
+
+Android export environment variables
+Export option
+
+Environment variable
+
+Encryption / Encryption Key
+
+GODOT_SCRIPT_ENCRYPTION_KEY
+
+Options / Keystore / Debug: GODOT_ANDROID_KEYSTORE_DEBUG_PATH
+
+Options / Keystore / Debug User: GODOT_ANDROID_KEYSTORE_DEBUG_USER
+
+Options / Keystore / Debug Password: GODOT_ANDROID_KEYSTORE_DEBUG_PASSWORD
+
+Options / Keystore / Release: GODOT_ANDROID_KEYSTORE_RELEASE_PATH
+
+Options / Keystore / Release User: GODOT_ANDROID_KEYSTORE_RELEASE_USER
+
+Options / Keystore / Release Password: GODOT_ANDROID_KEYSTORE_RELEASE_PASSWORD
+

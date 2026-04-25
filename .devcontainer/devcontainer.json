@@ -4,9 +4,15 @@
         // includes OpenJDK17
         "ghcr.io/nordcominc/devcontainer-features/android-sdk:1": {
             // https://docs.godotengine.org/en/4.4/contributing/development/compiling/compiling_for_android.html#setting-up-the-buildsystem
-            "extra_packages": "platform-tools build-tools;34.0.0 platforms;android-34 cmdline-tools;latest cmake;3.10.2.4988404 ndk;23.2.8568313"
+            "extra_packages": "platform-tools build-tools;35.0.1 platforms;android-35 cmdline-tools;latest cmake;3.10.2.4988404 ndk;28.1.13356709"
         },
-        "ghcr.io/devcontainers/features/git-lfs:1": {}
+        "ghcr.io/devcontainers/features/git-lfs:1": {},
+        //Test with Homebrew for now:
+        // "ghcr.io/devcontainers-extra/features/homebrew-package:1": {
+        //     "package": "fastlane"
+        // }
+        // should be moved into pre-baked image!
+        //"ghcr.io/rails/devcontainer/features/ruby:2": {}
     },
     "customizations": {
         "vscode": {
