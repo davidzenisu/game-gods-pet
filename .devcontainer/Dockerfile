@@ -43,10 +43,10 @@ RUN rm -f Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip
 
 # Run in user context
 USER vscode
+WORKDIR /home/vscode
 RUN mkdir ~/.cache
 RUN mkdir -p ~/.config/godot
 RUN mkdir -p ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
-RUN echo Godot version is ${GODOT_VERSION}
 RUN wget https://github.com/godotengine/godot-builds/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_export_templates.tpz -q
 RUN unzip Godot_v${GODOT_VERSION}-stable_export_templates.tpz
 RUN mv templates/* ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
