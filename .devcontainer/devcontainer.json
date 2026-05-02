@@ -3,14 +3,9 @@
     "customizations": {
         "vscode": {
             "extensions": [
-                "ms-vscode-remote.remote-containers"
+                "ms-vscode-remote.remote-containers",
+                "GitHub.copilot-chat"
             ]
         }
-    },
-    "containerEnv": {
-        "GODOT_VERSION": "4.6",
-        "JAVA_HOME": "/usr/lib/jvm/java-17-openjdk-amd64",
-        //Used in initialization script (Godot overwrite JAVA_HOME variable)
-        "GODOT_JAVA_HOME": "/usr/lib/jvm/java-17-openjdk-amd64"
     }
 }
