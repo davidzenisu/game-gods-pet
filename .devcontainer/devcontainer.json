@@ -1,5 +1,5 @@
 {
-    "image": "ghcr.io/davidzenisu/game-gods-pet/devcontainer:feature-official-website-a1923a2",
+    "image": "ghcr.io/davidzenisu/game-gods-pet/devcontainer:feature-official-website",
     "customizations": {
         "vscode": {
             "extensions": [
