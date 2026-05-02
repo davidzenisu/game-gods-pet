@@ -28,8 +28,7 @@ RUN yes | sdkmanager --licenses && \
     sdkmanager "platform-tools" "build-tools;35.0.1" "platforms;android-35" "cmdline-tools;latest" "cmake;3.10.2.4988404" "ndk;28.1.13356709"
 
 # Install fastlane
-RUN gem install bundler && \
-    bundle install
+RUN gem install bundler
 
 # Set environment variables
 ENV GODOT_VERSION=4.6
