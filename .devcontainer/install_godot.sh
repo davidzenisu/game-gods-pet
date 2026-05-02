@@ -10,7 +10,3 @@ sudo mv Godot_v${GODOT_VERSION}-stable_linux.x86_64 /usr/local/bin/godot
 unzip Godot_v${GODOT_VERSION}-stable_export_templates.tpz
 mv templates/* ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
 rm -f Godot_v${GODOT_VERSION}-stable_export_templates.tpz Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip
-
-# # Install fastlane
-# gem install bundler
-# bundle update
