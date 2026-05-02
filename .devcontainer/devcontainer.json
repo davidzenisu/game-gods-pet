@@ -1,5 +1,5 @@
 {
-    "build": { "dockerfile": "Dockerfile" },
+    "image": "ghcr.io/davidzenisu/game-gods-pet/devcontainer:feature-official-website-a1923a2",
     "customizations": {
         "vscode": {
             "extensions": [
