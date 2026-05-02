@@ -37,8 +37,13 @@ ENV GODOT_JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
 
 # Install Godot
 COPY .devcontainer/install_godot.sh /tmp/install_godot.sh
-USER vscode
-RUN chmod +x /tmp/install_godot.sh && /tmp/install_godot.sh
+RUN chmod +x /tmp/install_godot.sh
 
+# Run in user context
+USER vscode
+RUN /tmp/install_godot.sh
+
+# Switch back to clean up temp file
+USER root
 # Clean up
 RUN rm -f /tmp/install_godot.sh
