@@ -36,14 +36,18 @@ ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
 ENV GODOT_JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
 
 # Install Godot
-COPY .devcontainer/install_godot.sh /tmp/install_godot.sh
-RUN chmod +x /tmp/install_godot.sh
+RUN wget https://github.com/godotengine/godot-builds/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip -q
+RUN unzip Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip
+RUN sudo mv Godot_v${GODOT_VERSION}-stable_linux.x86_64 /usr/local/bin/godot
+RUN rm -f Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip
 
 # Run in user context
 USER vscode
-RUN /tmp/install_godot.sh
-
-# Switch back to clean up temp file
-USER root
-# Clean up
-RUN rm -f /tmp/install_godot.sh
+RUN mkdir ~/.cache
+RUN mkdir -p ~/.config/godot
+RUN mkdir -p ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+RUN wget https://github.com/godotengine/godot-builds/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_export_templates.tpz -q
+RUN unzip Godot_v${GODOT_VERSION}-stable_export_templates.tpz
+RUN mv templates/* ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+RUN rm -f Godot_v${GODOT_VERSION}-stable_export_templates.tpz
+RUN rm -rf templates
