@@ -29,7 +29,6 @@ jobs:
         runCmd: |
           echo Building release
           mkdir -p build
-          godot --headless --editor res://ci/ci_bootstrap.tscn
           godot --headless --install-android-build-template --export-debug "Android" build/debug.aab
 
     - name: Build Release
@@ -44,7 +43,6 @@ jobs:
           
           echo Building release
           mkdir -p build
-          godot --headless --editor res://ci/ci_bootstrap.tscn
           godot --headless --install-android-build-template --export-release "Android" build/release.aab
 
     - name: Upload build artifacts

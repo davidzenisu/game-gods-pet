@@ -33,7 +33,6 @@ RUN gem install bundler
 # Set environment variables
 ENV GODOT_VERSION=4.6
 ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
-ENV GODOT_JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
 
 # Install Godot
 RUN wget https://github.com/godotengine/godot-builds/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip -q
