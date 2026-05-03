@@ -4,7 +4,9 @@
         "vscode": {
             "extensions": [
                 "ms-vscode-remote.remote-containers",
-                "GitHub.copilot-chat"
+                "GitHub.copilot-chat",
+                "geequlim.godot-tools",
+                "ms-vscode.cpptools"
             ]
         }
     }
