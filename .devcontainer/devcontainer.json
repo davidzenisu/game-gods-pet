@@ -1,31 +1,13 @@
 {
-    "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
-    "features": {
-        // includes OpenJDK17
-        "ghcr.io/nordcominc/devcontainer-features/android-sdk:1": {
-            // https://docs.godotengine.org/en/4.4/contributing/development/compiling/compiling_for_android.html#setting-up-the-buildsystem
-            "extra_packages": "platform-tools build-tools;35.0.1 platforms;android-35 cmdline-tools;latest cmake;3.10.2.4988404 ndk;28.1.13356709"
-        },
-        "ghcr.io/devcontainers/features/git-lfs:1": {},
-        //Test with Homebrew for now:
-        // "ghcr.io/devcontainers-extra/features/homebrew-package:1": {
-        //     "package": "fastlane"
-        // }
-        // should be moved into pre-baked image!
-        //"ghcr.io/rails/devcontainer/features/ruby:2": {}
-    },
+    "image": "ghcr.io/davidzenisu/game-gods-pet/devcontainer:latest",
     "customizations": {
         "vscode": {
             "extensions": [
-                "ms-vscode-remote.remote-containers"
+                "ms-vscode-remote.remote-containers",
+                "GitHub.copilot-chat",
+                "geequlim.godot-tools",
+                "ms-vscode.cpptools"
             ]
         }
-    },
-    "containerEnv": {
-        "GODOT_VERSION": "4.6",
-        "JAVA_HOME": "/usr/lib/jvm/java-17-openjdk-amd64",
-        //Used in initialization script (Godot overwrite JAVA_HOME variable)
-        "GODOT_JAVA_HOME": "/usr/lib/jvm/java-17-openjdk-amd64"
-    },
-    "postCreateCommand": "bash .devcontainer/install_godot.sh"
+    }
 }
