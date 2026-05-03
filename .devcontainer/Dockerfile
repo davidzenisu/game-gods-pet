@@ -35,19 +35,23 @@ ENV GODOT_VERSION=4.6
 ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
 
 # Install Godot
-RUN wget https://github.com/godotengine/godot-builds/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip -q
-RUN unzip Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip
-RUN sudo mv Godot_v${GODOT_VERSION}-stable_linux.x86_64 /usr/local/bin/godot
-RUN rm -f Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip
+RUN wget https://github.com/godotengine/godot-builds/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip -q && \
+    unzip Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip && \
+    mv Godot_v${GODOT_VERSION}-stable_linux.x86_64 /usr/local/bin/godot && \
+    rm -f Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip
 
 # Run in user context
 USER vscode
 WORKDIR /home/vscode
-RUN mkdir ~/.cache
-RUN mkdir -p ~/.config/godot
-RUN mkdir -p ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
-RUN wget https://github.com/godotengine/godot-builds/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_export_templates.tpz -q
-RUN unzip Godot_v${GODOT_VERSION}-stable_export_templates.tpz
-RUN mv templates/* ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
-RUN rm -f Godot_v${GODOT_VERSION}-stable_export_templates.tpz
-RUN rm -rf templates
+RUN mkdir ~/.cache && \
+    mkdir -p ~/.config/godot && \
+    mkdir -p ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+    wget https://github.com/godotengine/godot-builds/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_export_templates.tpz -q && \
+    unzip Godot_v${GODOT_VERSION}-stable_export_templates.tpz && \
+    mv templates/* ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable && \
+    rm -f Godot_v${GODOT_VERSION}-stable_export_templates.tpz && \
+    rm -rf templates
+
+# Install NVM (Node Version Manager)
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.4/install.sh | bash && \
+    bash -c "source ~/.nvm/nvm.sh && nvm install --lts && nvm use --lts"
