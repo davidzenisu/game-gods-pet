@@ -45,7 +45,7 @@ USER vscode
 WORKDIR /home/vscode
 RUN mkdir ~/.cache && \
     mkdir -p ~/.config/godot && \
-    mkdir -p ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+    mkdir -p ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable && \
     wget https://github.com/godotengine/godot-builds/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_export_templates.tpz -q && \
     unzip Godot_v${GODOT_VERSION}-stable_export_templates.tpz && \
     mv templates/* ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable && \
