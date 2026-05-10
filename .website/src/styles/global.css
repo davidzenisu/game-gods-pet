@@ -93,7 +93,7 @@ a:focus-visible {
   box-shadow: 0 16px 36px rgba(15, 23, 42, 0.22);
 }
 
-.markdown-content h1 {
+h1 {
   margin-top: 0;
   margin-bottom: 24px;
   font-size: 2rem;
@@ -102,7 +102,7 @@ a:focus-visible {
   color: var(--text);
 }
 
-.markdown-content h2 {
+h2 {
   margin-top: 32px;
   margin-bottom: 16px;
   font-size: 1.5rem;
@@ -111,7 +111,7 @@ a:focus-visible {
   color: var(--text);
 }
 
-.markdown-content h3 {
+h3 {
   margin-top: 24px;
   margin-bottom: 12px;
   font-size: 1.25rem;
@@ -120,25 +120,21 @@ a:focus-visible {
   color: var(--text);
 }
 
-.markdown-content p {
+p {
   margin-bottom: 16px;
   color: var(--muted);
   font-size: 1rem;
   line-height: 1.75;
 }
 
-.markdown-content ul {
-  margin-bottom: 16px;
-  padding-left: 32px;
-  color: var(--muted);
-  font-size: 1rem;
-  line-height: 1.75;
-  list-style-type: disc;
-  list-style-position: inside;
-  text-align: center;
+ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0 auto 32px;
+  max-width: 420px;
 }
 
-.markdown-content ol {
+ol {
   margin-bottom: 16px;
   padding-left: 32px;
   color: var(--muted);
@@ -149,31 +145,32 @@ a:focus-visible {
   text-align: center;
 }
 
-.markdown-content li {
-  margin-bottom: 8px;
+li {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
 }
 
-.markdown-content strong {
+strong {
   color: var(--text);
   font-weight: 600;
 }
 
-.markdown-content em {
+em {
   font-style: italic;
 }
 
-.markdown-content code {
+code {
   background: var(--border);
   padding: 2px 6px;
   border-radius: 4px;
   font-family: "Courier New", monospace;
 }
 
-.markdown-content a {
+a {
   color: var(--accent);
   text-decoration: none;
 }
 
-.markdown-content a:hover {
+a:hover {
   text-decoration: underline;
 }

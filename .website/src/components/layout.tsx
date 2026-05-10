@@ -9,7 +9,7 @@ interface LayoutProps {
 const pageStyles = {
   minHeight: "100vh",
   display: "flex",
-  alignItems: "center",
+  alignItems: "flex-start",
   justifyContent: "center",
   padding: "48px 24px",
 }
