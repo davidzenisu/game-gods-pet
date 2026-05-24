@@ -28,7 +28,7 @@ jobs:
         runCmd: |
           echo Building release
           mkdir -p build
-          godot --headless --install-android-build-template --export-debug "Android" build/debug.aab
+          godot --headless --install-android-build-template --export-debug "Android" build/android_debug.aab
 
     - name: Build Release
       uses: devcontainers/ci@v0.3
@@ -42,11 +42,47 @@ jobs:
           
           echo Building release
           mkdir -p build
-          godot --headless --install-android-build-template --export-release "Android" build/release.aab
+          godot --headless --install-android-build-template --export-release "Android" build/android_release.aab
 
-    - name: Upload build artifacts
-      if: github.ref == 'refs/heads/main'
-      uses: actions/upload-artifact@v7
+    - name: Build Windows Debug
+      uses: devcontainers/ci@v0.3
       with:
-        name: AndroidBuild
-        path: build/
+        runCmd: |
+          echo Building Windows Debug
+          mkdir -p build
+          godot --headless --export-debug "Windows Desktop" build/windows_debug.exe
+
+    - name: Build Windows Release
+      uses: devcontainers/ci@v0.3
+      with:
+        runCmd: |
+          echo Building Windows Release
+          mkdir -p build
+          godot --headless --export-release "Windows Desktop" build/windows_release.exe
+
+    - name: Build Linux Debug
+      uses: devcontainers/ci@v0.3
+      with:
+        runCmd: |
+          echo Building Linux Debug
+          mkdir -p build
+          godot --headless --export-debug "Linux/X11" build/linux_debug.x86_64
+
+    - name: Build Linux Release
+      uses: devcontainers/ci@v0.3
+      with:
+        runCmd: |
+          echo Building Linux Release
+          mkdir -p build
+          godot --headless --export-release "Linux/X11" build/linux_release.x86_64
+    
+    - name: Create Release
+      uses: softprops/action-gh-release@v3
+      with:
+        draft: false
+        prerelease: false
+        generate_release_notes: true
+        with:
+          files: |
+            build/*
+      if: github.ref_type == 'tag'
