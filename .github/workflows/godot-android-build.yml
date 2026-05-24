@@ -82,7 +82,6 @@ jobs:
         draft: false
         prerelease: false
         generate_release_notes: true
-        with:
-          files: |
-            build/*
+        files: |
+          build/*
       if: github.ref_type == 'tag'
