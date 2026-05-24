@@ -1,5 +1,5 @@
 
-name: Godot Android Build
+ename: Godot Build & Release
 
 on:
   push:
