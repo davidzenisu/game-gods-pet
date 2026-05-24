@@ -1,5 +1,4 @@
-
-name: Godot Build & Release
+name: Godot Build / Release
 
 on:
   push:
@@ -10,10 +9,6 @@ on:
 jobs:
 
   build:
-    strategy:
-      matrix:
-        configuration: [Debug]
-
     runs-on: ubuntu-latest
 
     steps:
@@ -22,7 +17,7 @@ jobs:
       with:
         fetch-depth: 0
 
-    - name: Build Debug
+    - name: Build Android Debug
       uses: devcontainers/ci@v0.3
       with:
         runCmd: |
@@ -30,7 +25,7 @@ jobs:
           mkdir -p build
           godot --headless --install-android-build-template --export-debug "Android" build/android_debug.aab
 
-    - name: Build Release
+    - name: Build Android Release
       uses: devcontainers/ci@v0.3
       with:
         runCmd: |
