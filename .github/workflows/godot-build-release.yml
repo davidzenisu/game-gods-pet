@@ -22,16 +22,43 @@ jobs:
       with:
         fetch-depth: 0
 
-    - name: Build Android Debug
+    - name: Prepare Build Environment and Set Game Name
       uses: devcontainers/ci@v0.3
       with:
         runCmd: |
-          echo Building release
-          mkdir -p build
-          godot --headless --install-android-build-template --export-debug "Android" build/android_debug.aab
+          echo Extracting game name from project.godot
+          GAME_NAME=$(grep '^config/name=' project.godot | cut -d'=' -f2 | tr -d '"' | tr ' ' '_' | tr '[:upper:]' '[:lower:]')
+          echo "GAME_NAME=$GAME_NAME" >> $GITHUB_ENV
+          echo "Set GAME_NAME=$GAME_NAME"
+          echo Installing zip utility
+          sudo apt-get update && sudo apt-get install -y zip
 
-    - name: Build Android Release
+    - name: Build Android Debug (${{ env.GAME_NAME }})
       uses: devcontainers/ci@v0.3
+      env:
+        GAME_NAME: ${{ env.GAME_NAME }}
+      with:
+        runCmd: |
+          set -euo pipefail
+          shopt -s nullglob
+          echo Building Android Debug
+          mkdir -p build
+          godot --headless --install-android-build-template --export-debug "Android" build/${GAME_NAME}-android_debug.aab
+          echo Packaging Android Debug to zip
+          files=(build/${GAME_NAME}-android_debug*)
+          if [ ${#files[@]} -gt 0 ]; then
+            zip -j build/${GAME_NAME}-android_debug.zip "${files[@]}"
+            rm -f "${files[@]}"
+          else
+            echo "No files to zip for Android Debug"
+          fi
+        env: |
+          GAME_NAME
+
+    - name: Build Android Release (${{ env.GAME_NAME }})
+      uses: devcontainers/ci@v0.3
+      env:
+        GAME_NAME: ${{ env.GAME_NAME }}
       with:
         runCmd: |
           echo Setting environment variables
@@ -40,42 +67,110 @@ jobs:
           export GODOT_ANDROID_KEYSTORE_RELEASE_USER=${{ secrets.GODOT_ANDROID_KEYSTORE_RELEASE_USER }}
           export GODOT_ANDROID_KEYSTORE_RELEASE_PASSWORD=${{ secrets.GODOT_ANDROID_KEYSTORE_RELEASE_PASSWORD }}
           
-          echo Building release
+          set -euo pipefail
+          shopt -s nullglob
+          echo Building Android Release
           mkdir -p build
-          godot --headless --install-android-build-template --export-release "Android" build/android_release.aab
+          godot --headless --install-android-build-template --export-release "Android" build/${GAME_NAME}-android_release.aab
+          echo Packaging Android Release to zip
+          files=(build/${GAME_NAME}-android_release*)
+          if [ ${#files[@]} -gt 0 ]; then
+            zip -j build/${GAME_NAME}-android_release.zip "${files[@]}"
+            rm -f "${files[@]}"
+          else
+            echo "No files to zip for Android Release"
+          fi
+        env: |
+          GAME_NAME
 
-    - name: Build Windows Debug
+    - name: Build Windows Debug (${{ env.GAME_NAME }})
       uses: devcontainers/ci@v0.3
+      env:
+        GAME_NAME: ${{ env.GAME_NAME }}
       with:
         runCmd: |
+          set -euo pipefail
+          shopt -s nullglob
           echo Building Windows Debug
           mkdir -p build
-          godot --headless --export-debug "Windows Desktop" build/windows_debug.exe
+          godot --headless --export-debug "Windows Desktop" build/${GAME_NAME}-windows_debug.exe
+          echo Packaging Windows Debug to zip
+          files=(build/${GAME_NAME}-windows_debug*)
+          if [ ${#files[@]} -gt 0 ]; then
+            zip -j build/${GAME_NAME}-windows_debug.zip "${files[@]}"
+            rm -f "${files[@]}"
+          else
+            echo "No files to zip for Windows Debug"
+          fi
+        env: |
+          GAME_NAME
 
-    - name: Build Windows Release
+    - name: Build Windows Release (${{ env.GAME_NAME }})
       uses: devcontainers/ci@v0.3
+      env:
+        GAME_NAME: ${{ env.GAME_NAME }}
       with:
         runCmd: |
+          set -euo pipefail
+          shopt -s nullglob
           echo Building Windows Release
           mkdir -p build
-          godot --headless --export-release "Windows Desktop" build/windows_release.exe
+          godot --headless --export-release "Windows Desktop" build/${GAME_NAME}-windows_release.exe
+          echo Packaging Windows Release to zip
+          files=(build/${GAME_NAME}-windows_release*)
+          if [ ${#files[@]} -gt 0 ]; then
+            zip -j build/${GAME_NAME}-windows_release.zip "${files[@]}"
+            rm -f "${files[@]}"
+          else
+            echo "No files to zip for Windows Release"
+          fi
+        env: |
+          GAME_NAME
 
-    - name: Build Linux Debug
+    - name: Build Linux Debug (${{ env.GAME_NAME }})
       uses: devcontainers/ci@v0.3
+      env:
+        GAME_NAME: ${{ env.GAME_NAME }}
       with:
         runCmd: |
+          set -euo pipefail
+          shopt -s nullglob
           echo Building Linux Debug
           mkdir -p build
-          godot --headless --export-debug "Linux" build/linux_debug.x86_64
+          godot --headless --export-debug "Linux" build/${GAME_NAME}-linux_debug.x86_64
+          echo Packaging Linux Debug to zip
+          files=(build/${GAME_NAME}-linux_debug*)
+          if [ ${#files[@]} -gt 0 ]; then
+            zip -j build/${GAME_NAME}-linux_debug.zip "${files[@]}"
+            rm -f "${files[@]}"
+          else
+            echo "No files to zip for Linux Debug"
+          fi
+        env: |
+          GAME_NAME
 
-    - name: Build Linux Release
+    - name: Build Linux Release (${{ env.GAME_NAME }})
       uses: devcontainers/ci@v0.3
+      env:
+        GAME_NAME: ${{ env.GAME_NAME }}
       with:
         runCmd: |
+          set -euo pipefail
+          shopt -s nullglob
           echo Building Linux Release
           mkdir -p build
-          godot --headless --export-release "Linux" build/linux_release.x86_64
-    
+          godot --headless --export-release "Linux" build/${GAME_NAME}-linux_release.x86_64
+          echo Packaging Linux Release to zip
+          files=(build/${GAME_NAME}-linux_release*)
+          if [ ${#files[@]} -gt 0 ]; then
+            zip -j build/${GAME_NAME}-linux_release.zip "${files[@]}"
+            rm -f "${files[@]}"
+          else
+            echo "No files to zip for Linux Release"
+          fi
+        env: |
+          GAME_NAME
+
     - name: Create Release
       uses: softprops/action-gh-release@v3
       with:
