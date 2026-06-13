@@ -44,7 +44,7 @@ jobs:
           echo Building Android Debug
           mkdir -p build
           godot --headless --install-android-build-template --export-debug "Android" build/${GAME_NAME}-android_debug.aab
-          echo Packaging Android Debug to zip (matching prefix)
+          echo Packaging Android Debug to zip
           files=(build/${GAME_NAME}-android_debug*)
           if [ ${#files[@]} -gt 0 ]; then
             zip -j build/${GAME_NAME}-android_debug.zip "${files[@]}"
@@ -72,7 +72,7 @@ jobs:
           echo Building Android Release
           mkdir -p build
           godot --headless --install-android-build-template --export-release "Android" build/${GAME_NAME}-android_release.aab
-          echo Packaging Android Release to zip (matching prefix)
+          echo Packaging Android Release to zip
           files=(build/${GAME_NAME}-android_release*)
           if [ ${#files[@]} -gt 0 ]; then
             zip -j build/${GAME_NAME}-android_release.zip "${files[@]}"
@@ -94,7 +94,7 @@ jobs:
           echo Building Windows Debug
           mkdir -p build
           godot --headless --export-debug "Windows Desktop" build/${GAME_NAME}-windows_debug.exe
-          echo Packaging Windows Debug to zip (matching prefix)
+          echo Packaging Windows Debug to zip
           files=(build/${GAME_NAME}-windows_debug*)
           if [ ${#files[@]} -gt 0 ]; then
             zip -j build/${GAME_NAME}-windows_debug.zip "${files[@]}"
@@ -116,7 +116,7 @@ jobs:
           echo Building Windows Release
           mkdir -p build
           godot --headless --export-release "Windows Desktop" build/${GAME_NAME}-windows_release.exe
-          echo Packaging Windows Release to zip (matching prefix)
+          echo Packaging Windows Release to zip
           files=(build/${GAME_NAME}-windows_release*)
           if [ ${#files[@]} -gt 0 ]; then
             zip -j build/${GAME_NAME}-windows_release.zip "${files[@]}"
@@ -138,7 +138,7 @@ jobs:
           echo Building Linux Debug
           mkdir -p build
           godot --headless --export-debug "Linux" build/${GAME_NAME}-linux_debug.x86_64
-          echo Packaging Linux Debug to zip (matching prefix)
+          echo Packaging Linux Debug to zip
           files=(build/${GAME_NAME}-linux_debug*)
           if [ ${#files[@]} -gt 0 ]; then
             zip -j build/${GAME_NAME}-linux_debug.zip "${files[@]}"
@@ -160,7 +160,7 @@ jobs:
           echo Building Linux Release
           mkdir -p build
           godot --headless --export-release "Linux" build/${GAME_NAME}-linux_release.x86_64
-          echo Packaging Linux Release to zip (matching prefix)
+          echo Packaging Linux Release to zip
           files=(build/${GAME_NAME}-linux_release*)
           if [ ${#files[@]} -gt 0 ]; then
             zip -j build/${GAME_NAME}-linux_release.zip "${files[@]}"
