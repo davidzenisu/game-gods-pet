@@ -33,6 +33,13 @@ jobs:
           echo Installing zip utility
           sudo apt-get update && sudo apt-get install -y zip
 
+    - name: Temporary test
+      uses: devcontainers/ci@v0.3
+      with:
+        runCmd: |
+          echo "Temporary test step"
+          echo "Game name is: $GAME_NAME"
+
     - name: Build Android Debug (${{ env.GAME_NAME }})
       uses: devcontainers/ci@v0.3
       with:
