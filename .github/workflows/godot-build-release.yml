@@ -44,6 +44,8 @@ jobs:
 
     - name: Build Android Debug (${{ env.GAME_NAME }})
       uses: devcontainers/ci@v0.3
+      env:
+        GAME_NAME: ${{ env.GAME_NAME }}
       with:
         runCmd: |
           set -euo pipefail
@@ -59,11 +61,13 @@ jobs:
           else
             echo "No files to zip for Android Debug"
           fi
-        env:
-          GAME_NAME: ${{ env.GAME_NAME }}
+        env: |
+          GAME_NAME
 
     - name: Build Android Release (${{ env.GAME_NAME }})
       uses: devcontainers/ci@v0.3
+      env:
+        GAME_NAME: ${{ env.GAME_NAME }}
       with:
         runCmd: |
           echo Setting environment variables
@@ -85,11 +89,13 @@ jobs:
           else
             echo "No files to zip for Android Release"
           fi
-        env:
-          GAME_NAME: ${{ env.GAME_NAME }}
+        env: |
+          GAME_NAME
 
     - name: Build Windows Debug (${{ env.GAME_NAME }})
       uses: devcontainers/ci@v0.3
+      env:
+        GAME_NAME: ${{ env.GAME_NAME }}
       with:
         runCmd: |
           set -euo pipefail
@@ -105,11 +111,13 @@ jobs:
           else
             echo "No files to zip for Windows Debug"
           fi
-        env:
-          GAME_NAME: ${{ env.GAME_NAME }}
+        env: |
+          GAME_NAME
 
     - name: Build Windows Release (${{ env.GAME_NAME }})
       uses: devcontainers/ci@v0.3
+      env:
+        GAME_NAME: ${{ env.GAME_NAME }}
       with:
         runCmd: |
           set -euo pipefail
@@ -125,11 +133,13 @@ jobs:
           else
             echo "No files to zip for Windows Release"
           fi
-        env:
-          GAME_NAME: ${{ env.GAME_NAME }}
+        env: |
+          GAME_NAME
 
     - name: Build Linux Debug (${{ env.GAME_NAME }})
       uses: devcontainers/ci@v0.3
+      env:
+        GAME_NAME: ${{ env.GAME_NAME }}
       with:
         runCmd: |
           set -euo pipefail
@@ -145,11 +155,13 @@ jobs:
           else
             echo "No files to zip for Linux Debug"
           fi
-        env:
-          GAME_NAME: ${{ env.GAME_NAME }}
+        env: |
+          GAME_NAME
 
     - name: Build Linux Release (${{ env.GAME_NAME }})
       uses: devcontainers/ci@v0.3
+      env:
+        GAME_NAME: ${{ env.GAME_NAME }}
       with:
         runCmd: |
           set -euo pipefail
@@ -165,8 +177,8 @@ jobs:
           else
             echo "No files to zip for Linux Release"
           fi
-        env:
-          GAME_NAME: ${{ env.GAME_NAME }}
+        env: |
+          GAME_NAME
 
     - name: Create Release
       uses: softprops/action-gh-release@v3
