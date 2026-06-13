@@ -35,12 +35,14 @@ jobs:
 
     - name: Temporary test
       uses: devcontainers/ci@v0.3
+      env:
+        GAME_NAME: ${{ env.GAME_NAME }}
       with:
         runCmd: |
           echo "Temporary test step"
           echo "Game name is: $GAME_NAME"
-        env:
-          GAME_NAME: ${{ env.GAME_NAME }}
+        env: |
+          GAME_NAME
 
     - name: Build Android Debug (${{ env.GAME_NAME }})
       uses: devcontainers/ci@v0.3
