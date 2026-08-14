@@ -29,6 +29,7 @@ RUN yes | sdkmanager --licenses && \
 
 # Install fastlane
 RUN gem install bundler
+# TODO: Misses running `bundle install`?
 
 # Set environment variables
 ENV GODOT_VERSION=4.6
