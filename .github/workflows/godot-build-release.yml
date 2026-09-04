@@ -31,10 +31,6 @@ jobs:
           GAME_NAME=$(grep '^config/name=' project.godot | cut -d'=' -f2 | tr -d '"' | tr ' ' '_' | tr '[:upper:]' '[:lower:]')
           echo "GAME_NAME=$GAME_NAME" >> $GITHUB_ENV
           echo "Set GAME_NAME=$GAME_NAME"
-          echo Extracting Android version code from export_presets.cfg
-          VERSION_CODE=$(grep '^version/code=' export_presets.cfg | cut -d'=' -f2)
-          echo "VERSION_CODE=$VERSION_CODE" >> $GITHUB_ENV
-          echo "Set VERSION_CODE=$VERSION_CODE"
           echo Installing zip utility
           sudo apt-get update && sudo apt-get install -y zip
 
@@ -83,7 +79,6 @@ jobs:
       env:
         AAB_PATH: build/${{ env.GAME_NAME }}-android_release.aab
         PLAY_TRACK: internal
-        VERSION_CODE: ${{ env.VERSION_CODE }}
       with:
         runCmd: |
           sudo bundle install
