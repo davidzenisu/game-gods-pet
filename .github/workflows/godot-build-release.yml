@@ -74,25 +74,6 @@ jobs:
         create_credentials_file: true
       #if: github.ref_type == 'tag'
 
-
-    - name: Test GCP credentials
-      uses: devcontainers/ci@v0.3
-      with:
-        runCmd: |
-          echo "PWD=$(pwd)"
-          echo "GITHUB_WORKSPACE=$GITHUB_WORKSPACE"
-          echo "GOOGLE_APPLICATION_CREDENTIALS=$GOOGLE_APPLICATION_CREDENTIALS"
-          echo "Auth output=${{ steps.auth-gcp.outputs.credentials_file_path }}"
-
-          ls -la "$GITHUB_WORKSPACE"
-
-          test -f "$GOOGLE_APPLICATION_CREDENTIALS" && \
-            echo "Credentials FOUND" || \
-            echo "Credentials NOT FOUND"
-
-          echo "Double checking if cred file exists at all"
-          find . -name '*gha-creds*.json' -o -name '*.json' | head -20
-
     - name: Publish Android Release (${{ env.GAME_NAME }})
       uses: devcontainers/ci@v0.3
       env:
@@ -102,9 +83,7 @@ jobs:
       with:
         runCmd: |
           sudo bundle install
-          echo $GCP_CREDENTIALS_FILE
-          echo ${{ steps.auth-gcp.outputs.credentials_file_path }}
-          CREDENTIALS_FILE="$(basename "$GCP_CREDENTIALS_FILE")"
+          CREDENTIALS_FILE="$(basename "${{ steps.auth-gcp.outputs.credentials_file_path }}")"
           echo "Using credentials file "$CREDENTIALS_FILE
           bundle exec fastlane supply --json_key "$CREDENTIALS_FILE"
       #if: github.ref_type == 'tag'
