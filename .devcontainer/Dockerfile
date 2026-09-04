@@ -45,9 +45,9 @@ WORKDIR /home/vscode
 # Install Ruby and gems in the vscode user's home directory.
 COPY --chown=vscode:vscode Gemfile /tmp/game-gods-pet/Gemfile
 RUN curl https://mise.run | sh
+RUN echo 'eval "$(~/.local/bin/mise activate bash)"' >> ~/.bashrc
 RUN ~/.local/bin/mise use --global ruby@latest && \
     ~/.local/bin/mise exec -- gem install bundler
-RUN echo 'eval "$(~/.local/bin/mise activate bash)"' >> ~/.bashrc
 
 RUN mkdir ~/.cache && \
     mkdir -p ~/.config/godot && \
