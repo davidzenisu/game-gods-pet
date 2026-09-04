@@ -21,7 +21,8 @@ platform :android do
     upload_to_play_store(
       aab: ENV["AAB_PATH"],
       track: ENV.fetch("PLAY_TRACK", "internal"),
-      release_status: "completed"
+      release_status: "completed",
+      version_code: ENV["VERSION_CODE"]
     )
   end
 
