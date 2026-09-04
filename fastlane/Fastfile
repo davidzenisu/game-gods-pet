@@ -21,7 +21,7 @@ platform :android do
   lane :deploy do
     upload_to_play_store(
       aab: ENV["AAB_PATH"],
-      track: "internal",
+      track: ENV.fetch("PLAY_TRACK", "internal"),
       release_status: "completed"
     )
   end
