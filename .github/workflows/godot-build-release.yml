@@ -82,7 +82,7 @@ jobs:
       uses: devcontainers/ci@v0.3
       env:
         AAB_PATH: build/${{ env.GAME_NAME }}-android_release.aab
-        PLAY_TRACK: internal
+        PLAY_TRACK: production
         VERSION_CODE: ${{ env.VERSION_CODE }}
       with:
         runCmd: |
