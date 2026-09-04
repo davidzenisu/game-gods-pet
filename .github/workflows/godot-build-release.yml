@@ -34,33 +34,33 @@ jobs:
           echo Installing zip utility
           sudo apt-get update && sudo apt-get install -y zip
 
-    - name: Build Android Release (${{ env.GAME_NAME }})
-      uses: devcontainers/ci@v0.3
-      env:
-        GAME_NAME: ${{ env.GAME_NAME }}
-      with:
-        runCmd: |
-          echo Setting environment variables
-          printf "%s" "${{ secrets.GODOT_ANDROID_KEYSTORE_BASE64 }}" | base64 --decode > release.keystore
-          export GODOT_ANDROID_KEYSTORE_RELEASE_PATH=$(pwd)/release.keystore
-          export GODOT_ANDROID_KEYSTORE_RELEASE_USER=${{ secrets.GODOT_ANDROID_KEYSTORE_RELEASE_USER }}
-          export GODOT_ANDROID_KEYSTORE_RELEASE_PASSWORD=${{ secrets.GODOT_ANDROID_KEYSTORE_RELEASE_PASSWORD }}
+    # - name: Build Android Release (${{ env.GAME_NAME }})
+    #   uses: devcontainers/ci@v0.3
+    #   env:
+    #     GAME_NAME: ${{ env.GAME_NAME }}
+    #   with:
+    #     runCmd: |
+    #       echo Setting environment variables
+    #       printf "%s" "${{ secrets.GODOT_ANDROID_KEYSTORE_BASE64 }}" | base64 --decode > release.keystore
+    #       export GODOT_ANDROID_KEYSTORE_RELEASE_PATH=$(pwd)/release.keystore
+    #       export GODOT_ANDROID_KEYSTORE_RELEASE_USER=${{ secrets.GODOT_ANDROID_KEYSTORE_RELEASE_USER }}
+    #       export GODOT_ANDROID_KEYSTORE_RELEASE_PASSWORD=${{ secrets.GODOT_ANDROID_KEYSTORE_RELEASE_PASSWORD }}
           
-          set -euo pipefail
-          shopt -s nullglob
-          echo Building Android Release
-          mkdir -p build
-          godot --headless --install-android-build-template --export-release "Android" build/${GAME_NAME}-android_release.aab
-          echo Packaging Android Release to zip
-          files=(build/${GAME_NAME}-android_release*)
-          if [ ${#files[@]} -gt 0 ]; then
-            zip -j build/${GAME_NAME}-android_release.zip "${files[@]}"
-            rm -f "${files[@]}"
-          else
-            echo "No files to zip for Android Release"
-          fi
-        env: |
-          GAME_NAME
+    #       set -euo pipefail
+    #       shopt -s nullglob
+    #       echo Building Android Release
+    #       mkdir -p build
+    #       godot --headless --install-android-build-template --export-release "Android" build/${GAME_NAME}-android_release.aab
+    #       echo Packaging Android Release to zip
+    #       files=(build/${GAME_NAME}-android_release*)
+    #       if [ ${#files[@]} -gt 0 ]; then
+    #         zip -j build/${GAME_NAME}-android_release.zip "${files[@]}"
+    #         rm -f "${files[@]}"
+    #       else
+    #         echo "No files to zip for Android Release"
+    #       fi
+    #     env: |
+    #       GAME_NAME
 
 
     # Publish to Play Store
@@ -93,7 +93,7 @@ jobs:
           echo "Double checking if cred file exists at all"
           find . -name '*gha-creds*.json' -o -name '*.json' | head -20
 
-    - name: Build Android Debug (${{ env.GAME_NAME }})
+    - name: Publish Android Release (${{ env.GAME_NAME }})
       uses: devcontainers/ci@v0.3
       env:
         GCP_CREDENTIALS_FILE: ${{ steps.auth-gcp.outputs.credentials_file_path }}
@@ -102,6 +102,8 @@ jobs:
       with:
         runCmd: |
           sudo bundle install
+          echo $GCP_CREDENTIALS_FILE
+          echo ${{ steps.auth-gcp.outputs.credentials_file_path }}
           CREDENTIALS_FILE="$(basename "$GCP_CREDENTIALS_FILE")"
           echo "Using credentials file "$CREDENTIALS_FILE
           bundle exec fastlane supply --json_key "$CREDENTIALS_FILE"
