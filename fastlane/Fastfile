@@ -16,13 +16,20 @@
 default_platform(:android)
 
 platform :android do
-  desc "Upload pre-built AAB to Google Play"
-
-  lane :deploy do
+  desc "Upload pre-built AAB to Google Play (internal track)"
+  lane :internal do
     upload_to_play_store(
       aab: ENV["AAB_PATH"],
       track: ENV.fetch("PLAY_TRACK", "internal"),
       release_status: "completed"
+    )
+  end
+
+  desc "Promote internal track to production"
+  lane :production do
+    upload_to_play_store(
+      track: "internal",
+      track_promote_to: "production"
     )
   end
 end
