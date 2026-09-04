@@ -46,8 +46,9 @@ WORKDIR /home/vscode
 COPY --chown=vscode:vscode Gemfile /tmp/game-gods-pet/Gemfile
 RUN curl https://mise.run | sh
 RUN echo 'eval "$(~/.local/bin/mise activate bash)"' >> ~/.bashrc
-RUN ~/.local/bin/mise use --global ruby@latest && \
-    ~/.local/bin/mise exec -- gem install bundler
+RUN mise use --global ruby@latest && \
+    mise exec -- gem install bundler
+
 
 RUN mkdir ~/.cache && \
     mkdir -p ~/.config/godot && \
