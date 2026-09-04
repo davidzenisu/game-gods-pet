@@ -180,3 +180,24 @@ jobs:
         files: |
           build/*
       if: github.ref_type == 'tag'
+
+    # Publish to Play Store
+    # https://github.com/fastlane/fastlane/discussions/19869#discussioncomment-16543339
+    - name: 'Authenticate to GCP'
+      uses: 'google-github-actions/auth@v3'
+      with:
+        workload_identity_provider: ${{ secrets.GCP_WORKLOAD_PROVIDER }}
+        service_account: ${{ secrets.GCP_SERVICE_ACCOUNT_ID }}
+      #if: github.ref_type == 'tag'
+
+
+    - name: Build Android Debug (${{ env.GAME_NAME }})
+      uses: devcontainers/ci@v0.3
+      env:
+        AAB_PATH: build/${{ env.GAME_NAME }}-android_release.aab
+        PLAY_TRACK: internal
+      with:
+        runCmd: |
+          sudo bundle install
+          bundle exec fastlane android deploy
+      #if: github.ref_type == 'tag'
