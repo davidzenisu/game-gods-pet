@@ -52,16 +52,17 @@ jobs:
           mkdir -p build
           godot --headless --install-android-build-template --export-release "Android" build/${GAME_NAME}-android_release.aab
           echo Packaging Android Release to zip
+          # Special case: Move to publish folder instead of deleting
+          mkdir -p publish
           files=(build/${GAME_NAME}-android_release*)
           if [ ${#files[@]} -gt 0 ]; then
             zip -j build/${GAME_NAME}-android_release.zip "${files[@]}"
-            rm -f "${files[@]}"
+            mv ${files[@]} publish/
           else
             echo "No files to zip for Android Release"
           fi
         env: |
           GAME_NAME
-
 
     # Publish to Play Store
     # https://github.com/fastlane/fastlane/discussions/19869#discussioncomment-16543339
