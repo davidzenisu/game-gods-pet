@@ -17,6 +17,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    environment:
+      name: ${{ 
+        github.event_name == 'pull_request' && 'pr' ||
+        github.ref_type == 'tag' && 'release' ||
+        'main'
+        }}
+
     steps:
     - name: Checkout
       uses: actions/checkout@v6
@@ -73,7 +80,7 @@ jobs:
         workload_identity_provider: ${{ secrets.GCP_WORKLOAD_PROVIDER }}
         service_account: ${{ secrets.GCP_SERVICE_ACCOUNT_ID }}
         create_credentials_file: true
-      #if: github.ref_type == 'tag'
+      # if: github.ref_type == 'tag'
 
     - name: Publish Android Release (${{ env.GAME_NAME }})
       uses: devcontainers/ci@v0.3
@@ -87,4 +94,4 @@ jobs:
           bundle exec fastlane android internal
         env: |
           AAB_PATH
-      #if: github.ref_type == 'tag'
+      # if: github.ref_type == 'tag'
