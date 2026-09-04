@@ -3,10 +3,11 @@ FROM mcr.microsoft.com/devcontainers/base:ubuntu-24.04
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \
+    curl \
+    gnupg \
     wget \
     unzip \
     openjdk-17-jdk \
-    ruby-full \
     git-lfs \
     && rm -rf /var/lib/apt/lists/*
 
@@ -27,10 +28,6 @@ ENV PATH="${ANDROID_HOME}/cmdline-tools/latest/bin:${ANDROID_HOME}/platform-tool
 RUN yes | sdkmanager --licenses && \
     sdkmanager "platform-tools" "build-tools;35.0.1" "platforms;android-35" "cmdline-tools;latest" "cmake;3.10.2.4988404" "ndk;28.1.13356709"
 
-# Install fastlane
-RUN gem install bundler
-# TODO: Misses running `bundle install`?
-
 # Set environment variables
 ENV GODOT_VERSION=4.6
 ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
@@ -44,6 +41,13 @@ RUN wget https://github.com/godotengine/godot-builds/releases/download/${GODOT_V
 # Run in user context
 USER vscode
 WORKDIR /home/vscode
+
+# Install Ruby and gems in the vscode user's home directory.
+COPY --chown=vscode:vscode Gemfile /tmp/game-gods-pet/Gemfile
+RUN curl -sSL https://get.rvm.io | bash -s stable && \
+    bash -lc 'source "$HOME/.rvm/scripts/rvm" && rvm install ruby --default && gem install bundler && cd /tmp/game-gods-pet && bundler install' && \
+    echo 'source "$HOME/.rvm/scripts/rvm"' >> ~/.bashrc
+
 RUN mkdir ~/.cache && \
     mkdir -p ~/.config/godot && \
     mkdir -p ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable && \
