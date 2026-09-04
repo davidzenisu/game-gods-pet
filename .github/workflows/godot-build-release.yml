@@ -77,7 +77,6 @@ jobs:
     - name: Publish Android Release (${{ env.GAME_NAME }})
       uses: devcontainers/ci@v0.3
       env:
-        GCP_CREDENTIALS_FILE: ${{ steps.auth-gcp.outputs.credentials_file_path }}
         AAB_PATH: build/${{ env.GAME_NAME }}-android_release.aab
         PLAY_TRACK: internal
       with:
