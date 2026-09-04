@@ -74,11 +74,12 @@ jobs:
         create_credentials_file: true
       #if: github.ref_type == 'tag'
 
-    - name: Upload credentials for testing (remove asap)
-      uses: actions/upload-artifact@v4
-      with:
-        name: gcp-wif-credentials
-        path: ${{ steps.auth-gcp.outputs.credentials_file_path }}
+    - name: Test GCP authentication
+      run: |
+        gcloud auth login --brief \
+          --cred-file="${{ steps.auth-gcp.outputs.credentials_file_path }}"
+
+        gcloud auth print-access-token
 
     - name: Publish Android Release (${{ env.GAME_NAME }})
       uses: devcontainers/ci@v0.3
