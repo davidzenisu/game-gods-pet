@@ -96,11 +96,13 @@ jobs:
     - name: Build Android Debug (${{ env.GAME_NAME }})
       uses: devcontainers/ci@v0.3
       env:
+        GCP_CREDENTIALS_FILE: ${{ steps.auth-gcp.outputs.credentials_file_path }}
         AAB_PATH: build/${{ env.GAME_NAME }}-android_release.aab
         PLAY_TRACK: internal
       with:
         runCmd: |
           sudo bundle install
+          CREDENTIALS_FILE="$(basename "$GCP_CREDENTIALS_FILE")"
           bundle exec fastlane supply \
-            --json_key '${{ steps.auth-gcp.outputs.credentials_file_path }}'
+            --json_key "$CREDENTIALS_FILE"
       #if: github.ref_type == 'tag'
