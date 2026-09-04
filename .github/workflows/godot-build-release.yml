@@ -31,36 +31,40 @@ jobs:
           GAME_NAME=$(grep '^config/name=' project.godot | cut -d'=' -f2 | tr -d '"' | tr ' ' '_' | tr '[:upper:]' '[:lower:]')
           echo "GAME_NAME=$GAME_NAME" >> $GITHUB_ENV
           echo "Set GAME_NAME=$GAME_NAME"
+          echo Extracting Android version code from export_presets.cfg
+          VERSION_CODE=$(grep '^version/code=' export_presets.cfg | cut -d'=' -f2)
+          echo "VERSION_CODE=$VERSION_CODE" >> $GITHUB_ENV
+          echo "Set VERSION_CODE=$VERSION_CODE"
           echo Installing zip utility
           sudo apt-get update && sudo apt-get install -y zip
 
-    # - name: Build Android Release (${{ env.GAME_NAME }})
-    #   uses: devcontainers/ci@v0.3
-    #   env:
-    #     GAME_NAME: ${{ env.GAME_NAME }}
-    #   with:
-    #     runCmd: |
-    #       echo Setting environment variables
-    #       printf "%s" "${{ secrets.GODOT_ANDROID_KEYSTORE_BASE64 }}" | base64 --decode > release.keystore
-    #       export GODOT_ANDROID_KEYSTORE_RELEASE_PATH=$(pwd)/release.keystore
-    #       export GODOT_ANDROID_KEYSTORE_RELEASE_USER=${{ secrets.GODOT_ANDROID_KEYSTORE_RELEASE_USER }}
-    #       export GODOT_ANDROID_KEYSTORE_RELEASE_PASSWORD=${{ secrets.GODOT_ANDROID_KEYSTORE_RELEASE_PASSWORD }}
+    - name: Build Android Release (${{ env.GAME_NAME }})
+      uses: devcontainers/ci@v0.3
+      env:
+        GAME_NAME: ${{ env.GAME_NAME }}
+      with:
+        runCmd: |
+          echo Setting environment variables
+          printf "%s" "${{ secrets.GODOT_ANDROID_KEYSTORE_BASE64 }}" | base64 --decode > release.keystore
+          export GODOT_ANDROID_KEYSTORE_RELEASE_PATH=$(pwd)/release.keystore
+          export GODOT_ANDROID_KEYSTORE_RELEASE_USER=${{ secrets.GODOT_ANDROID_KEYSTORE_RELEASE_USER }}
+          export GODOT_ANDROID_KEYSTORE_RELEASE_PASSWORD=${{ secrets.GODOT_ANDROID_KEYSTORE_RELEASE_PASSWORD }}
           
-    #       set -euo pipefail
-    #       shopt -s nullglob
-    #       echo Building Android Release
-    #       mkdir -p build
-    #       godot --headless --install-android-build-template --export-release "Android" build/${GAME_NAME}-android_release.aab
-    #       echo Packaging Android Release to zip
-    #       files=(build/${GAME_NAME}-android_release*)
-    #       if [ ${#files[@]} -gt 0 ]; then
-    #         zip -j build/${GAME_NAME}-android_release.zip "${files[@]}"
-    #         rm -f "${files[@]}"
-    #       else
-    #         echo "No files to zip for Android Release"
-    #       fi
-    #     env: |
-    #       GAME_NAME
+          set -euo pipefail
+          shopt -s nullglob
+          echo Building Android Release
+          mkdir -p build
+          godot --headless --install-android-build-template --export-release "Android" build/${GAME_NAME}-android_release.aab
+          echo Packaging Android Release to zip
+          files=(build/${GAME_NAME}-android_release*)
+          if [ ${#files[@]} -gt 0 ]; then
+            zip -j build/${GAME_NAME}-android_release.zip "${files[@]}"
+            rm -f "${files[@]}"
+          else
+            echo "No files to zip for Android Release"
+          fi
+        env: |
+          GAME_NAME
 
 
     # Publish to Play Store
@@ -74,18 +78,12 @@ jobs:
         create_credentials_file: true
       #if: github.ref_type == 'tag'
 
-    - name: Test GCP authentication
-      run: |
-        gcloud auth login --brief \
-          --cred-file="${{ steps.auth-gcp.outputs.credentials_file_path }}"
-
-        gcloud auth print-access-token
-
     - name: Publish Android Release (${{ env.GAME_NAME }})
       uses: devcontainers/ci@v0.3
       env:
         AAB_PATH: build/${{ env.GAME_NAME }}-android_release.aab
         PLAY_TRACK: internal
+        VERSION_CODE: ${{ env.VERSION_CODE }}
       with:
         runCmd: |
           sudo bundle install
