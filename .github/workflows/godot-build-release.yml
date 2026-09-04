@@ -103,6 +103,6 @@ jobs:
         runCmd: |
           sudo bundle install
           CREDENTIALS_FILE="$(basename "$GCP_CREDENTIALS_FILE")"
-          bundle exec fastlane supply \
-            --json_key "$CREDENTIALS_FILE"
+          echo "Using credentials file "$CREDENTIALS_FILE
+          bundle exec fastlane supply --json_key "$CREDENTIALS_FILE"
       #if: github.ref_type == 'tag'
