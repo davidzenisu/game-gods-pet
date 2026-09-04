@@ -78,7 +78,7 @@ jobs:
     - name: Publish Android Release (${{ env.GAME_NAME }})
       uses: devcontainers/ci@v0.3
       env:
-        AAB_PATH: build/${{ env.GAME_NAME }}-android_release.aab
+        AAB_PATH: publish/${{ env.GAME_NAME }}-android_release.aab
       with:
         runCmd: |
           sudo bundle install
