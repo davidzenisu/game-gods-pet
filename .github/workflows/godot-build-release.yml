@@ -82,6 +82,6 @@ jobs:
       with:
         runCmd: |
           sudo bundle install
-          bundle exec fastlane android deploy \
+          bundle exec fastlane supply \
             --json_key '${{ steps.auth-gcp.outputs.credentials_file_path }}'
       #if: github.ref_type == 'tag'
