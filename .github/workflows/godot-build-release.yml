@@ -208,7 +208,7 @@ jobs:
         AAB_PATH: publish/${{ env.GAME_NAME }}-android_release.aab
       with:
         runCmd: |
-          sudo bundle install
+          bundle install
           CREDENTIALS_FILE="$(basename "${{ steps.auth-gcp.outputs.credentials_file_path }}")"
           export GOOGLE_APPLICATION_CREDENTIALS="${CREDENTIALS_FILE}"
           bundle exec fastlane android internal
@@ -220,7 +220,7 @@ jobs:
       uses: devcontainers/ci@v0.3
       with:
         runCmd: |
-          sudo bundle install
+          bundle install
           CREDENTIALS_FILE="$(basename "${{ steps.auth-gcp.outputs.credentials_file_path }}")"
           export GOOGLE_APPLICATION_CREDENTIALS="${CREDENTIALS_FILE}"
           bundle exec fastlane android production
