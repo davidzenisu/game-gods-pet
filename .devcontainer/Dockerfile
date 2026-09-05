@@ -49,7 +49,7 @@ RUN bash -lc '~/.local/bin/mise use --global ruby@latest && ~/.local/bin/mise ex
 RUN echo 'eval "$(~/.local/bin/mise activate bash)"' >> ~/.bashrc
 
 
-RUN mkdir ~/.cache && \
+RUN mkdir -p ~/.cache && \
     mkdir -p ~/.config/godot && \
     mkdir -p ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable && \
     wget https://github.com/godotengine/godot-builds/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_export_templates.tpz -q && \
