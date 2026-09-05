@@ -200,9 +200,9 @@ jobs:
         workload_identity_provider: ${{ secrets.GCP_WORKLOAD_PROVIDER }}
         service_account: ${{ secrets.GCP_SERVICE_ACCOUNT_ID }}
         create_credentials_file: true
-      # if: github.ref_type == 'tag'
+      if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref_type == 'tag')
 
-    - name: Publish Android Release (${{ env.GAME_NAME }})
+    - name: Publish Android Release Internal (${{ env.GAME_NAME }})
       uses: devcontainers/ci@v0.3
       env:
         AAB_PATH: publish/${{ env.GAME_NAME }}-android_release.aab
@@ -214,4 +214,14 @@ jobs:
           bundle exec fastlane android internal
         env: |
           AAB_PATH
-      # if: github.ref_type == 'tag'
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+
+    - name: Publish Android Release Production (${{ env.GAME_NAME }})
+      uses: devcontainers/ci@v0.3
+      with:
+        runCmd: |
+          sudo bundle install
+          CREDENTIALS_FILE="$(basename "${{ steps.auth-gcp.outputs.credentials_file_path }}")"
+          export GOOGLE_APPLICATION_CREDENTIALS="${CREDENTIALS_FILE}"
+          bundle exec fastlane android production
+      if: github.ref_type == 'tag'
