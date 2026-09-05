@@ -40,6 +40,28 @@ jobs:
           echo "Set GAME_NAME=$GAME_NAME"
           echo Installing zip utility
           sudo apt-get update && sudo apt-get install -y zip
+  
+    - name: Build Android Debug (${{ env.GAME_NAME }})
+      uses: devcontainers/ci@v0.3
+      env:
+        GAME_NAME: ${{ env.GAME_NAME }}
+      with:
+        runCmd: |
+          set -euo pipefail
+          shopt -s nullglob
+          echo Building Android Debug
+          mkdir -p build
+          godot --headless --install-android-build-template --export-debug "Android" build/${GAME_NAME}-android_debug.aab
+          echo Packaging Android Debug to zip
+          files=(build/${GAME_NAME}-android_debug*)
+          if [ ${#files[@]} -gt 0 ]; then
+            zip -j build/${GAME_NAME}-android_debug.zip "${files[@]}"
+            rm -f "${files[@]}"
+          else
+            echo "No files to zip for Android Debug"
+          fi
+        env: |
+          GAME_NAME
 
     - name: Build Android Release (${{ env.GAME_NAME }})
       uses: devcontainers/ci@v0.3
@@ -70,6 +92,104 @@ jobs:
           fi
         env: |
           GAME_NAME
+
+    - name: Build Windows Debug (${{ env.GAME_NAME }})
+      uses: devcontainers/ci@v0.3
+      env:
+        GAME_NAME: ${{ env.GAME_NAME }}
+      with:
+        runCmd: |
+          set -euo pipefail
+          shopt -s nullglob
+          echo Building Windows Debug
+          mkdir -p build
+          godot --headless --export-debug "Windows Desktop" build/${GAME_NAME}-windows_debug.exe
+          echo Packaging Windows Debug to zip
+          files=(build/${GAME_NAME}-windows_debug*)
+          if [ ${#files[@]} -gt 0 ]; then
+            zip -j build/${GAME_NAME}-windows_debug.zip "${files[@]}"
+            rm -f "${files[@]}"
+          else
+            echo "No files to zip for Windows Debug"
+          fi
+        env: |
+          GAME_NAME
+
+    - name: Build Windows Release (${{ env.GAME_NAME }})
+      uses: devcontainers/ci@v0.3
+      env:
+        GAME_NAME: ${{ env.GAME_NAME }}
+      with:
+        runCmd: |
+          set -euo pipefail
+          shopt -s nullglob
+          echo Building Windows Release
+          mkdir -p build
+          godot --headless --export-release "Windows Desktop" build/${GAME_NAME}-windows_release.exe
+          echo Packaging Windows Release to zip
+          files=(build/${GAME_NAME}-windows_release*)
+          if [ ${#files[@]} -gt 0 ]; then
+            zip -j build/${GAME_NAME}-windows_release.zip "${files[@]}"
+            rm -f "${files[@]}"
+          else
+            echo "No files to zip for Windows Release"
+          fi
+        env: |
+          GAME_NAME
+
+    - name: Build Linux Debug (${{ env.GAME_NAME }})
+      uses: devcontainers/ci@v0.3
+      env:
+        GAME_NAME: ${{ env.GAME_NAME }}
+      with:
+        runCmd: |
+          set -euo pipefail
+          shopt -s nullglob
+          echo Building Linux Debug
+          mkdir -p build
+          godot --headless --export-debug "Linux" build/${GAME_NAME}-linux_debug.x86_64
+          echo Packaging Linux Debug to zip
+          files=(build/${GAME_NAME}-linux_debug*)
+          if [ ${#files[@]} -gt 0 ]; then
+            zip -j build/${GAME_NAME}-linux_debug.zip "${files[@]}"
+            rm -f "${files[@]}"
+          else
+            echo "No files to zip for Linux Debug"
+          fi
+        env: |
+          GAME_NAME
+
+    - name: Build Linux Release (${{ env.GAME_NAME }})
+      uses: devcontainers/ci@v0.3
+      env:
+        GAME_NAME: ${{ env.GAME_NAME }}
+      with:
+        runCmd: |
+          set -euo pipefail
+          shopt -s nullglob
+          echo Building Linux Release
+          mkdir -p build
+          godot --headless --export-release "Linux" build/${GAME_NAME}-linux_release.x86_64
+          echo Packaging Linux Release to zip
+          files=(build/${GAME_NAME}-linux_release*)
+          if [ ${#files[@]} -gt 0 ]; then
+            zip -j build/${GAME_NAME}-linux_release.zip "${files[@]}"
+            rm -f "${files[@]}"
+          else
+            echo "No files to zip for Linux Release"
+          fi
+        env: |
+          GAME_NAME
+
+    - name: Create Release
+      uses: softprops/action-gh-release@v3
+      with:
+        draft: false
+        prerelease: false
+        generate_release_notes: true
+        files: |
+          build/*
+      if: github.ref_type == 'tag'
 
     # Publish to Play Store
     # https://github.com/fastlane/fastlane/discussions/19869#discussioncomment-16543339
