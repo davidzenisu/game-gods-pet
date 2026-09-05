@@ -3,10 +3,11 @@ FROM mcr.microsoft.com/devcontainers/base:ubuntu-24.04
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \
+    curl \
+    gnupg \
     wget \
     unzip \
     openjdk-17-jdk \
-    ruby-full \
     git-lfs \
     && rm -rf /var/lib/apt/lists/*
 
@@ -27,9 +28,6 @@ ENV PATH="${ANDROID_HOME}/cmdline-tools/latest/bin:${ANDROID_HOME}/platform-tool
 RUN yes | sdkmanager --licenses && \
     sdkmanager "platform-tools" "build-tools;35.0.1" "platforms;android-35" "cmdline-tools;latest" "cmake;3.10.2.4988404" "ndk;28.1.13356709"
 
-# Install fastlane
-RUN gem install bundler
-
 # Set environment variables
 ENV GODOT_VERSION=4.6
 ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
@@ -43,7 +41,15 @@ RUN wget https://github.com/godotengine/godot-builds/releases/download/${GODOT_V
 # Run in user context
 USER vscode
 WORKDIR /home/vscode
-RUN mkdir ~/.cache && \
+
+# Install Ruby and gems in the vscode user's home directory.
+COPY --chown=vscode:vscode Gemfile /tmp/game-gods-pet/Gemfile
+RUN curl https://mise.run | sh
+RUN bash -lc '~/.local/bin/mise use --global ruby@latest && ~/.local/bin/mise exec -- gem install bundler'
+RUN echo 'eval "$(~/.local/bin/mise activate bash)"' >> ~/.bashrc
+
+
+RUN mkdir -p ~/.cache && \
     mkdir -p ~/.config/godot && \
     mkdir -p ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable && \
     wget https://github.com/godotengine/godot-builds/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_export_templates.tpz -q && \

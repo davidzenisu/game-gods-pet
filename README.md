@@ -45,3 +45,34 @@ Options / Keystore / Release User: GODOT_ANDROID_KEYSTORE_RELEASE_USER
 
 Options / Keystore / Release Password: GODOT_ANDROID_KEYSTORE_RELEASE_PASSWORD
 
+
+To generate a certificate, the following command was used:
+
+```
+keytool -genkeypair \
+  -alias upload \
+  -keyalg RSA \
+  -keysize 4096 \
+  -validity 10000 \
+  -keystore upload-keystore.jks \
+  -dname "CN=David Zeni-Su, OU=ovid, O=ovid, L=Vienna, ST=Vienna, C=AT"
+```
+The manually generated password was generated via `openssl rand -base64 32`.
+Then the following details were uploaded to GitHub Actions as secrets:
+
+GODOT_ANDROID_KEYSTORE_BASE64 => `base64 upload-keystore.jks > keystore_base64.txt`
+GODOT_ANDROID_KEYSTORE_RELEASE_USER => Name from the certificate (technically not a secret and not required, can be read from the public cert)
+GODOT_ANDROID_KEYSTORE_RELEASE_PASSWORD => From the generated password (see above)
+
+Long-term, this could be stored in a secret manager (to make it retrievable if Github is lost/broken)
+
+
+For fastlane setup, the WIF is implemented in a separate repository (iac-tf).
+However, for initial setup ([fastlane supply](https://docs.fastlane.tools/getting-started/android/setup/#Setting-up-supply)) the following manual steps were executed:
+- Go to the GCP service account created for the workflow authentication and create a JSON key (follow step 4 of "Collect your Google credentials")
+- Bring the downloaded json file into your workspace
+- Run `fastlane run validate_play_store_json_key json_key:/path/to/your/downloaded/file.json` for testing.
+- Update the json_key_file value in the Appfile (that value is originally blank)
+- Run `fastlane suply init`
+
+Afterwards the metadata is store in your repository and can be pushed from there.

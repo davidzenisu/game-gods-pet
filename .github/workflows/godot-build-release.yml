@@ -9,12 +9,20 @@ on:
     branches: [ "main" ]
 
 permissions:
+  id-token: write
   contents: write
 
 jobs:
 
   build:
     runs-on: ubuntu-latest
+
+    environment:
+      name: ${{ 
+        github.event_name == 'pull_request' && 'pr' ||
+        github.ref_type == 'tag' && 'release' ||
+        'main'
+        }}
 
     steps:
     - name: Checkout
@@ -32,7 +40,7 @@ jobs:
           echo "Set GAME_NAME=$GAME_NAME"
           echo Installing zip utility
           sudo apt-get update && sudo apt-get install -y zip
-
+  
     - name: Build Android Debug (${{ env.GAME_NAME }})
       uses: devcontainers/ci@v0.3
       env:
@@ -73,10 +81,12 @@ jobs:
           mkdir -p build
           godot --headless --install-android-build-template --export-release "Android" build/${GAME_NAME}-android_release.aab
           echo Packaging Android Release to zip
+          # Special case: Move to publish folder instead of deleting
+          mkdir -p publish
           files=(build/${GAME_NAME}-android_release*)
           if [ ${#files[@]} -gt 0 ]; then
             zip -j build/${GAME_NAME}-android_release.zip "${files[@]}"
-            rm -f "${files[@]}"
+            mv ${files[@]} publish/
           else
             echo "No files to zip for Android Release"
           fi
@@ -179,4 +189,39 @@ jobs:
         generate_release_notes: true
         files: |
           build/*
+      if: github.ref_type == 'tag'
+
+    # Publish to Play Store
+    # https://github.com/fastlane/fastlane/discussions/19869#discussioncomment-16543339
+    - name: 'Authenticate to GCP'
+      uses: 'google-github-actions/auth@v3'
+      id: auth-gcp
+      with:
+        workload_identity_provider: ${{ secrets.GCP_WORKLOAD_PROVIDER }}
+        service_account: ${{ secrets.GCP_SERVICE_ACCOUNT_ID }}
+        create_credentials_file: true
+      if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref_type == 'tag')
+
+    - name: Publish Android Release Internal (${{ env.GAME_NAME }})
+      uses: devcontainers/ci@v0.3
+      env:
+        AAB_PATH: publish/${{ env.GAME_NAME }}-android_release.aab
+      with:
+        runCmd: |
+          sudo bundle install
+          CREDENTIALS_FILE="$(basename "${{ steps.auth-gcp.outputs.credentials_file_path }}")"
+          export GOOGLE_APPLICATION_CREDENTIALS="${CREDENTIALS_FILE}"
+          bundle exec fastlane android internal
+        env: |
+          AAB_PATH
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+
+    - name: Publish Android Release Production (${{ env.GAME_NAME }})
+      uses: devcontainers/ci@v0.3
+      with:
+        runCmd: |
+          sudo bundle install
+          CREDENTIALS_FILE="$(basename "${{ steps.auth-gcp.outputs.credentials_file_path }}")"
+          export GOOGLE_APPLICATION_CREDENTIALS="${CREDENTIALS_FILE}"
+          bundle exec fastlane android production
       if: github.ref_type == 'tag'

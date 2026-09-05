@@ -19,5 +19,9 @@ export_credentials.cfg
 data_*/
 mono_crash.*.json
 
-# build directory
+# build & publish directory
 build/
+publish/
+
+
+google-cloud-sdk/
